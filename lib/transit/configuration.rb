@@ -15,7 +15,12 @@ module Transit
   # 
   # 
   config.authentication_method = :user_signed_in?
-    
+  
+  ##
+  # When generating post slugs, use this interpolation
+  # 
+  config.slug_posts_via = ":title"
+  
   ##
   # When using the publishing extension, should a publish_date be used?
   # 

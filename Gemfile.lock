@@ -42,6 +42,8 @@ GEM
     activesupport (3.2.14)
       i18n (~> 0.6, >= 0.6.4)
       multi_json (~> 1.0)
+    ancestry (2.0.0)
+      activerecord (>= 3.0.0)
     arel (3.0.2)
     builder (3.0.4)
     coderay (1.0.9)
@@ -86,6 +88,7 @@ GEM
       rspec (>= 2.9)
     moped (1.5.0)
     multi_json (1.7.7)
+    mysql2 (0.3.13)
     origin (1.1.0)
     polyglot (0.3.3)
     pry (0.9.12.2)
@@ -137,6 +140,8 @@ GEM
       rspec-core (~> 2.14.0)
       rspec-expectations (~> 2.14.0)
       rspec-mocks (~> 2.14.0)
+    shoulda-matchers (2.2.0)
+      activesupport (>= 3.0.0)
     simplecov (0.7.1)
       multi_json (~> 1.0)
       simplecov-html (~> 0.7.1)
@@ -159,6 +164,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  ancestry (~> 2.0.0)
   guard
   guard-rspec
   listen
@@ -167,10 +173,12 @@ DEPENDENCIES
   mongoid (>= 3.1)
   mongoid-ancestry (~> 0.3.1, < 4.1)
   mongoid-rspec (~> 1.8)
+  mysql2 (~> 0.3.11)
   rake
   rb-fsevent
   rspec (>= 2.14.0)
   rspec-rails (>= 2.14.0)
+  shoulda-matchers (~> 2.2.0)
   simplecov
   transit!
   yard (= 0.8.5.2)

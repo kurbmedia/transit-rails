@@ -1,6 +1,7 @@
 module Transit
   module Adapter
-    extend self
+    mattr_accessor :use_serialization
+    @@use_serialization = false
     
     ##
     # ORM adapters should overide this method to 

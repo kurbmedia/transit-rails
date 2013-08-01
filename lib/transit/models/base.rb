@@ -4,11 +4,8 @@ module Transit
       extend ActiveSupport::Concern
       
       included do
-        
-        transit_attribute :content, String,      :default => ""
-        transit_attribute :content_schema, Hash, :default => {}
-        
-        class_attribute :delivery_type
+        transit_attribute :content, String, :default => "", :localize => self.has_translation_support
+        transit_attribute :content_schema, Transit::Schematic, :default => {}
       end
     end
   end

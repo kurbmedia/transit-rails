@@ -14,6 +14,7 @@ group :test do
   gem 'rb-fsevent'
   gem 'listen'
   gem 'machinist_mongo', github: 'brentkirby/machinist_mongo', require: 'machinist/mongoid'
+  gem 'shoulda-matchers', '~> 2.2.0'
 end
 
 group :doc do
