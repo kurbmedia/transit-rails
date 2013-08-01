@@ -1,0 +1,4 @@
+  MOPED: 127.0.0.1:27017 COMMAND      database=admin command={:ismaster=>1} (15.3239ms)
+  MOPED: 127.0.0.1:27017 QUERY        database=transitcms_test collection=system.namespaces selector={:name=>{"$not"=>/transitcms_test\.system\.|\$/}} flags=[] limit=0 skip=0 batch_size=nil fields=nil (40.8928ms)
+  MOPED: 127.0.0.1:27017 COMMAND      database=admin command={:ismaster=>1} (0.6437ms)
+  MOPED: 127.0.0.1:27017 QUERY        database=transitcms_test collection=system.namespaces selector={:name=>{"$not"=>/transitcms_test\.system\.|\$/}} flags=[] limit=0 skip=0 batch_size=nil fields=nil (0.2170ms)
