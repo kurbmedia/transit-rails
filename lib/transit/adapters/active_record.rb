@@ -46,6 +46,16 @@ module Transit
       end
       where(query.join(" AND "), values)
     end
+    
+    def lte(opts)
+      return self unless opts
+      values = []
+      query  = opts.keys.collect do |key|
+        values << opts[key]
+        "#{key.to_s} <= ?"
+      end
+      where(query.join(" AND "), values)
+    end
   end
 end
 

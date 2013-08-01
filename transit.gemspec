@@ -21,6 +21,7 @@ Gem::Specification.new do |s|
   s.require_paths     = ["lib"]
 
   s.add_dependency("rails", ">= 3.2.6", "< 5")
+  #s.add_dependency("orm_adapter", "~> 0.1")
   
   s.add_development_dependency("rspec", ">= 2.14.0")
   s.add_development_dependency("rspec-rails", ">= 2.14.0")
