@@ -16,7 +16,7 @@ describe Post do
   it 'applies the publishing extension' do
     Post.included_modules
       .should include(
-      Transit::Extensions::Published)
+      Transit::Extensions::Publishable)
   end
   
   describe 'applied attributes' do

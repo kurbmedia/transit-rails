@@ -1,10 +1,11 @@
 class TransitCreatePosts < ActiveRecord::Migration
   def change
-    create_table(:posts) do |t|
+    create_table(:transit_posts) do |t|
       t.string  :title
       t.text    :teaser
       t.string  :slug
-      t.timestamps
+      t.text    :content
+      t.text    :content_schema
 
       ##
       # Publishing extension
@@ -12,10 +13,7 @@ class TransitCreatePosts < ActiveRecord::Migration
       t.boolean  :published, :default => false
       t.datetime :publish_date
       
-      ##
-      # Ordering extension
-      # 
-      t.integer :position, :default => 0
+      t.timestamps
     end
   end
 end

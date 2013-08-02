@@ -10,6 +10,10 @@ class TransitCreate<%= table_name.camelize %>WithPageFunctionality < ActiveRecor
       t.string  :ancestry
       t.integer :ancestry_depth, :default => nil
       t.text    :slug_map
+      
+      t.text    :content
+      t.text    :content_schema
+      
       t.timestamps
       
       ##

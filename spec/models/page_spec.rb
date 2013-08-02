@@ -12,12 +12,7 @@ describe Page do
     .should include(
     Transit::Models::Page)
   end
-  
-  it 'applies the ordering extension' do
-    Page.included_modules
-      .should include(
-      Transit::Extensions::Ordered)
-  end
+
   
   describe 'applied attributes' do
     

@@ -1,11 +1,22 @@
 module Transit
   module Models
+    ##
+    # Common functionality to both post types.
+    # 
     module Base
       extend ActiveSupport::Concern
-      
-      included do
-        transit_attribute :content, String, :default => "", :localize => self.has_translation_support
-        transit_attribute :content_schema, Transit::Schematic, :default => {}
+      ##
+      # Used to set keywords via comma separated string
+      # 
+      def keyword_list=(words)
+        self.keywords = words.split(",").compact.map!(&:strip)
+      end
+    
+      ##
+      # Display keywords as a comma separated string.
+      # 
+      def keyword_list
+        [self.keywords].flatten.compact.join(",")
       end
     end
   end

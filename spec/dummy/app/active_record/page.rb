@@ -1,3 +1,3 @@
 class Page < ActiveRecord::Base
-  deliver_as :page, :published
+  deliver_as :page, :publishable, :orderable => :siblings
 end

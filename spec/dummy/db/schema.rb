@@ -13,7 +13,7 @@
 
 ActiveRecord::Schema.define(:version => 20130801203610) do
 
-  create_table "pages", :force => true do |t|
+  create_table "transit_pages", :force => true do |t|
     t.string   "name"
     t.string   "title"
     t.text     "description"
@@ -21,25 +21,30 @@ ActiveRecord::Schema.define(:version => 20130801203610) do
     t.string   "slug"
     t.string   "identifier"
     t.string   "ancestry"
+    t.integer  "ancestry_depth"
     t.text     "slug_map"
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
-    t.boolean  "published",    :default => false
+    t.text     "content"
+    t.text     "content_schema"
+    t.boolean  "published",      :default => false
     t.datetime "publish_date"
-    t.integer  "position",     :default => 0
+    t.integer  "position",       :default => 0
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
   end
 
   add_index "pages", ["identifier"], :name => "index_pages_on_identifier", :unique => true
 
-  create_table "posts", :force => true do |t|
+  create_table "transit_posts", :force => true do |t|
     t.string   "title"
     t.text     "teaser"
     t.string   "slug"
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
-    t.boolean  "published",    :default => false
+    t.text     "content"
+    t.text     "content_schema"
+    t.boolean  "published",      :default => false
     t.datetime "publish_date"
-    t.integer  "position",     :default => 0
+    t.integer  "position",       :default => 0
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
   end
 
 end

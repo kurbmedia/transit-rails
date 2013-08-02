@@ -10,6 +10,9 @@ module Transit
   mattr_accessor :deliverables
   @@deliverables = {}
   
+  mattr_accessor :orm
+  @@orm = :mongoid
+  
   ##
   # Register a deliverable class based 
   # on its type.

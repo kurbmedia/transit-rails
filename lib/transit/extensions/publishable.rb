@@ -7,14 +7,10 @@ module Transit
     # item as published, as well as set the date in which it is 
     # available.
     # 
-    module Published
+    module Publishable
       extend ActiveSupport::Concern
       
       included do
-        
-        transit_attribute :published, Boolean, :default => false
-        transit_attribute :publish_date, Date
-        
         # Alias post_date for convenience and as a sensible name for post type deliverables.
         alias_attribute :post_date, :publish_date
         before_save :check_for_published_and_auto_set_date
@@ -53,15 +49,6 @@ module Transit
 
       private
       
-      ##
-      # Override the original slug generation method 
-      # when publishing is present. 
-      # 
-      def auto_generate_slug
-        return true unless self.slug.nil?
-        return true unless self.published?
-        self.slug = respond_to?(:interpolate_slug) ? self.interpolate_slug : self.title.to_slug
-      end
       
       ##
       # If a resource has "published" set to true, but no 

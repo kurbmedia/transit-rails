@@ -2,39 +2,14 @@ require 'mongoid'
 require 'mongoid-ancestry'
 require 'transit/adapter'
 
-module Transit
-  module Adapter
-    ##
-    # Create a field for the model, optionally 
-    # auto-adding translation support.
-    # 
-    # @param [Symbol] name The field name
-    # @param [Object] type The class used as the type.
-    # @param [Hash] options Options to be set on the field.
-    # 
-    def transit_attribute(name, type, options = {})
-      options.reverse_merge!(:localize => self.has_translation_support) if options.has_key?(:localize)
-      field name, { :type => type }.merge(options)
-    end
-    
-    ##
-    # Loads the ancestry gem and applies any passed options.
-    # 
-    # @param [Hash] options Options to be passed to the has_ancestry method
-    # 
-    def transit_ancestry(options = {})
-      include Mongoid::Ancestry
-      has_ancestry(options)
-    end
-  end
-end
+Transit.orm = :mongoid
 
 # autoload
-Transit::Extensions::Published
+Transit::Extensions::Publishable
 
 module Transit
   module Extensions
-    module Published
+    module Publishable
       module ClassMethods
         
         ##
@@ -51,3 +26,6 @@ end
 
 Mongoid::Document::ClassMethods.send(:include, Transit::Adapter)
 Mongoid::Document::ClassMethods.send(:include, Transit::Models)
+
+require "transit/schemas/mongoid/page"
+require "transit/schemas/mongoid/post"

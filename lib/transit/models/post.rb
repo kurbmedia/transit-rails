@@ -12,13 +12,8 @@ module Transit
       extend ActiveSupport::Concern
 
       included do
-      
-        transit_attribute :title, String,  :localize => self.has_translation_support
-        transit_attribute :teaser, String, :localize => self.has_translation_support
-        transit_attribute :slug, String
-        
+        include Transit::Schemas::Post
         include Transit::Extensions::Slugged
-        include Transit::Extensions::Published
         
         self.delivery_options.slugged ||= Transit.config.slug_posts_via
         

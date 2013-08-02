@@ -11,6 +11,9 @@ class TransitAddPageFunctionalityTo<%= table_name.camelize %> < ActiveRecord::Mi
       t.integer :ancestry_depth, :default => nil
       t.text    :slug_map
       
+      t.text    :content
+      t.text    :content_schema
+      
       # Uncomment unless your model already has timestamps
       # t.timestamps
       

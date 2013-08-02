@@ -5,6 +5,9 @@ class TransitAddPostFunctionalityTo<%= table_name.camelize %> < ActiveRecord::Mi
       t.text    :teaser
       t.string  :slug
       
+      t.text    :content
+      t.text    :content_schema
+      
       # Uncomment unless your model already has timestamps
       # t.timestamps
       

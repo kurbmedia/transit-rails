@@ -4,6 +4,10 @@ class TransitCreate<%= table_name.camelize %>WithPostFunctionality < ActiveRecor
       t.string  :title
       t.text    :teaser
       t.string  :slug
+      
+      t.text    :content
+      t.text    :content_schema
+      
       t.timestamps
 
       ##

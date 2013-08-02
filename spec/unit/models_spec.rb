@@ -24,7 +24,7 @@ describe Transit::Models do
       
       it 'loads additional extensions from the options hash' do
         Page.included_modules
-          .should include(Transit::Extensions::Published)
+          .should include(Transit::Extensions::Publishable)
       end
       
       mongoid_models_only do
@@ -39,7 +39,6 @@ describe Transit::Models do
       end
 
     end
-    
   end
   
   describe '.modify_delivery' do

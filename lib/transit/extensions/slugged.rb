@@ -12,12 +12,15 @@ module Transit
       end
       
       ##
-      # Generate a slug from the title on save
+      # Generate a slug via interpolation. 
+      # Detect publishable models and skip generation 
+      # unless the model is published.
       # 
       def auto_generate_slug
-        self.slug ||= interpolate_slug
+        return true unless self.slug.nil?
+        return true if self.respond_to?(:published?) && !self.published?
+        self.slug = self.interpolate_slug
       end
-      
       
       ##
       # Takes the models interpolation string and 

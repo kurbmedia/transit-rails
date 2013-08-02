@@ -1,6 +1,6 @@
 class TransitCreatePages < ActiveRecord::Migration
   def change
-    create_table(:pages) do |t|
+    create_table(:transit_pages) do |t|
       t.string  :name
       t.string  :title
       t.text    :description
@@ -10,7 +10,8 @@ class TransitCreatePages < ActiveRecord::Migration
       t.string  :ancestry
       t.integer :ancestry_depth, :default => nil
       t.text    :slug_map
-      t.timestamps
+      t.text    :content
+      t.text    :content_schema
       
       ##
       # Publishing extension
@@ -21,7 +22,9 @@ class TransitCreatePages < ActiveRecord::Migration
       ##
       # Ordering extension
       # 
-      t.integer :position, :default => 0
+      t.integer :position, :default => nil
+      
+      t.timestamps
     end
     
     add_index :pages, :identifier, :unique => true

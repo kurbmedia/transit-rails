@@ -1,9 +1,9 @@
 module Transit
   module Extensions
     
-    autoload :Ordered,    'transit/extensions/ordered'
-    autoload :Published,  'transit/extensions/published'
-    autoload :Slugged,    'transit/extensions/slugged'
+    autoload :Orderable,    'transit/extensions/orderable'
+    autoload :Publishable,  'transit/extensions/publishable'
+    autoload :Slugged,      'transit/extensions/slugged'
     
   end
 end

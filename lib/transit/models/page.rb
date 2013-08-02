@@ -10,28 +10,13 @@ module Transit
       extend ActiveSupport::Concern
 
       included do
-
-        transit_attribute :name, String,          :localize => self.has_translation_support
-        transit_attribute :title, String,         :localize => self.has_translation_support
-        transit_attribute :description, String,   :localize => self.has_translation_support
-        transit_attribute :keywords, Array,       :default => []
-        transit_attribute :slug, String
-        transit_attribute :identifier, String
-        transit_attribute :ancestry_depth, String
-        transit_attribute :slug_map, Array,       :default => []
-      
-        include Transit::Extensions::Ordered
-        self.delivery_options.ordered ||= :siblings
-      
-        # Setup ancestry for page nesting
-        transit_ancestry :orphan_strategy => :rootify, :cache_depth => true
-      
+        include Transit::Schemas::Page
+        
         before_save :sanitize_path_names
         before_save :generate_paths
         before_create :generate_identifier
         validates_presence_of :title, :name
         validates_presence_of :slug, :allow_blank => true
-
       end
     
       ##
@@ -76,20 +61,6 @@ module Transit
       end
     
       alias :abs_path :absolute_path
-    
-      ##
-      # Used to set keywords via comma separated string
-      # 
-      def keyword_list=(words)
-        self.keywords = words.split(",").compact.map!(&:strip)
-      end
-    
-      ##
-      # Display keywords as a comma separated string.
-      # 
-      def keyword_list
-        [self.keywords].flatten.compact.join(",")
-      end
     
       ##
       # Does this page have children?
