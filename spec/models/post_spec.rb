@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Transit::Models::Post do
+describe Post do
   
   it 'delivers as a post' do
     Post.delivery_type
@@ -37,14 +37,10 @@ describe Transit::Models::Post do
   end
   
   describe 'validations' do
-    
-    let(:post) do
-      Post.new
-    end
-    
+
     it 'validates a title exists' do
-      post.should have(1)
-        .errors_on(:title)
+      should validate_presence_of(
+        :title)
     end
   end
   

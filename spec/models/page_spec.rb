@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Transit::Models::Page do
+describe Page do
   
   it 'delivers as a page' do
     Page.delivery_type
@@ -37,23 +37,19 @@ describe Transit::Models::Page do
   end
   
   describe "validations" do
-
-    let(:page) do
-      Page.new
-    end
-
+    
     it 'validates that a title exists' do
-      page.should have(1)
-        .errors_on(:title)
+      should validate_presence_of(
+        :title)
     end
     
     it 'validates that a name exists' do
-      page.should have(1)
-        .errors_on(:name)
+      should validate_presence_of(
+        :name)
     end
     
     it 'validates the presence of a slug' do
-      Page.should validate_presence_of(
+      should validate_presence_of(
         :slug)
     end
   end
