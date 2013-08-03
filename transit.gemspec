@@ -10,8 +10,8 @@ Gem::Specification.new do |s|
   s.authors     = ["Brent Kirby"]
   s.email       = ["dev@kurbmedia.com"]
   s.homepage    = "https://github.com/kurbmedia/transit-rails"
-  s.summary     = %q{Transit is a content management and delivery engine designed for use with Rails 3.1/4+ MongoDB and Mongoid}
-  s.description = %q{Transit is a content management and delivery engine designed for use with Rails 3.1/4+ MongoDB and Mongoid}
+  s.summary     = %q{Transit is a content management and delivery engine designed for use with Rails 3.1+}
+  s.description = %q{Transit is a content management and delivery engine designed for use with Rails 3.1+. It supports ActiveRecord, as well as Mongoid}
 
   s.rubyforge_project = "transit"
   s.license           = 'MIT'
