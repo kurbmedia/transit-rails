@@ -18,8 +18,8 @@ describe Transit::Models do
       end
     
       it 'includes options passed from deliver_as' do
-        TranslatedPost.delivery_options
-          .translate.should be_true
+        TestPage.delivery_options
+          .slugged.should eq ":name"
       end
       
       it 'loads additional extensions from the options hash' do

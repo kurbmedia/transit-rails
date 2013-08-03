@@ -14,18 +14,19 @@ class TransitCreate<%= table_name.camelize %>WithPageFunctionality < ActiveRecor
       t.text    :content
       t.text    :content_schema
       
-      t.timestamps
-      
       ##
-      # Publishing extension
+      # Publishable
       # 
       # t.boolean  :published, :default => false
       # t.datetime :publish_date
       
       ##
-      # Ordering extension
+      # Orderable
       # 
-      # t.integer :position, :default => 0
+      # t.integer :position, :default => nil
+      
+      
+      t.timestamps
     end
     
     add_index :<%= table_name %>, :identifier, :unique => true

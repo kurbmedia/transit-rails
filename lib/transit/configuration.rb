@@ -7,6 +7,11 @@ module Transit
   config.translate = false
 
   ##
+  # Allow for disabling built-in model validations
+  # 
+  config.enable_validations = true
+
+  ##
   # Method used for authentication in controllers. Before any 
   # actions are called within the Pages/Posts controller, this 
   # method will be run. It is best to define this method in 

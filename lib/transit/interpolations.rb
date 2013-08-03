@@ -39,6 +39,15 @@ module Transit
     end
     
     ##
+    # Returns the name of a passed resource
+    #
+    # @param [Object] resource The associated model instance
+    #
+    def name(resource)
+      resource.name.to_s.to_slug
+    end
+    
+    ##
     # Month value, using publish_date if it exists, 
     # otherwise, created_at date.
     # 

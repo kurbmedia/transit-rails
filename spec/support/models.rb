@@ -10,7 +10,7 @@ if TRANSIT_ORM == 'mongoid'
     include Mongoid::Document
     include Mongoid::Timestamps
   
-    deliver_as :page
+    deliver_as :page, :slugged => ":name"
   end
   
   class TranslatedPost
@@ -31,7 +31,7 @@ elsif TRANSIT_ORM == 'active_record'
   end
   
   class TestPage < Page
-    deliver_as :page
+    deliver_as :page, :slugged => ":name"
   end
   
   class TranslatedPage < Page

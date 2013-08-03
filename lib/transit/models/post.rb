@@ -15,9 +15,16 @@ module Transit
         include Transit::Schemas::Post
         include Transit::Extensions::Slugged
         
+        if Transit::Adapter.serialize_fields
+          serialize :keywords, Array
+          serialize :content_schema, Transit::Schematic
+        end
+        
         self.delivery_options.slugged ||= Transit.config.slug_posts_via
         
-        validates_presence_of :title
+        if Transit.config.enable_validations
+          validates_presence_of :title
+        end
       end
       
       

@@ -28,7 +28,6 @@ module Transit
       # 
       def interpolate_slug
         interpolation = self.delivery_options.slugged
-        interpolation = Transit.config.slug_posts_via unless interpolation.present?
         ::Transit::Interpolations.interpolate(interpolation, self)
       end
     end

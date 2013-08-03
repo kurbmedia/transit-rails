@@ -12,11 +12,20 @@ module Transit
       included do
         include Transit::Schemas::Page
         
+        if Transit::Adapter.serialize_fields
+          serialize :slug_map, Array
+          serialize :content_schema, Transit::Schematic
+          serialize :keywords, Array
+        end
+        
         before_save :sanitize_path_names
         before_save :generate_paths
         before_create :generate_identifier
-        validates_presence_of :title, :name
-        validates_presence_of :slug, :allow_blank => true
+        
+        if Transit.config.enable_validations
+          validates_presence_of :title, :name
+          validates_presence_of :slug, :allow_blank => true
+        end
       end
     
       ##
@@ -37,7 +46,7 @@ module Transit
         # 
         def from_path(p)
           parts = p.split("/")
-          parts = parts.to_yaml if Transit::Adapter.use_serialization
+          parts = parts.to_yaml if Transit::Adapter.serialize_fields
           where(:slug_map => parts)
         end
       

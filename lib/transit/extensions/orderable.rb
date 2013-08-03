@@ -8,8 +8,6 @@ module Transit
       extend ActiveSupport::Concern
       
       included do
-        self.delivery_options.orderable ||= :siblings
-
         before_create :set_default_position
         default_scope order_by("position ASC")
       end
@@ -56,7 +54,7 @@ module Transit
       # Gets a target for calculating position values
       # 
       def get_object_for_position_counter
-        target = self.delivery_options.orderable
+        target = self.delivery_options.orderable || :siblings
         return self.send(target) if target
         self._parent.send(self.metadata.name) if self.respond_to?(:_parent)
       end

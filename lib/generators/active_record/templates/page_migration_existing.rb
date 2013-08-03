@@ -14,9 +14,6 @@ class TransitAddPageFunctionalityTo<%= table_name.camelize %> < ActiveRecord::Mi
       t.text    :content
       t.text    :content_schema
       
-      # Uncomment unless your model already has timestamps
-      # t.timestamps
-      
       ##
       # Publishing extension
       # 
@@ -26,7 +23,10 @@ class TransitAddPageFunctionalityTo<%= table_name.camelize %> < ActiveRecord::Mi
       ##
       # Ordering extension
       # 
-      # t.integer :position, :default => 0
+      # t.integer :position, :default => nil
+      
+      # Uncomment unless your model already has timestamps
+      # t.timestamps
     end
     
     add_index :<%= table_name %>, :identifier, :unique => true

@@ -21,29 +21,18 @@ module Transit
     # @param [Hash] options Any deliverable specific options
     # 
     def deliver_as(type, *args)
+      include Transit::Models::Base
       
       options = args.extract_options! || {}
-      
       options.symbolize_keys!
-      class_attribute :delivery_type
-      
-      ##
-      # Track any options passed to deliver_as for use within 
-      # core modules or extensions.
-      # 
-      class_attribute :delivery_options
-      self.delivery_options ||= Transit::DeliveryOptions.new(
-        options.reverse_merge!(
-          :translate => Transit.config.translate
-      ))
+
+      self.delivery_options.merge!(options)
       
       ##
       # Track whether or not this model should be translated.
       # 
       class_attribute :has_translation_support
       self.has_translation_support = !!self.delivery_options.translate
-      
-      include Transit::Models::Base
       
       ##
       # Register the deliverable.

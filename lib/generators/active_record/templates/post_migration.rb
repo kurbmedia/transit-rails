@@ -11,13 +11,13 @@ class TransitCreate<%= table_name.camelize %>WithPostFunctionality < ActiveRecor
       t.timestamps
 
       ##
-      # Publishing extension
+      # Publishable
       # 
       # t.boolean  :published, :default => false
       # t.datetime :publish_date
       
       ##
-      # Ordering extension
+      # Orderable
       # 
       # t.integer :position, :default => 0
     end

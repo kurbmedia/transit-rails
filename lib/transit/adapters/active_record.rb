@@ -41,7 +41,7 @@ module Transit
   end
 end
 
-Transit::Adapter.use_serialization = true
+Transit::Adapter.serialize_fields = true
 
 ActiveRecord::Relation.send(:include, Transit::ActiveRecordExtensions)
 ActiveRecord::Base.send(:extend, Transit::Adapter)

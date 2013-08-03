@@ -1,7 +1,7 @@
 module Transit
   module Adapter
-    mattr_accessor :use_serialization
-    @@use_serialization = false
+    mattr_accessor :serialize_fields
+    @@serialize_fields = false
     
     ##
     # ORM adapters should overide this method to 
