@@ -1,21 +1,4 @@
 module Transit
-  
-  ##
-  # Placeholder class for field types
-  # 
-  class ContentField
-    attr_accessor :type, :id, :content, :node, :position
-    
-    ##
-    # Create a field from a hash.
-    # 
-    def initialize(data = {})
-      data.each do |key, value|
-        self.send(:"#{key.to_s}=", value)
-      end
-    end
-  end
-  
   ##
   # A schematic represents the structure in which the model's
   # content is defined. 
@@ -27,6 +10,7 @@ module Transit
     # Data is created using a structure matching that of 
     # a nested_attributes hash.
     # 
+    # @param [Hash] data The hash of data to assign
     # 
     def initialize(data = {})
       data = (data || {}).stringify_keys!
@@ -50,8 +34,15 @@ module Transit
     # 
     def to_data
       self.keys.collect do |key|
-        Transit::ContentField.new(self[key].merge("position" => key.to_i))
+        Transit::Context.new(self[key].merge("position" => key.to_i))
       end
+    end
+    
+    ##
+    # Create a final html string from the schema
+    # 
+    def to_s
+      to_data.map(&:to_s).join("\n")
     end
     
     class << self
@@ -63,6 +54,9 @@ module Transit
         Transit::Schematic.new(data || {})
       end
       
+      ##
+      # Convert from Mongoid
+      # 
       def mongoize(object)
         case object
         when Transit::Schematic then object.mongoize

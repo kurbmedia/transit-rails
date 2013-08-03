@@ -5,6 +5,7 @@ module Transit
   include ActiveSupport::Configurable
   
   autoload :Models,     'transit/models'
+  autoload :Context,    'transit/context'
   autoload :Schematic,  'transit/schematic'
   
   mattr_accessor :deliverables

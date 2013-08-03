@@ -52,6 +52,15 @@ module Transit
       def keyword_list
         [self.keywords].flatten.compact.join(",")
       end
+      
+      private
+      
+      ##
+      # Generate the content attribute from the schematic
+      # 
+      def generate_content_from_schema
+        self.content = self.content_schema.to_s
+      end
     end
   end
 end

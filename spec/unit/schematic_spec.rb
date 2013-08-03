@@ -52,14 +52,22 @@ describe Transit::Schematic do
         .should be_an(Array)
     end
     
-    it 'contains multiple ContentFields' do
+    it 'contains multiple Contexts' do
       content.to_data.first
-        .should be_a(Transit::ContentField)
+        .should be_a(Transit::Context)
     end
     
     it 'assigns attributes to each field' do
       content.to_data.first
         .type.should eq 'Heading'
+    end
+  end
+  
+  describe ".to_s" do
+    
+    it 'returns the resulting html content' do
+      content.to_s.should eq(
+        ["<h1>Title</h1>", "<p>test</p>"].join("\n"))
     end
   end
 end
