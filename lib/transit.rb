@@ -4,9 +4,10 @@ module Transit
   extend self
   include ActiveSupport::Configurable
   
-  autoload :Models,     'transit/models'
-  autoload :Context,    'transit/context'
-  autoload :Schematic,  'transit/schematic'
+  autoload :Deliverable,  'transit/deliverable'
+  autoload :Models,       'transit/models'
+  autoload :Context,      'transit/context'
+  autoload :Schematic,    'transit/schematic'
   
   mattr_accessor :deliverables
   @@deliverables = {}

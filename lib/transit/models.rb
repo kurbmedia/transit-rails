@@ -21,12 +21,10 @@ module Transit
     # @param [Hash] options Any deliverable specific options
     # 
     def deliver_as(type, *args)
+      include Transit::Deliverable
       include Transit::Models::Base
       
-      options = args.extract_options! || {}
-      options.symbolize_keys!
-
-      self.delivery_options.merge!(options)
+      deliver_with(*args)
       
       ##
       # Track whether or not this model should be translated.
@@ -47,18 +45,6 @@ module Transit
       end
       
       include Transit::Models.const_get(mdef)
-      
-      ##
-      # Take any additional options passed to deliver_as and 
-      # attempt to include them as extensions.
-      # 
-      [options.keys, args].flatten.uniq.each do |ext|
-        next if [:translate].include?(ext)
-        mod_name = ext.to_s.classify
-        if Transit::Extensions.const_defined?(mod_name)
-          include Transit::Extensions.const_get(mod_name)
-        end
-      end
     end
     
     

@@ -8,13 +8,6 @@ module Transit
       
       included do
         class_attribute :delivery_type
-
-        ##
-        # Track any options passed to deliver_as for use within 
-        # core modules or extensions.
-        # 
-        class_attribute :delivery_options
-        self.delivery_options ||= Transit::DeliveryOptions.new(:translate => Transit.config.translate)
       end
       
       ##
