@@ -8,3 +8,6 @@ Post.blueprint do
   title { "Sample Post Number #{sn}" }
   publish_date{ Date.today }
 end
+
+Business.blueprint do
+end
