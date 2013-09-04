@@ -20,7 +20,7 @@ module Transit
       ##
       # Adds support for adding extensions to models.
       # 
-      def deliver_with(*args)
+      def delivery_as(*args)
         options = args.extract_options! || {}
         options.symbolize_keys!
 

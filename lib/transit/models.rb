@@ -24,7 +24,7 @@ module Transit
       include Transit::Deliverable
       include Transit::Models::Base
       
-      deliver_with(*args)
+      delivery_as(*args)
       
       ##
       # Track whether or not this model should be translated.
