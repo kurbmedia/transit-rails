@@ -1,41 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/_Work/gems/transit/lib/transit/context.rb": [
-        1,
-        null,
-        null,
-        null,
-        1,
-        1,
-        null,
-        null,
-        null,
-        null,
-        1,
-        12,
-        38,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        1,
-        4,
-        null,
-        null,
-        null,
-        null,
-        null,
-        1,
-        4,
-        2,
-        null,
-        null,
-        null
-      ]
     },
-    "timestamp": 1378318785
+    "timestamp": 1378408450
   }
 }

@@ -9,7 +9,7 @@ describe Transit::Schematic do
   
   let(:schema) do
     {
-      "0" => { "type" => "Heading", "content" => "Title", "node" => "h1" },
+      "0" => { "type" => "Heading", "content" => "Title", "node" => "h1", "properties" => { "class" => "red" } },
       "1" => { "type" => "TextBlock", "content" => "<p>test</p>" }
     }
   end
@@ -65,9 +65,9 @@ describe Transit::Schematic do
   
   describe ".to_s" do
     
-    it 'returns the resulting html content' do
+    it 'returns the resulting html content, including attrs' do
       content.to_s.should eq(
-        ["<h1>Title</h1>", "<p>test</p>"].join("\n"))
+        ["<h1 class=\"red\">Title</h1>", "<p>test</p>"].join("\n"))
     end
   end
 end

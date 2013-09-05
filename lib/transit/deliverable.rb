@@ -12,7 +12,7 @@ module Transit
       # Track any options passed to deliver_as, or assigned via extensions.
       # 
       class_attribute :delivery_options
-      self.delivery_options ||= Transit::DeliveryOptions.new(:translate => Transit.config.translate)
+      self.delivery_options ||= Transit::DeliveryOptions.new(:translate => Transit.config.translate, :slugged => Transit.config.slug_posts_via)
     end
     
     module ClassMethods
