@@ -12,7 +12,7 @@ module Transit
       # These are mostly suggestions, but any included assets etc honor them.
       # 
       def types
-        ['HeadingText', 'TextBlock', 'Audio', 'Video']
+        ['Heading', 'TextBlock', 'Audio', 'Video']
       end
     end
     
