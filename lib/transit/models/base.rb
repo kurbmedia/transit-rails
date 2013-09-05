@@ -7,6 +7,7 @@ module Transit
       extend ActiveSupport::Concern
       
       included do
+        before_save :generate_content_from_schema
         class_attribute :delivery_type
       end
       
