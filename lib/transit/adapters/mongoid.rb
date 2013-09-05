@@ -17,7 +17,7 @@ module Transit
         # TODO: Maybe use orm_adapter or some kind of adapter functionality for this?
         #
         def published_by_date
-          all_of(:published => true, :publish_date.gte => Date.today.to_time)
+          all_of(:published => true, :publish_date.lte => Date.today.to_time)
         end
       end
     end
