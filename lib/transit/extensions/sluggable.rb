@@ -8,17 +8,17 @@ module Transit
       extend ActiveSupport::Concern
       
       included do
-        before_save :auto_generate_slug
+        before_validation :auto_generate_slug
       end
+      
+      private
       
       ##
       # Generate a slug via interpolation. 
-      # Detect publishable models and skip generation 
-      # unless the model is published.
       # 
       def auto_generate_slug
-        return true unless self.slug.nil?
-        self.slug = self.interpolate_slug
+        return true if self.slug.present?
+        self.slug = interpolate_slug
       end
       
       ##
@@ -26,9 +26,10 @@ module Transit
       # generates a slug. By default this is simply :title
       # 
       def interpolate_slug
-        interpolation = self.delivery_options.slugged
-        ::Transit::Interpolations.interpolate(interpolation, self)
+        interpolation = self.delivery_options.sluggable.to_s.sub(/^:/, '')
+        ::Transit::Interpolations.interpolate(":#{interpolation}", self)
       end
+
     end
     
   end

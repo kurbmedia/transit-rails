@@ -2,6 +2,12 @@ require 'spec_helper'
 
 describe "the Ordering extension" do
   
+  before do
+    Transit::Page.class_eval do
+      transit :orderable
+    end
+  end
+  
   context 'when included' do
     
     it 'adds a position field' do

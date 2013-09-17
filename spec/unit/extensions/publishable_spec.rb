@@ -2,28 +2,33 @@ require 'spec_helper'
 
 describe "Publishing Extension" do
   
-  let!(:parent_page) do
+  let!(:page) do
     Transit::Page.make!(
       title: "Un-Published Page",
       slug: "parent"
     )
   end
   
-  let!(:sub_page) do
+  let!(:page2) do
     Transit::Page.make!(
       title: 'Published Page', 
       slug: 'child',
-      parent: parent_page)
+      parent: page)
   end
   
   it 'adds a published attribute' do
-    parent_page.respond_to?(
+    page.respond_to?(
       :published)
       .should be_true
   end
   
+  it 'includes the Publishable extension' do
+    Transit::Page.included_modules
+      .should include(Transit::Extensions::Publishable)
+  end
+  
   it 'adds a .published? method' do
-    parent_page.respond_to?(
+    page.respond_to?(
       :published?)
       .should be_true
   end
@@ -36,20 +41,27 @@ describe "Publishing Extension" do
     end
     
     before do
-      sub_page.publish!
+      page2.publish!
+      page2.reload
     end
   
     it "does not find pages where published is false" do
       page_ids.should_not(
-        include(parent_page.id))
+        include(page.id))
     end
   
     it 'finds pages where published is true' do
       page_ids.should(
-        include(sub_page.id))
+        include(page2.id))
     end
     
     context 'when publishing by date' do
+      
+      before do
+        Transit::Page.class_eval do
+          transit :publishable => :date
+        end
+      end
       
       let!(:page) do
         Transit::Page.make!(

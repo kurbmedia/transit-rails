@@ -5,7 +5,7 @@ describe Transit::Page do
   describe 'applied attributes' do
     
     let!(:page) do
-      Page.new
+      Transit::Page.new
     end
     
     it 'has a title attribute' do
@@ -40,7 +40,7 @@ describe Transit::Page do
   describe 'generated_slugs' do
     
     let(:page) do
-      Page.make(
+      Transit::Page.make!(
         title: "Test Page",
         slug: slug
       )
@@ -74,14 +74,14 @@ describe Transit::Page do
   describe 'page scopes' do
     
     let!(:parent_page) do
-      Page.make!(
+      Transit::Page.make!(
         title: "Un-Published Page",
         slug: "parent"
       )
     end
     
     let!(:sub_page) do
-      Page.make!(
+      Transit::Page.make!(
         title: 'Published Page', 
         slug: 'child',
         parent: parent_page)
@@ -90,20 +90,8 @@ describe Transit::Page do
     describe '.top_level' do
     
       it "only finds pages that do not belong to another" do
-        Page.top_level.count
+        Transit::Page.top_level.count
           .should eq 1
-      end
-    end
-    
-    describe '.from_path' do
-      
-      let(:path) do
-        "parent/child"
-      end
-      
-      it 'accepts a url and finds pages by path' do
-        Page.from_path(path).first
-          .should eq sub_page
       end
     end
   end
@@ -111,13 +99,13 @@ describe Transit::Page do
   describe 'page hierarchy' do
     
     let!(:page) do 
-      Page.make!(
+      Transit::Page.make!(
         title: "Parent Page",
         slug: "parent")
     end
     
     let!(:sub_page) do
-      Page.make!(
+      Transit::Page.make!(
         title: "Sub Page", 
         slug: "sub-page", 
         published: true,
@@ -135,7 +123,7 @@ describe Transit::Page do
         
         it "stores sub pages as instances of the same class" do
           page.children.first
-            .should be_a(Page)
+            .should be_a(Transit::Page)
         end
         
         it "stores unique page instances" do
@@ -165,7 +153,7 @@ describe Transit::Page do
     context "when a page is tertiary" do
       
       let!(:tertiary) do
-        Page.make!(
+        Transit::Page.make!(
           title: "Tertiary Page", 
           slug: 'tertiary',
           parent: sub_page)

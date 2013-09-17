@@ -42,13 +42,6 @@ module Transit
         end
         
       end
-      
-      ##
-      # Publish and save the resource.
-      # 
-      def publish!
-        update_attributes(published: true, publish_date: self.publish_date || Date.today.to_time)
-      end
 
       private
       

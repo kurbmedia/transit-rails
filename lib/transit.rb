@@ -7,7 +7,6 @@ module Transit
   autoload :DeliveryOptions, 'transit/delivery_options'
   autoload :Publishable,  'transit/publishable'
   autoload :Context,      'transit/context'
-  autoload :Schematic,    'transit/schematic'
 
   mattr_accessor :orm
   @@orm = :mongoid
@@ -36,5 +35,6 @@ require 'transit/error'
 require 'transit/configuration'
 require 'transit/adapter'
 require 'transit/interpolations'
+require 'transit/model'
 require 'transit/extensions'
 require 'transit/core_ext/string'

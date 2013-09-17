@@ -4,7 +4,7 @@ describe 'The slugged extension' do
   
   before do
     Transit::Page.class_eval do
-      transit :slugged => ":month/:year/:title"
+      transit :sluggable => ":month/:year/:title"
     end
   end
   
@@ -12,7 +12,8 @@ describe 'The slugged extension' do
     Transit::Page.make!(
       post_date: Date.today,
       title: "Post Slug Test",
-      published: true
+      published: true,
+      slug: nil
     )
   end
   

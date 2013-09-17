@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe Transit::Interpolations do
   
-  let!(:post) do
-    Post.make
+  let!(:page) do
+    Transit::Page.make
   end
   
   describe 'adding methods with Transit.interpolates' do
@@ -13,7 +13,7 @@ describe Transit::Interpolations do
         "success"
       end
       
-      Transit.interpolates(:post) do |model|
+      Transit.interpolates(:page) do |model|
         model.title
       end
     end
@@ -31,13 +31,13 @@ describe Transit::Interpolations do
     context 'when running the interpolation' do
       
       it 'replaces each key with the callback result' do
-        Transit::Interpolations.interpolate(":test", post)
+        Transit::Interpolations.interpolate(":test", page)
           .should eq "success"
       end
       
       it 'passes any arguments to the interpolation block' do
-        Transit::Interpolations.interpolate(":post", post)
-          .should eq post.title
+        Transit::Interpolations.interpolate(":page", page)
+          .should eq page.title
       end
     end
   end
@@ -45,20 +45,20 @@ describe Transit::Interpolations do
   describe 'built in interpolations' do
     
     before do
-      post.stub(
+      page.stub(
         publish_date: Date.today,
         title: 'sample title'
       )
     end
     
     let(:expected) do
-      "#{Date.today.strftime('%m')}/#{Date.today.year}/#{post.title.to_slug}"
+      "#{Date.today.strftime('%m')}/#{Date.today.year}/#{page.title.to_slug}"
     end
       
     let(:result) do
       Transit::Interpolations
         .interpolate(":month/:year/:title", 
-        post)
+        page)
     end
       
     it "interpolates month, year, and title" do

@@ -1,18 +1,15 @@
 class InstallTransit < ActiveRecord::Migration
   def change
     create_table(:transit_pages) do |t|
-      t.string  :name
-      t.string  :title
-      t.text    :description
-      t.text    :keywords
-      t.string  :slug
-      t.string  :identifier
-      t.string  :template, :default => "default"
-      t.string  :ancestry
-      t.integer :ancestry_depth, :default => nil
-      
-      t.text    :rendered_content
-
+      t.string   :name
+      t.string   :title
+      t.text     :description
+      t.text     :keywords
+      t.string   :slug
+      t.string   :identifier
+      t.string   :template, :default => "default"
+      t.string   :ancestry
+      t.integer  :ancestry_depth, :default => nil
       t.boolean  :published, :default => false
       t.datetime :publish_date
       
@@ -27,10 +24,10 @@ class InstallTransit < ActiveRecord::Migration
     
     create_table(:transit_regions) do
       t.string :dom_id
-      t.text :content
-      t.text :draft_content
+      t.text   :content
+      t.text   :draft_content
       t.string :type
-      t.text :data
+      t.text   :data
     end
     
     add_index :transit_pages, :identifier, :unique => true

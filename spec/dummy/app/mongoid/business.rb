@@ -6,6 +6,5 @@ class Business
   field :slug,    :type => String
   field :summary, :type => String
 
-  include Transit::Deliverable
-  delivery_as :slugged => ":name"
+  transit :sluggable => ":name"
 end

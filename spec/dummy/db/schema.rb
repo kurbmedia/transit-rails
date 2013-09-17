@@ -11,48 +11,32 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130801203615) do
+ActiveRecord::Schema.define(:version => 20130801203604) do
 
-  create_table "pages", :force => true do |t|
+  create_table "transit_pages", :force => true do |t|
     t.string   "name"
     t.string   "title"
     t.text     "description"
     t.text     "keywords"
     t.string   "slug"
     t.string   "identifier"
+    t.string   "template",       :default => "default"
     t.string   "ancestry"
     t.integer  "ancestry_depth"
-    t.text     "slug_map"
-    t.text     "content"
-    t.text     "content_schema"
     t.boolean  "published",      :default => false
     t.datetime "publish_date"
-    t.integer  "position"
-    t.datetime "created_at",                        :null => false
-    t.datetime "updated_at",                        :null => false
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
   end
 
-  add_index "pages", ["identifier"], :name => "index_pages_on_identifier", :unique => true
+  add_index "transit_pages", ["identifier"], :name => "index_transit_pages_on_identifier", :unique => true
 
-  create_table "posts", :force => true do |t|
-    t.string   "title"
-    t.text     "teaser"
-    t.string   "slug"
-    t.text     "content"
-    t.text     "content_schema"
-    t.boolean  "published",      :default => false
-    t.datetime "publish_date"
-    t.integer  "position",       :default => 0
-    t.datetime "created_at",                        :null => false
-    t.datetime "updated_at",                        :null => false
-  end
-
-  create_table "transit_businesses", :force => true do |t|
-    t.string   "name"
-    t.text     "summary"
-    t.string   "slug"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+  create_table "transit_regions", :force => true do |t|
+    t.string "dom_id"
+    t.text   "content"
+    t.text   "draft_content"
+    t.string "type"
+    t.text   "data"
   end
 
 end

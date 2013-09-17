@@ -24,7 +24,7 @@ module Transit
   ##
   # When generating post slugs, use this interpolation
   # 
-  config.slug_posts_via = ":title"
+  config.sluggable_via = ":name"
   
   ##
   # When using the publishing extension, should a publish_date be used?

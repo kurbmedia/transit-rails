@@ -3,7 +3,7 @@ module Transit
     
     autoload :Orderable,    'transit/extensions/orderable'
     autoload :Publishable,  'transit/extensions/publishable'
-    autoload :Slugged,      'transit/extensions/slugged'
+    autoload :Sluggable,    'transit/extensions/sluggable'
     
   end
 end

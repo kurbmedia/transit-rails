@@ -4,6 +4,12 @@ describe Transit::Model do
   
   describe '.transit' do
     
+    before do
+      Transit::Page.class_eval do
+        transit :sluggable => ':name'
+      end
+    end
+    
     context 'when called on a model' do
 
       it 'adds a delivery_options attribute' do
@@ -13,26 +19,14 @@ describe Transit::Model do
       end
     
       it 'includes options passed from deliver_as' do
-        TestPage.delivery_options
-          .slugged.should eq ":name"
+        Transit::Page.delivery_options
+          .sluggable.should eq ":name"
       end
       
       it 'loads additional extensions from the options hash' do
         Transit::Page.included_modules
           .should include(Transit::Extensions::Publishable)
       end
-      
-      mongoid_models_only do
-        context 'when translate: true is passed' do
-          
-          it 'adds localize: true to fields' do
-            Transit::Page.new
-              .respond_to?(:name_translations)
-              .should be_true
-          end
-        end
-      end
-
     end
   end
 end
