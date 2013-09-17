@@ -12,3 +12,5 @@ module Transit
     end
   end
 end
+
+Transit::Page.send(:include, Transit::Schemas::Page)

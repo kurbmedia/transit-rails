@@ -25,7 +25,7 @@ module Transit
 end
 
 Mongoid::Document::ClassMethods.send(:include, Transit::Adapter)
-Mongoid::Document::ClassMethods.send(:include, Transit::Models)
+Mongoid::Document::ClassMethods.send(:include, Transit::Model)
 
 require "transit/schemas/mongoid/page"
 require "transit/schemas/mongoid/post"

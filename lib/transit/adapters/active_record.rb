@@ -45,7 +45,7 @@ Transit::Adapter.serialize_fields = true
 
 ActiveRecord::Relation.send(:include, Transit::ActiveRecordExtensions)
 ActiveRecord::Base.send(:extend, Transit::Adapter)
-ActiveRecord::Base.send(:extend, Transit::Models)
+ActiveRecord::Base.send(:extend, Transit::Model)
 ActiveRecord::Base.class_eval do
   
   def set(key, value = nil)
