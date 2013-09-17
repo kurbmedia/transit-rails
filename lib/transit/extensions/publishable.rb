@@ -34,7 +34,10 @@ module Transit
         # and a publish_date before or on the current date.
         # 
         def published
-          return published_by_date if Transit.config.publish_with_date
+          if self.delivery_options.publishable.present?
+            meth = "published_by_#{self.delivery_options.publishable.to_s}"
+            return self.send(meth.to_sym)
+          end
           where(:published => true)
         end
         

@@ -7,6 +7,7 @@ module Transit
       extend ActiveSupport::Concern
       
       included do
+        serialize :keywords, Array
         has_ancestry :orphan_strategy => :rootify, :cache_depth => true
       end
     end
