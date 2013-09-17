@@ -3,14 +3,14 @@ require 'spec_helper'
 describe "Publishing Extension" do
   
   let!(:parent_page) do
-    Page.make!(
+    Transit::Page.make!(
       title: "Un-Published Page",
       slug: "parent"
     )
   end
   
   let!(:sub_page) do
-    Page.make!(
+    Transit::Page.make!(
       title: 'Published Page', 
       slug: 'child',
       parent: parent_page)
@@ -31,7 +31,7 @@ describe "Publishing Extension" do
   describe '.published scope' do
     
     let(:page_ids) do
-      Page.published
+      Transit::Page.published
         .all.collect(&:id)
     end
     
@@ -51,34 +51,34 @@ describe "Publishing Extension" do
     
     context 'when publishing by date' do
       
-      let!(:post) do
-        Post.make!(
+      let!(:page) do
+        Transit::Page.make!(
           publish_date: Date.today.to_time.midnight,
           title: "Post Slug Test",
           published: true
         )
       end
   
-      let!(:post2) do
-        Post.make!(
+      let!(:page2) do
+        Transit::Page.make!(
           publish_date: 5.days.from_now,
           title: "Unpublished Post",
           published: true
         )
       end
       
-      let(:post_ids) do
-        Post.published.pluck(:id).map(&:to_s)
+      let(:page_ids) do
+        Transit::Page.published.pluck(:id).map(&:to_s)
       end
       
       it 'finds objects where the publish date is before today' do
-        post_ids.should(
-          include(post.id.to_s))
+        page_ids.should(
+          include(page.id.to_s))
       end
       
       it 'does not find objects where publish_date is after today' do
-        post_ids.should_not(
-          include(post2.id.to_s))
+        page_ids.should_not(
+          include(page2.id.to_s))
       end
     end
   end

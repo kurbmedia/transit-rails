@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'Page Schemas' do
   
   let!(:page) do
-    Page.new
+    Transit::Page.new
   end
   
   it 'modifies the engine models' do

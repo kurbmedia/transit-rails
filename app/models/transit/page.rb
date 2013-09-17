@@ -2,7 +2,12 @@ require_dependency "transit/schemas/#{Transit.orm.to_s}/page"
 
 module Transit
   class Page
-    transit :publishable, :sluggable => :name
+    
+    # All pages should use publishing, slugs, and tracking
+    transit :publishable, 
+            :sluggable => :name
+    
+    validates :title, :name, :slug, presence: true
     
     ##
     # Used to set keywords via comma separated string

@@ -15,12 +15,11 @@ module Transit
         field :slug,              :type => String
         field :identifier,        :type => String
         field :ancestry_depth,    :type => String
-        field :slug_map,          :type => Array,  :default  => []
         field :position,          :type => Integer
-    
-        field :content,           :type => String, :default => "", :localize => self.has_translation_support
-        field :content_schema,    :type => Transit::Schematic, :default => {}
-    
+
+        # Final rendered html. 
+        field :rendered_content, :type => String, :default => "", :localize => self.has_translation_support
+        
         has_ancestry :orphan_strategy => :rootify, :cache_depth => true
       end
     end

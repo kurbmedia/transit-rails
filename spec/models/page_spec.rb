@@ -1,18 +1,6 @@
 require 'spec_helper'
 
-describe Page do
-  
-  it 'delivers as a page' do
-    Page.delivery_type
-      .should eq :page
-  end
-  
-  it 'applies the page model' do
-    Page.included_modules
-    .should include(
-    Transit::Models::Page)
-  end
-
+describe Transit::Page do
   
   describe 'applied attributes' do
     
@@ -154,16 +142,7 @@ describe Page do
           page.children.count
             .should eq 1
         end
-        
-        it "creates full_path using only its slug" do
-          page.full_path
-            .should eq 'parent'
-        end
-        
-        it 'creates absolute_path using only its slug' do
-          page.absolute_path
-            .should eq '/parent'
-        end
+
       end
       
       context 'and it does not have sub-pages' do
@@ -180,16 +159,6 @@ describe Page do
       it 'does not store parent page ids' do
         sub_page.children
           .should be_empty
-      end
-      
-      it "creates full_path using the slug from its parent" do
-        sub_page.full_path
-          .should eq 'parent/sub-page'
-      end
-        
-      it 'creates absolute_path using the slug from its parent' do
-        sub_page.absolute_path
-          .should eq '/parent/sub-page'
       end
     end
     
@@ -216,56 +185,7 @@ describe Page do
         sub_page.children.count
           .should eq 1
       end
-      
-      it "creates a full path to the page" do
-        tertiary.full_path
-          .should eq "parent/sub-page/tertiary"
-      end
-      
-      it "stores all parent paths in the slug_map array" do
-        tertiary.slug_map
-          .should eq [page, sub_page, tertiary]
-          .collect(&:slug)
-      end
     end
-    
-    describe "slug de-duplication" do
-      
-      context "when a child page's slug contains the parent" do
-        
-        let!(:secondary) do
-          Page.make!(
-            parent: page, 
-            title: "Dupetest Page", 
-            slug: 'parent/dupetest')
-        end
-        
-        it "removes the parent's slug from the child" do
-          secondary.full_path
-            .should eq "parent/dupetest"
-        end
-      end
-      
-      context "when a child page's slug does not contain a parent" do
-        
-        let(:nodupe) do
-          Page.make!(
-            parent: page, 
-            title: "Dupetest2",
-            slug: slug
-          )
-        end
-        
-        let!(:slug) do
-          'random-page/dupetest'
-        end
-        
-        it "does not modify the slug" do
-          nodupe.full_path
-            .should eq "parent/random-page/dupetest"
-        end
-      end
-    end
-    
+
   end
 end

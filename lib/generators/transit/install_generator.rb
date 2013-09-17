@@ -6,10 +6,10 @@ module Transit
     # 
     class InstallGenerator < Rails::Generators::Base
       source_root File.expand_path("../../templates", __FILE__)
-      class_option :orm
 
-      def copy_initializer
+      def copy_files
         template "transit.rb", "config/initializers/transit.rb"
+        template "page_migration.rb", "db/migrations/#{Time.now.to_i}_transit_create_pages.rb"
       end
     end
     

@@ -5,37 +5,37 @@ describe "the Ordering extension" do
   context 'when included' do
     
     it 'adds a position field' do
-      Page.new.respond_to?(
+      Transit::Page.new.respond_to?(
         :position).should be_true
     end
   end
   
   after do
-    Page.destroy_all
+    Transit::Page.destroy_all
   end
   
   let!(:page) do
-    Page.make!
+    Transit::Page.make!
   end
   
   let!(:page2) do
-    Page.make!
+    Transit::Page.make!
   end
   
   let!(:page3) do
-    Page.make!
+    Transit::Page.make!
   end
   
   let!(:sub) do
-    Page.make!(parent: page)
+    Transit::Page.make!(parent: page)
   end
   
   let!(:sub2) do
-    Page.make!(parent: page)
+    Transit::Page.make!(parent: page)
   end
   
   let!(:sub3) do
-    Page.make!(parent: page)
+    Transit::Page.make!(parent: page)
   end
   
   context 'when top level nodes' do
