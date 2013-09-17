@@ -8,6 +8,7 @@ module Transit
       
       included do
         serialize :keywords, Array
+        has_many :regions, :class_name => "Transit::Region", :autosave => true
         has_ancestry :orphan_strategy => :rootify, :cache_depth => true
       end
     end

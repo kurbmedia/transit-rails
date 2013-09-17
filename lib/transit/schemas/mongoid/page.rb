@@ -8,12 +8,13 @@ module Transit
       included do
         include Mongoid::Ancestry
     
-        field :name,              :type => String, :localize => self.has_translation_support
-        field :title,             :type => String, :localize => self.has_translation_support
-        field :description,       :type => String, :localize => self.has_translation_support
-        field :keywords,          :type => Array,  :default  => []
+        field :name,              :type => String,  :localize => self.has_translation_support
+        field :title,             :type => String,  :localize => self.has_translation_support
+        field :description,       :type => String,  :localize => self.has_translation_support
+        field :keywords,          :type => Array,   :default  => []
         field :slug,              :type => String
         field :identifier,        :type => String
+        field :template,          :type => String,  :default => 'default'
         field :ancestry_depth,    :type => String
         field :position,          :type => Integer
 
@@ -21,6 +22,7 @@ module Transit
         field :rendered_content, :type => String, :default => "", :localize => self.has_translation_support
         
         has_ancestry :orphan_strategy => :rootify, :cache_depth => true
+        embeds_many :regions, :class_name => "Transit::Region", :autosave => true
       end
     end
   end
