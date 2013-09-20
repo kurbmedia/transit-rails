@@ -10,4 +10,13 @@ module ORMHelpers
   def mongoid_models_only(&block)
     block.call() if using_mongoid?
   end
+  
+  def when_active_record(&block)
+    block.call if using_active_record?
+  end
+  
+  def when_mongoid(&block)
+    block.call if using_mongoid?
+  end
+  
 end

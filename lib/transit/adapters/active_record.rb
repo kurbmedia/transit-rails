@@ -1,5 +1,11 @@
 require 'active_record'
-require 'ancestry'
+begin
+  require 'ancestry'
+rescue Exception => e
+  puts "\n\nPlease add the ancestry gem to your Gemfile. "
+  puts "  gem 'ancestry'\n"
+end
+
 
 Transit.orm = :active_record
 
@@ -56,6 +62,3 @@ ActiveRecord::Base.class_eval do
     end
   end
 end
-
-require "transit/schemas/active_record/page"
-require "transit/schemas/active_record/post"

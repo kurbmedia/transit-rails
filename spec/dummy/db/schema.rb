@@ -13,6 +13,26 @@
 
 ActiveRecord::Schema.define(:version => 20130801203604) do
 
+  create_table "transit_menu_items", :force => true do |t|
+    t.string   "title"
+    t.string   "url"
+    t.string   "target"
+    t.string   "ancestry"
+    t.integer  "menu_id"
+    t.integer  "ancestry_depth"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  create_table "transit_menus", :force => true do |t|
+    t.string   "name"
+    t.string   "identifier"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "transit_menus", ["identifier"], :name => "index_transit_menus_on_identifier", :unique => true
+
   create_table "transit_pages", :force => true do |t|
     t.string   "name"
     t.string   "title"
@@ -32,11 +52,12 @@ ActiveRecord::Schema.define(:version => 20130801203604) do
   add_index "transit_pages", ["identifier"], :name => "index_transit_pages_on_identifier", :unique => true
 
   create_table "transit_regions", :force => true do |t|
-    t.string "dom_id"
-    t.text   "content"
-    t.text   "draft_content"
-    t.string "type"
-    t.text   "data"
+    t.string  "dom_id"
+    t.text    "content"
+    t.text    "draft_content"
+    t.integer "page_id"
+    t.string  "type"
+    t.text    "data"
   end
 
 end

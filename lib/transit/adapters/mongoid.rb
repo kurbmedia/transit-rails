@@ -1,5 +1,12 @@
 require 'mongoid'
-require 'mongoid-ancestry'
+
+begin
+  require 'mongoid-ancestry'
+rescue Exception => e
+  puts "\n\nPlease add the mongoid-ancestry gem to your Gemfile. "
+  puts "  gem 'mongoid-ancestry'\n\n"
+end
+
 require 'transit/adapter'
 
 Transit.orm = :mongoid
