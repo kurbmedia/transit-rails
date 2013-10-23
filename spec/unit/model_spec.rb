@@ -25,7 +25,7 @@ describe Transit::Model do
       
       it 'loads additional extensions from the options hash' do
         Transit::Page.included_modules
-          .should include(Transit::Extensions::Publishable)
+          .should include(Transit::Extensions::Sluggable)
       end
     end
   end

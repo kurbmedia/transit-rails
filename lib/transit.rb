@@ -4,10 +4,10 @@ module Transit
   extend self
   include ActiveSupport::Configurable
   
-  autoload :DeliveryOptions, 'transit/delivery_options'
-  autoload :Publishable,  'transit/publishable'
-  autoload :Context,      'transit/context'
-
+  autoload :DeliveryOptions,  'transit/delivery_options'
+  autoload :Delivery,         'transit/delivery'
+  
+  
   mattr_accessor :orm
   @@orm = :mongoid
   
@@ -28,6 +28,10 @@ module Transit
   def setup
     yield config
   end
+end
+
+ActiveSupport.on_load(:action_controller) do
+  include Transit::Delivery
 end
 
 

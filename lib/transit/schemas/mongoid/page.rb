@@ -15,13 +15,16 @@ module Transit
     field :template,          :type => String,  :default => 'default'
     field :ancestry_depth,    :type => String
     field :position,          :type => Integer
-    field :published,         :type => Boolean, :default => false
-    field :publish_date,      :type => Date
+    field :available,         :type => Boolean, :default => false
+    field :available_on,      :type => Date
     
-    # Final rendered html. 
-    field :rendered_content, :type => String, :default => "", :localize => Transit.config.translate
+    # Non-editable pages can only have their properties modified, and should not contain regions.
+    # This allows using pages to only control/dictate metadata and other properties, for use with 
+    # other models etc. 
+    # 
+    field :editable,          :type => Boolean, :default => true
     
     has_ancestry :orphan_strategy => :rootify, :cache_depth => true
-    embeds_many :regions, :class_name => "Transit::Region"
+    embeds_many :regions, :class_name => "Transit::Region", :cascade_callbacks => true
   end
 end

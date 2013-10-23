@@ -27,7 +27,7 @@ module Transit
     # 
     def ensure_draft_content
       return true if self.draft_content.present?
-      self.draft_content = self.content
+      self.draft_content ||= self.content
     end
   end
 end

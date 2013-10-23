@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'The slugged extension' do
+describe 'The Sluggable extension' do
   
   before do
     Transit::Page.class_eval do
@@ -10,9 +10,9 @@ describe 'The slugged extension' do
   
   let(:page) do
     Transit::Page.make!(
-      post_date: Date.today,
+      available_on: Date.today,
       title: "Post Slug Test",
-      published: true,
+      available: true,
       slug: nil
     )
   end

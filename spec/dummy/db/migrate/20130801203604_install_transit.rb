@@ -10,8 +10,9 @@ class InstallTransit < ActiveRecord::Migration
       t.string   :template, :default => "default"
       t.string   :ancestry
       t.integer  :ancestry_depth, :default => nil
-      t.boolean  :published, :default => false
-      t.datetime :publish_date
+      t.boolean  :available, :default => false
+      t.datetime :available_on
+      t.boolean  :editable, :default => false
       
       ##
       # Orderable

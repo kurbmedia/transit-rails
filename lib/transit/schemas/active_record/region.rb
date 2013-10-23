@@ -6,6 +6,6 @@ module Transit
     serialize :data
     serialize :snippet_data
     
-    belongs_to :page, :class_name => "Transit::Page"
+    belongs_to :page, :class_name => 'Transit::Page'
   end
 end

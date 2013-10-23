@@ -2,6 +2,10 @@ require 'spec_helper'
 
 describe Transit::Region do
   
+  let!(:page) do
+    Transit::Page.make!
+  end
+  
   describe 'associations' do
     
     when_active_record do
@@ -19,5 +23,10 @@ describe Transit::Region do
           :page)
       end
     end
+  end
+  
+  describe 'content drafts' do
+    
+    
   end
 end

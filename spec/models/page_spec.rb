@@ -108,7 +108,7 @@ describe Transit::Page do
       Transit::Page.make!(
         title: "Sub Page", 
         slug: "sub-page", 
-        published: true,
+        available: true,
         parent: page)
     end
     
@@ -174,6 +174,45 @@ describe Transit::Page do
           .should eq 1
       end
     end
-
+    
+    
+    describe 'assigning a hash to region_data' do
+      
+      let!(:page) do
+        Transit::Page.make!(:regions)
+      end
+      
+      let(:region) do
+        page.regions.where(dom_id: "test_node").first
+      end
+      
+      before do
+        page.regions.first.update_attributes(
+          dom_id: "test_node", 
+          content: "original"
+        )
+      end
+      
+      context 'when new content is assigned' do
+        
+        before do
+          page.update_attributes(regions_attributes: data)
+        end
+        
+        let(:data) do
+          { "test_node" => { "content" => "replaced" }}
+        end
+        
+        it 'updates the draft_content of each region' do
+          region.draft_content
+            .should eq 'replaced'
+        end
+        
+        it 'does not update the existing content' do
+          region.content
+            .should eq 'original'
+        end
+      end
+    end
   end
 end

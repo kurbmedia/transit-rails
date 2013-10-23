@@ -13,6 +13,7 @@ guard 'rspec', {
   
   watch(%r{^lib/transit/models/(.+)\.rb$}){ |m| "spec/models/#{m[1]}_spec.rb" }
   watch(%r{^spec/.+_spec\.rb$})
+  watch(%r{^app/models/transit/(.+)\.rb$})            { |m| "spec/models/#{m[1]}_spec.rb" }
   watch(%r{^app/(.+)\.rb$})                           { |m| "spec/#{m[1]}_spec.rb" }
   watch(%r{^lib/transit/helpers/(.+)\.rb$})           { |m| "spec/helpers/#{m[1]}_spec.rb" }
   watch(%r{^lib/transit/(.+)\.rb$})                           { |m| "spec/unit/#{m[1]}_spec.rb" }
