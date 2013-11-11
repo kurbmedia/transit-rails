@@ -7,7 +7,7 @@ module Transit
     protected
     
     def collection
-      
+      @pages = Page.roots
     end
     
     def resource

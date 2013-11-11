@@ -1,0 +1,5 @@
+<ul id="transit_page_list">
+    <% collection.each do |page| %>
+    <%= render partial: "transit/pages/page", locals: { page: page } %>
+    <% end %>
+</ul>

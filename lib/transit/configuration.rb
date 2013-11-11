@@ -27,8 +27,13 @@ module Transit
   config.sluggable_via = ":name"
   
   ##
-  # When using the publishing extension, should a publish_date be used?
+  # When using the active extension, should a active_date be used?
   # 
   config.publish_with_date = true
-
+  
+  
+  ##
+  # Set the template directory in which to look for templates.
+  # 
+  config.template_dir = 'transit/pages'
 end

@@ -2,6 +2,7 @@ require_dependency "transit/schemas/#{Transit.orm.to_s}/page"
 
 module Transit
   class Page
+    extend Transit::Templating
     
     # All pages should use publishing, slugs, and tracking
     transit :available, 
@@ -9,7 +10,10 @@ module Transit
     
     validates :title, :name, :slug, presence: true
     validate :slug_is_unique
+    validates :identifier, uniqueness: true
+    
     before_validation :sanitize_slug
+    before_validation :generate_identifier
 
     scope :top_level, -> { roots }
     
@@ -78,6 +82,14 @@ module Transit
     
     private
 
+    ##
+    # If an identifier hasn't been set, auto-generate 
+    # one from the name of the page.
+    # 
+    def generate_identifier
+      self.identifier ||= self.name.to_s.to_slug.underscore
+    end
+    
     
     ##
     # In the event slugs are entered by end-users, this ensures they are 

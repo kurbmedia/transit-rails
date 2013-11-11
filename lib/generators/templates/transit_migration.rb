@@ -19,7 +19,6 @@ class InstallTransit < ActiveRecord::Migration
       # 
       # t.integer :position, :default => nil
       
-      # Uncomment unless your model already has timestamps
       t.timestamps
     end
     

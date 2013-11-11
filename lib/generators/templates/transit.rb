@@ -3,25 +3,26 @@ Transit.configure do |config|
   require 'transit/adapters/<%= options[:orm] %>'
   
   ##
-  # Enable translations globally. This will enable 
-  # translation support for any model which acts as a deliverable.
-  # To enable support on a per-model basis, pass :translate => true to the 
-  # deliver_as method.
+  # Enable translations globally for all transit models.
   # 
   #config.translate = false
 
   ##
-  # When generating post slugs, use this interpolation
+  # When generating page slugs, use this interpolation
   # 
   #config.sluggable_via = ":name"
 
   ##
-  # When using the publishing extension, by default published state 
-  # is determined by checking the value of the 'published' attribute 
-  # as well as 'publish_date'. Items are considered published if true, and the
-  # publish_date is on or before the current date. Set this to false to only 
-  # utilize the 'published' attribute.
+  # When using the available extension, by default available state 
+  # is determined by checking the value of the 'available' attribute 
+  # as well as 'available_on'. Items are considered available if true, and the
+  # available_on date is on or before the current date. Set this to false to only 
+  # utilize the 'available' attribute.
   # 
   #config.publish_with_date = true
-
+  
+  ##
+  # Set the template directory in which to look for templates.
+  # 
+  config.template_dir = 'transit/pages'
 end
