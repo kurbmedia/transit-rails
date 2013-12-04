@@ -9,6 +9,7 @@ module Transit
     field :data,          :type => Hash,   :default => {}
     field :snippet_data,  :type => Hash,   :default => {}
     field :draft_content, :type => String
+    field :publish_state, :type => String, :default => "draft"
     
     embedded_in :page, :class_name => "Transit::Page"
   end

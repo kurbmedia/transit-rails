@@ -13,8 +13,10 @@ module Transit
       [].tap do |names|
         ActionController::Base.view_paths.each do |path|
           Dir[ File.join(path, Transit.config.template_dir, '*.*') ].collect do |file|
-            names << File.basename(file).split('.').first
-          end
+            fname = File.basename(file).split('.').first
+            next nil if fname.match(/^\_/)
+            names << fname
+          end.compact
         end
       end
     end

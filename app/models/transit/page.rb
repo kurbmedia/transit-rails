@@ -5,7 +5,7 @@ module Transit
     extend Transit::Templating
     
     # All pages should use publishing, slugs, and tracking
-    transit :available, 
+    transit :publishable, 
             :sluggable => ':name'
     
     validates :title, :name, :slug, presence: true
@@ -50,32 +50,11 @@ module Transit
     
     
     ##
-    # Update the content for this page
-    # by rendering the resulting template.
-    # 
-    def publish(force = false)
-      force ? self.regions.each(&:publish!) : self.regions.each(&:publish)
-      self
-    end
-    
-    
-    ##
-    # Update the content for this page
-    # permanently, and save the result.
-    # 
-    def publish!
-      publish(true)
-      save
-    end
-    
-    
-    ##
     # Assigns regions based off of their dom ids.
     # 
     def regions_attributes=(hash)
       hash.stringify_keys!.each do |dom, props|
         region = self.regions.where(:dom_id => dom).first || self.regions.build(:dom_id => dom)
-        props['draft_content'] = props.delete('content')
         region.update_attributes(props)
       end
     end

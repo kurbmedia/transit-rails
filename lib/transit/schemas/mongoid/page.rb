@@ -1,4 +1,5 @@
 require 'mongoid-ancestry'
+require 'mongoid/extensions/boolean'
 
 module Transit
   class Page
@@ -15,8 +16,8 @@ module Transit
     field :template,          :type => String,  :default => 'default'
     field :ancestry_depth,    :type => String
     field :position,          :type => Integer
-    field :available,         :type => Boolean, :default => false
-    field :available_on,      :type => Date
+    field :published,         :type => Boolean, :default => false
+    field :publish_on,        :type => Date
     
     # Non-editable pages can only have their properties modified, and should not contain regions.
     # This allows using pages to only control/dictate metadata and other properties, for use with 

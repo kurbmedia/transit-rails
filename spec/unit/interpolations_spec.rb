@@ -46,7 +46,7 @@ describe Transit::Interpolations do
     
     before do
       page.stub(
-        available_on: Date.today,
+        publish_on: Date.today,
         title: 'sample title'
       )
     end

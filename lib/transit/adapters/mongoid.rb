@@ -7,24 +7,25 @@ rescue Exception => e
   puts "  gem 'mongoid-ancestry'\n\n"
 end
 
+require 'mongoid/extensions/boolean'
 require 'transit/adapter'
 
 Transit.orm = :mongoid
 
 # autoload
-Transit::Extensions::Available
+Transit::Extensions::Publishable
 
 module Transit
   module Extensions
-    module Available
+    module Publishable
       module ClassMethods
         
         ##
         # Override here to use mongo specific queries
         # TODO: Maybe use orm_adapter or some kind of adapter functionality for this?
         #
-        def available_by_date
-          all_of(:available => true, :available_on.lte => Date.today.to_time)
+        def published_by_date
+          all_of(:published => true, :publish_on.lte => Date.today.to_time)
         end
       end
     end

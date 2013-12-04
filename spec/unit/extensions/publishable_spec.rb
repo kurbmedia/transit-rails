@@ -1,17 +1,17 @@
 require 'spec_helper' 
 
-describe "Publishing Extension" do
+describe "Publishable Extension" do
   
   let!(:page) do
     Transit::Page.make!(
-      title: "Un-Published Page",
+      title: "Un-Available Page",
       slug: "parent"
     )
   end
   
   let!(:page2) do
     Transit::Page.make!(
-      title: 'Published Page', 
+      title: 'Available Page', 
       slug: 'child',
       parent: page)
   end
@@ -65,30 +65,31 @@ describe "Publishing Extension" do
       
       let!(:page) do
         Transit::Page.make!(
-          publish_date: Date.today.to_time.midnight,
+          publish_on: Date.today.to_time.midnight,
           title: "Post Slug Test",
-          published: true
+          published: 'true'
         )
       end
   
       let!(:page2) do
         Transit::Page.make!(
-          publish_date: 5.days.from_now,
-          title: "Unpublished Post",
-          published: true
+          publish_on: 5.days.from_now,
+          title: "Unavailable Post",
+          published: 'true'
         )
       end
       
       let(:page_ids) do
-        Transit::Page.published.pluck(:id).map(&:to_s)
+        Transit::Page.published
+          .pluck(:id).map(&:to_s)
       end
       
-      it 'finds objects where the publish date is before today' do
+      it 'finds objects where the publish_on date is before today' do
         page_ids.should(
           include(page.id.to_s))
       end
       
-      it 'does not find objects where publish_date is after today' do
+      it 'does not find objects where publish_on is after today' do
         page_ids.should_not(
           include(page2.id.to_s))
       end

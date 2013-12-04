@@ -10,23 +10,14 @@ describe 'The Sluggable extension' do
   
   let(:page) do
     Transit::Page.make!(
-      available_on: Date.today,
+      publish_on: Date.new(2013, 12, 1),
       title: "Post Slug Test",
-      available: true,
+      published: true,
       slug: nil
     )
   end
   
-  let(:year) do
-    Date.today.year
-  end
-  
-  let(:mo) do
-    Date.today.strftime("%m")
-  end 
-  
   it 'generates a slug based on the slugged config' do
-    page.slug.should eq(
-      [mo, year, page.title.to_slug].join("/"))
+    page.slug.should eq "12/2013/post-slug-test"
   end
 end

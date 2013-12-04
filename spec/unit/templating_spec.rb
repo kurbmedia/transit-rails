@@ -7,7 +7,7 @@ describe Transit::Templating do
     
     it 'finds all templates in the templates_dir' do
       Transit::Page.available_templates
-        .should eq ['default']
+        .should include?('default')
     end
   end
 end

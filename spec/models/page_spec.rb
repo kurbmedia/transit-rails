@@ -108,7 +108,7 @@ describe Transit::Page do
       Transit::Page.make!(
         title: "Sub Page", 
         slug: "sub-page", 
-        available: true,
+        published: true,
         parent: page)
     end
     
@@ -203,14 +203,9 @@ describe Transit::Page do
           { "test_node" => { "content" => "replaced" }}
         end
         
-        it 'updates the draft_content of each region' do
-          region.draft_content
-            .should eq 'replaced'
-        end
-        
-        it 'does not update the existing content' do
+        it 'updates the content of each region' do
           region.content
-            .should eq 'original'
+            .should eq 'replaced'
         end
       end
     end

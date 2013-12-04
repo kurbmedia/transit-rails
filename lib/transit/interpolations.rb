@@ -54,8 +54,8 @@ module Transit
     # @param [Object] resource The associated model instance
     # 
     def month(resource)
-      if resource.respond_to?(:available_on) 
-        return resource.available_on.try(:strftime, '%m')
+      if resource.respond_to?(:publish_on) 
+        return resource.publish_on.try(:strftime, '%m')
       end
       resource.created_at.try(:strftime, '%m')
     end
@@ -67,8 +67,8 @@ module Transit
     # @param [Object] resource The associated model instance
     # 
     def day(resource)
-      if resource.respond_to?(:available_on) 
-        return resource.available_on.try(:day)
+      if resource.respond_to?(:publish_on) 
+        return resource.publish_on.try(:day)
       end
       resource.created_at.try(:day)
     end
@@ -80,8 +80,8 @@ module Transit
     # @param [Object] resource The associated model instance
     # 
     def year(resource)
-      if resource.respond_to?(:available_on) 
-        return resource.available_on.try(:year)
+      if resource.respond_to?(:publish_on) 
+        return resource.publish_on.try(:year)
       end
       resource.created_at.try(:year)
     end
