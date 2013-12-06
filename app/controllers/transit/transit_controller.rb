@@ -1,5 +1,5 @@
 module Transit
-  class TransitController < ApplicationController
+  class TransitController < ::ApplicationController
     before_filter :perform_authentication_method
     
     protected
@@ -10,7 +10,7 @@ module Transit
     # 
     def perform_authentication_method
       runs = Transit.config.authentication_method
-      return true unless runs.present? && self.respond_to?(:runs)
+      return true unless runs.present? && self.respond_to?(runs)
       send(runs)
     end
     

@@ -8,6 +8,10 @@ Transit::Page.blueprint(:regions) do
   regions(5)
 end
 
+Transit::Page.blueprint(:region) do
+  regions(1)
+end
+
 Transit::Region.blueprint do
   content { "Sample content" }
 end

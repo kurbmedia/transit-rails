@@ -12,8 +12,10 @@ module Transit
         
         # Create a Draft class for this model.
         const_set 'Draft', Class.new(::Transit::Draft) unless const_defined?('Draft')
-
-        has_one :draft, class_name: "#{self.name}::Draft", as: :draftable, dependent: :destroy, autobuild: true
+        options = { :class_name => "#{self.name}::Draft", :as => :draftable, :dependent => :destroy, :autosave => true }
+        options.merge!(:autobuild => true ) if Transit.orm == :mongoid
+        
+        has_one *[:draft, options]
         
         delegate :draftable_attributes, :draft_class, :to => self
         
@@ -129,6 +131,14 @@ module Transit
       
       
       ##
+      # Auto-build the draft
+      # 
+      def draft
+        super || build_draft
+      end
+      
+      
+      ##
       # Place the model in a preview mode. 
       # Assigns draft content to the model, then 
       # makes it readonly.
@@ -137,7 +147,7 @@ module Transit
         draftable_attributes.each do |prop|
           value = draft.read_property(prop)
           next if value.nil?
-          self.write_attribute(prop, value)
+          self.send(:write_attribute, prop, value)
         end
         extend Transit::Extensions::Draftable::PreviewMode
         self

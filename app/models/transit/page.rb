@@ -21,7 +21,7 @@ module Transit
     # The absolute path to this page
     # 
     def absolute_path
-      File.join('/', self.slug)
+      File.join('/', self.slug.to_s)
     end
     
     

@@ -13,6 +13,12 @@
 
 ActiveRecord::Schema.define(:version => 20130801203604) do
 
+  create_table "transit_drafts", :force => true do |t|
+    t.integer "draftable_id"
+    t.string  "draftable_type"
+    t.text    "content"
+  end
+
   create_table "transit_menu_items", :force => true do |t|
     t.string   "title"
     t.string   "url"
@@ -44,7 +50,9 @@ ActiveRecord::Schema.define(:version => 20130801203604) do
     t.string   "ancestry"
     t.integer  "ancestry_depth"
     t.boolean  "published",      :default => false
-    t.datetime "publish_date"
+    t.datetime "publish_on"
+    t.boolean  "editable",       :default => true
+    t.integer  "position"
     t.datetime "created_at",                            :null => false
     t.datetime "updated_at",                            :null => false
   end
@@ -52,12 +60,12 @@ ActiveRecord::Schema.define(:version => 20130801203604) do
   add_index "transit_pages", ["identifier"], :name => "index_transit_pages_on_identifier", :unique => true
 
   create_table "transit_regions", :force => true do |t|
+    t.integer "page_id"
     t.string  "dom_id"
     t.text    "content"
-    t.text    "draft_content"
-    t.integer "page_id"
     t.string  "type"
     t.text    "data"
+    t.text    "snippet_data"
   end
 
 end

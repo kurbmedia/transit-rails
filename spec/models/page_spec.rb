@@ -179,7 +179,7 @@ describe Transit::Page do
     describe 'assigning a hash to region_data' do
       
       let!(:page) do
-        Transit::Page.make!(:regions)
+        Transit::Page.make!
       end
       
       let(:region) do
@@ -187,22 +187,23 @@ describe Transit::Page do
       end
       
       before do
-        page.regions.first.update_attributes(
-          dom_id: "test_node", 
-          content: "original"
-        )
+        page.update_attributes({
+          regions_attributes: { "test_node" => { "content" => "original" }}
+        })
+        region.deploy!
       end
       
       context 'when new content is assigned' do
         
         before do
           page.update_attributes(regions_attributes: data)
+          region.reload.deploy!
         end
-        
+
         let(:data) do
           { "test_node" => { "content" => "replaced" }}
         end
-        
+
         it 'updates the content of each region' do
           region.content
             .should eq 'replaced'

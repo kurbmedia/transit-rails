@@ -10,16 +10,15 @@ class InstallTransit < ActiveRecord::Migration
       t.string   :template, :default => "default"
       t.string   :ancestry
       t.integer  :ancestry_depth, :default => nil
-      t.boolean  :available, :default => false
-      t.datetime :available_on
-      t.boolean  :editable, :default => false
+      t.boolean  :published, :default => false
+      t.datetime :publish_on
+      t.boolean  :editable, :default => true
       
       ##
       # Orderable
       # 
-      # t.integer :position, :default => nil
+      t.integer :position, :default => nil
       
-      # Uncomment unless your model already has timestamps
       t.timestamps
     end
     
@@ -27,10 +26,14 @@ class InstallTransit < ActiveRecord::Migration
       t.belongs_to  :page
       t.string      :dom_id
       t.text        :content
-      t.text        :draft_content
       t.string      :type
       t.text        :data
       t.text        :snippet_data
+    end
+    
+    create_table(:transit_drafts) do |t|
+      t.belongs_to  :draftable, polymorphic: true
+      t.text        :content
     end
     
     create_table(:transit_menus) do |t|
@@ -48,6 +51,7 @@ class InstallTransit < ActiveRecord::Migration
       t.integer    :ancestry_depth, :default => nil
       t.timestamps
     end
+    
     
     add_index :transit_pages, :identifier, :unique => true
     add_index :transit_menus, :identifier, :unique => true

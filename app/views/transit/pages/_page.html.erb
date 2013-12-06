@@ -3,11 +3,11 @@
         <%= page.name %> <small>[ <%= page.slug %> ]</small>
     </span>
     <div class="links">
-        <%= link_to "Edit", transit.page_path(page) %>
+        <%= link_to "Edit", transit.page_path(page), :class => 'edit-link' %>
         <% unless page.children.any? %>
-        <%= link_to "Delete", transit.page_path(page), method: "delete", data: { confirm: "Are you sure you want to delete this page?" } %>
+        <%= link_to "Delete", transit.page_path(page), :class => 'delete-link', :method => "delete", :data => { :confirm => "Are you sure you want to delete this page?" } %>
         <% else %>
-         <%= link_to "Pages", transit.pages_path(parent: page.id), remote: true %>
+         <%= link_to "Pages", transit.pages_path(:parent => page.id), :class => 'pages-link', :remote => true %>
         <% end %>
     </div>
     <% if page.children.any? %>

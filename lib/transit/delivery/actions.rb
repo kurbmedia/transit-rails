@@ -10,7 +10,7 @@ module Transit
       # for rendering pages.
       # 
       def show
-        render template: "transit/templates/%s" % [current_template]
+        render template: current_template and return
       end
     end
   end

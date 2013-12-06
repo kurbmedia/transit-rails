@@ -1,8 +1,25 @@
 module Transit
   class PagesController < TransitController
-    helper_method :resource, :collection
+    helper_method :resource, :collection, :current_page
     layout :transit_layout, only: [:show]
     respond_to :html, :js, :json
+    
+    
+    def index
+      if params[:parent_id].present?
+        @page  = Transit::Page.find(params[:parent_id])
+        @pages = resource.children
+      end
+      respond_with(collection)
+    end
+    
+    
+    def show
+      if params[:mercury_frame].present?
+        render template: resource.template and return
+      end
+      respond_with(resource)
+    end
     
     ##
     # Create a new page
@@ -70,13 +87,16 @@ module Transit
       @page ||= params[:id].present? ? Transit::Page.find(params[:id]) : Transit::Page.new
     end
     
+    alias :current_page :resource
+    
     
     ##
     # When in 'edit' mode, we need to render the mercury layout to 
     # configure the editor.
     # 
     def transit_layout
-      return controller.send(:_layout) if params[:mercury_frame].present? && resource.persisted?
+      return send(:_layout) if params[:mercury_frame].present? && resource.persisted? && resource.editable?
+      params[:mercury_frame] = resource.absolute_path
       'transit'
     end
     

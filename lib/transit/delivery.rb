@@ -6,7 +6,7 @@ module Transit
     
     included do
       helper_method :current_page, :current_template
-      before_filter :append_transit_templates_path
+      #before_filter :append_transit_templates_path
       include Transit::Delivery::Actions  
     end
     
@@ -25,7 +25,7 @@ module Transit
     # page's "template" attribute.
     # 
     def current_template
-      "#{current_page.try(:template) || 'default'}"
+      current_page.try(:template) || 'transit/templates/default'
     end
     
     
@@ -35,7 +35,7 @@ module Transit
     # Look for templates under app/templates
     # 
     def append_transit_templates_path
-      append_view_path 'app/views/transit'
+      append_view_path 'app/views/transit/templates'
     end
   end
 end
