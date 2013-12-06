@@ -20,8 +20,8 @@
     <script type="text/javascript" charset="utf-8">    
     //<![CDATA[
         (function(){
-            var editor = new Transit.Editor("<%= transit.page_path(resource) %>");
-            editor.loadIframeSrc("<%= resource.absolute_path %>");
+            Transit.editor = new Transit.Editor("<%= transit.page_path(resource) %>");
+            Transit.editor.loadIframeSrc("<%= resource.absolute_path %>");
         })();
     //]]>
     </script>

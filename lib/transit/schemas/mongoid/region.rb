@@ -5,7 +5,7 @@ module Transit
     
     field :dom_id,        :type => String
     field :content,       :type => String
-    field :type,          :type => String
+    field :region_type,   :type => String
     field :data,          :type => Hash,   :default => {}
     field :snippet_data,  :type => Hash,   :default => {}
     field :draft_content, :type => String

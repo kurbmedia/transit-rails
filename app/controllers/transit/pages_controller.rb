@@ -33,7 +33,7 @@ module Transit
     # Accept params for a new page and create it. 
     # 
     def create
-      @page = Transit::Page.new(permitted_params[:page])
+      @page = Transit::Page.new(permitted_params)
       unless resource.save
         respond_with(resource) and return
       end
@@ -47,7 +47,7 @@ module Transit
     
     
     def update
-      resource.update_attributes(permitted_params[:page])
+      resource.update_attributes(permitted_params)
       respond_with(resource, location: transit.page_path(resource))
     end
     
@@ -72,11 +72,11 @@ module Transit
     # Optional strong params support
     # 
     def permitted_params
-      return params unless Rails.version.to_i >= 4
-      params.permit(:page => [ 
-        :name, :title, :description, :keywords, :slug, :template, :parent_id, :published, :publish_on,
-        :regions_attributes => [:dom_id, :data, :type, :content, :snippet_data]
-      ])
+      return params[:page] unless Rails.version.to_i >= 4
+      params.require(:page).permit!
+      # params.permit(:page => [ 
+      #   :id, :name, :title, :description, :keywords, :slug, :template, :parent_id, :published, :publish_on, :regions_attributes => {}
+      # ])
     end
     
     

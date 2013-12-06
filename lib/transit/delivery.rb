@@ -6,7 +6,6 @@ module Transit
     
     included do
       helper_method :current_page, :current_template
-      #before_filter :append_transit_templates_path
       include Transit::Delivery::Actions  
     end
     
@@ -26,16 +25,6 @@ module Transit
     # 
     def current_template
       current_page.try(:template) || 'transit/templates/default'
-    end
-    
-    
-    private
-    
-    ##
-    # Look for templates under app/templates
-    # 
-    def append_transit_templates_path
-      append_view_path 'app/views/transit/templates'
     end
   end
 end

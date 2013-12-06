@@ -26,7 +26,7 @@ class InstallTransit < ActiveRecord::Migration
       t.belongs_to  :page
       t.string      :dom_id
       t.text        :content
-      t.string      :type
+      t.string      :region_type
       t.text        :data
       t.text        :snippet_data
     end
