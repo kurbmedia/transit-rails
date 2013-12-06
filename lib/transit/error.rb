@@ -12,4 +12,7 @@ module Transit
       ::I18n.translate("#{BASE_KEY}.#{key}", options)
     end
   end
+  
+  class ReadOnlyRecord < Error
+  end
 end

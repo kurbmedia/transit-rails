@@ -11,7 +11,7 @@ module Transit
   # Included into any model using the 'transit' method.
   # Sets up some default options.
   # 
-  module Delivery
+  module Deliverable
     extend ActiveSupport::Concern
   
     included do
@@ -36,7 +36,7 @@ module Transit
     # 
     def transit(*args)
       
-      include Transit::Delivery
+      include Transit::Deliverable
       
       options = args.extract_options! || {}
       options.symbolize_keys!

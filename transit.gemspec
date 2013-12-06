@@ -10,8 +10,8 @@ Gem::Specification.new do |s|
   s.authors     = ["Brent Kirby"]
   s.email       = ["dev@kurbmedia.com"]
   s.homepage    = "https://github.com/kurbmedia/transit-rails"
-  s.summary     = %q{Transit is a content management and delivery engine designed for use with Rails 3.1+}
-  s.description = %q{Transit is a content management and delivery engine designed for use with Rails 3.1+. It supports ActiveRecord, as well as Mongoid}
+  s.summary     = %q{Transit is a content management engine for Rails 3.1+ based on Mercury editor.}
+  s.description = %q{Transit is a content management engine for Rails 3.1+ based on Mercury editor. It supports ActiveRecord, as well as Mongoid}
 
   s.rubyforge_project = "transit"
   s.license           = 'MIT'
@@ -21,7 +21,6 @@ Gem::Specification.new do |s|
   s.require_paths     = ["lib"]
 
   s.add_dependency("rails", ">= 3.2.6", "< 5")
-  #s.add_dependency("orm_adapter", "~> 0.1")
   
   s.add_development_dependency("rspec", ">= 2.14.0")
   s.add_development_dependency("rspec-rails", ">= 2.14.0")

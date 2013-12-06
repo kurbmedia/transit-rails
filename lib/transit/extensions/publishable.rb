@@ -42,7 +42,7 @@ module Transit
       end
       
       ##
-      # Make this model available immediately.
+      # Publish this model available immediately.
       # 
       def publish!
         self.published = true

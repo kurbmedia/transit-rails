@@ -30,10 +30,6 @@ module Transit
   end
 end
 
-ActiveSupport.on_load(:action_controller) do
-  include Transit::Delivery
-end
-
 
 require 'transit/error'
 require 'transit/configuration'

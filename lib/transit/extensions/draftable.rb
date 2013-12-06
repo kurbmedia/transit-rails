@@ -9,8 +9,102 @@ module Transit
       extend ActiveSupport::Concern
       
       included do
-        after_create :ensure_draft_contents
-        has_many :drafts, class_name: "Transit::Draft", as: :draftable, dependent: :destroy
+        
+        # Create a Draft class for this model.
+        const_set 'Draft', Class.new(::Transit::Draft) unless const_defined?('Draft')
+
+        has_one :draft, class_name: "#{self.name}::Draft", as: :draftable, dependent: :destroy, autobuild: true
+        
+        delegate :draftable_attributes, :draft_class, :to => self
+        
+        draftable_attributes.map(&:to_s).each do |prop|
+          
+          ##
+          # Override setter to update the draft instead of the model's attribute.
+          # To make 'live' the deploy method should be used.
+          # 
+          define_method(:"#{prop}=") do |value|
+            raise Transit::ReadOnlyRecord and return if preview?
+            draft.write_property(prop, value)
+          end
+          
+          ##
+          # Create a draft_* getter for each draftable attribute.
+          # This way we can get the current content 
+          # 
+          # @author brent
+          define_method(:"draft_#{prop}") do
+            draft.read_property(prop)
+          end
+          
+          define_method(:"#{prop}") do
+            read_attribute(prop) || draft.read_property(prop)
+          end
+        end
+      end
+      
+      module ClassMethods
+        
+        ##
+        # Reference to the class which drafts are based on
+        # 
+        def draft_class
+          const_get('Draft')
+        end
+        
+        ##
+        # The fields/attributes that are draftable.
+        # 
+        def draftable_attributes
+          [self.delivery_options.draftable].flatten.uniq.map(&:to_sym)
+        end
+      end
+      
+      ##
+      # Places a model in a 'preview' state, that way 
+      # draft content can be assigned but the model can't be saved, updated, 
+      # or destroyed etc.
+      # 
+      module PreviewMode
+        extend ActiveSupport::Concern
+
+        included do
+          draftable_attributes.each do |prop|
+            attr_readonly(prop)
+          end
+        end
+        
+        
+        ##
+        # Block destruction when previewing
+        # 
+        def destroy
+          raise Transit::ReadOnlyRecord
+        end
+        
+        
+        ##
+        # Block destruction when previewing
+        # 
+        def delete
+          raise Transit::ReadOnlyRecord
+        end
+        
+        
+        ##
+        # We're now in preview mode.
+        # 
+        def preview?
+          true
+        end
+        
+        
+        ##
+        # When previewing, models should be in a readonly state.
+        # 
+        def readonly?
+          true
+        end
       end
       
       
@@ -19,7 +113,7 @@ module Transit
       # 
       def deploy
         draftable_attributes.each do |prop|
-          write_attribute(prop, drafts.for_attribute(prop).try(:content))
+          write_attribute(prop, draft.read_property(prop))
         end
         self
       end
@@ -33,28 +127,29 @@ module Transit
         save
       end
       
-      private
-
       
       ##
-      # When saving, if there is no draft content for the 
-      # publishable attr, copy it from the source.
+      # Place the model in a preview mode. 
+      # Assigns draft content to the model, then 
+      # makes it readonly.
       # 
-      def ensure_draft_contents
+      def preview!
         draftable_attributes.each do |prop|
-          current = self.drafts.where(property: prop).first || self.drafts.build(property: prop)
-          current.content = self.attributes[prop.to_s]
-          current.save
+          value = draft.read_property(prop)
+          next if value.nil?
+          self.write_attribute(prop, value)
         end
+        extend Transit::Extensions::Draftable::PreviewMode
+        self
       end
       
       
       ##
-      # The field/attribute that is publishable.
+      # Are we in preview mode?
       # 
-      def draftable_attributes
-        [self.delivery_options.draftable].flatten.uniq.map(&:to_sym)
-      end
+      def preview?
+        false
+      end      
     end
   end
 end

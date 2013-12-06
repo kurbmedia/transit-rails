@@ -33,9 +33,7 @@ class InstallTransit < ActiveRecord::Migration
     
     create_table(:transit_drafts) do |t|
       t.belongs_to  :draftable, polymorphic: true
-      t.string      :property
       t.text        :content
-      t.boolean     :serialize, default: false
     end
     
     create_table(:transit_menus) do |t|

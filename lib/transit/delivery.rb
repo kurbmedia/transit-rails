@@ -1,20 +1,14 @@
 module Transit
   module Delivery
+    autoload :Actions,  'transit/delivery/actions'
+    
     extend ActiveSupport::Concern
     
     included do
-      helper_method :current_page
+      helper_method :current_page, :current_template
+      before_filter :append_transit_templates_path
+      include Transit::Delivery::Actions  
     end
-    
-    
-    ##
-    # Default show action for controllers responsible 
-    # for rendering pages.
-    # 
-    def show
-      render template: current_template
-    end
-    
     
     protected
     
@@ -31,7 +25,17 @@ module Transit
     # page's "template" attribute.
     # 
     def current_template
-      "pages/#{current_page.try(:template) || 'default'}"
+      "#{current_page.try(:template) || 'default'}"
+    end
+    
+    
+    private
+    
+    ##
+    # Look for templates under app/templates
+    # 
+    def append_transit_templates_path
+      append_view_path 'app/views/transit'
     end
   end
 end

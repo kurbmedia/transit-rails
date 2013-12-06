@@ -33,7 +33,7 @@ module Transit
   
   
   ##
-  # Set the template directory in which to look for templates.
+  # Contains a list of template names that are available
   # 
-  config.template_dir = 'transit/pages'
+  config.templates = []
 end

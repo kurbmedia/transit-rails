@@ -50,6 +50,16 @@ module Transit
     
     
     ##
+    # When explicitly publishing pages, 
+    # deploy all region changes.
+    # 
+    def publish!
+      self.regions.each(&:deploy)
+      super
+    end
+    
+    
+    ##
     # Assigns regions based off of their dom ids.
     # 
     def regions_attributes=(hash)
