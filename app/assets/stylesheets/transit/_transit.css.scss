@@ -1,0 +1,15 @@
+//@import 'mercury';
+@import 'transit/config';
+@import 'transit/reset';
+@import 'transit/forms';
+
+html { -webkit-text-size-adjust:none; margin:0; padding:0; height:100%; }
+html, body{ -webkit-transition:-webkit-transform 3s; margin:0; padding:0; }
+body{ min-height:100%; }
+#transit_editor{ position:fixed; top:0px; left:0px; width:100%; height:100%; }
+div.mercury-statusbar{ background:black; height:1px; overflow:hidden; } 
+.mercury-iframe{ visibility:visible; position:absolute; top:0; width:100%; }
+.mercury-focusable{ position:absolute; opacity:0; }
+.filter{ margin:0; padding:0; }
+
+@import 'transit/toolbar';

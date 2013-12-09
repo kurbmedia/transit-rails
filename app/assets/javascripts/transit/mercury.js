@@ -102,13 +102,8 @@ window.Mercury = {
           },
         insertLink:            ['Link', 'Insert Link', { modal: '/mercury/modals/link.html', regions: ['full', 'markdown'] }],
         insertMedia:           ['Media', 'Insert Media (images and videos)', { modal: '/mercury/modals/media.html', regions: ['full', 'markdown'] }],
-        insertCharacter:       ['Character', 'Special Characters', { modal: '/mercury/modals/character.html', regions: ['full', 'markdown'] }],
-        snippetPanel:          ['Snippet', 'Snippet Panel', { panel: '/mercury/panels/snippets.html' }],
-        sep2:                  ' ',
-        historyPanel:          ['History', 'Page Version History', { panel: '/mercury/panels/history.html' }],
-        sep3:                  ' ',
-        notesPanel:            ['Notes', 'Page Notes', { panel: '/mercury/panels/notes.html' }]
-        },
+        snippetPanel:          ['Snippet', 'Snippet Panel', { panel: '/mercury/panels/snippets.html' }]
+      },
 
       editable: {
         _regions:              ['full', 'markdown'],
