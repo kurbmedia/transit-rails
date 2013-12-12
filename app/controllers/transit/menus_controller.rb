@@ -1,6 +1,6 @@
 module Transit
   class MenusController < TransitController
-    helper_method :resource, :collection, :current_page
+    helper_method :resource, :collection, :pages
     respond_to :html, :js, :json
     
     def index
@@ -27,8 +27,10 @@ module Transit
     def create
       @menu = Transit::Menu.new(permitted_params)
       unless resource.save
+        set_flash_message(:alert, I18n.t('transit.flash.menus.create.alert'))
         respond_with(resource) and return
       end
+      set_flash_message(:notice, I18n.t('transit.flash.menus.create.notice'))
       respond_with(resource, location: transit.menu_path(resource))
     end
     
@@ -39,13 +41,15 @@ module Transit
     
     
     def update
-      resource.update_attributes(permitted_params)
+      mkey = resource.update_attributes(permitted_params) ? :notice : :alert
+      set_flash_message(mkey, I18n.t("transit.flash.menus.update.#{mkey.to_s}"))
       respond_with(resource, location: transit.menu_path(resource))
     end
     
     
     def destroy
       resource.destroy
+      set_flash_message(:notice, I18n.t("transit.flash.menus.destroy.notice"))
       respond_with(resource, location: transit.menus_path)
     end
     
@@ -56,7 +60,15 @@ module Transit
     # All available menus
     # 
     def collection
-      @menus ||= Transit::Menu.all
+      @menus ||= Transit::Menu.order('name ASC').all
+    end
+    
+    
+    ##
+    # Get a list of all of the existing pages
+    # 
+    def pages
+      @pages ||= Transit::Page.order('name ASC').all
     end
     
     

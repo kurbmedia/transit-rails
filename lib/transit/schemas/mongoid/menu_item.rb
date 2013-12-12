@@ -9,6 +9,7 @@ module Transit
     field :url,               :type => String
     field :target,            :type => String
     field :ancestry_depth,    :type => String
+    field :position,          :type => Integer
     
     has_ancestry :orphan_strategy => :rootify, :cache_depth => true
     

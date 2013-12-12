@@ -1,0 +1,6 @@
+(function(){
+  var content = ("<%= escape_javascript(render(partial: 'form')) %>");
+  $('#transit_menu_form_area').html(content).trigger('reload').slideDown('fast', function(){
+    $('#menu_item_list').trigger('items:update');
+  });
+})();

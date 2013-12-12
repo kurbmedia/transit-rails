@@ -10,7 +10,6 @@ PATH
   remote: .
   specs:
     transit (0.0.2)
-      mercury-rails (= 0.9.0)
       rails (>= 3.2.6, < 5)
 
 GEM
@@ -48,16 +47,8 @@ GEM
     arel (3.0.3)
     builder (3.0.4)
     coderay (1.0.9)
-    coffee-rails (3.2.2)
-      coffee-script (>= 2.2.0)
-      railties (~> 3.2.0)
-    coffee-script (2.2.0)
-      coffee-script-source
-      execjs
-    coffee-script-source (1.6.3)
     diff-lcs (1.2.4)
     erubis (2.7.0)
-    execjs (2.0.2)
     ffi (1.9.0)
     formatador (0.2.4)
     guard (1.8.2)
@@ -82,9 +73,6 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
-    mercury-rails (0.9.0)
-      coffee-rails
-      railties (~> 3.2)
     method_source (0.8.2)
     mime-types (1.25.1)
     mongoid (3.1.4)

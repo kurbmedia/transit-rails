@@ -6,6 +6,7 @@ module Transit
     validates :name, :identifier, uniqueness: true
     before_validation :generate_identifier
     
+    accepts_nested_attributes_for :items, allow_destroy: true, reject_if: :all_blank
     
     private
     

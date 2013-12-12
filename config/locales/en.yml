@@ -1,0 +1,29 @@
+en:
+  transit:
+    flash:
+      menus:
+        create:
+          notice: "Menu has been successfully created"
+          alert: "There was a problem creating this menu. Please check the errors below"
+        update:
+          notice: "Menu has been successfully updated."
+          alert: "There was a problem saving this menu. Please check the errors below"
+        destroy:
+          notice: "Menu was successfully removed"
+          alert: "There was a problem deleting this menu."
+          
+    help: 
+      menu_items: "Drag & drop menu items to set their order. Click a title to change it's text."
+    ui:
+      buttons:
+        save_page: "Save Page"
+        save_menu: "Save Menu"
+    menus:
+      name: "Menu Name"
+    menu_items:
+      url: "URL"
+      title: "Title"
+      target: "Opens In"
+    
+    pages:
+      parent_id: "Parent Page"

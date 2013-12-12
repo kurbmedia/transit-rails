@@ -1,0 +1,14 @@
+@mixin clearfix{
+  &:before, &:after{
+    content:"";
+    display:table;
+  }
+  
+  &:after{
+    clear:both;
+  }
+
+  @if $legacy-support-for-ie8 or $legacy-support-for-ie7{
+    &{ zoom:1; }
+  }
+}

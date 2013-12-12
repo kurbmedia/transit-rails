@@ -1,0 +1,20 @@
+<li data-item-id="<%= i.object.id %>">
+    <div class="item">
+        <h5><%= i.text_field :title %></h5>
+        <span class="url">
+            <%= i.object.url.to_s %>
+            <%= i.hidden_field :url %>
+        </span>
+        <% if i.object.persisted? %>
+        <%= i.hidden_field :id %>
+        <%= i.hidden_field :_destroy, rel: 'remove' %>
+        <% end %>
+        <%= i.hidden_field :position, rel: "position" %>
+        <%= i.hidden_field :parent_id %>
+        <%= i.hidden_field :target %>
+        <a href="#" class="remove-item-link">&times;</a>
+    </div>
+    <% if i.object.persisted? %>
+    <ul class="sub"></ul>
+    <% end %>
+</li>
