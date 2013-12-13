@@ -31,6 +31,5 @@
     
 @Mercury.modalHandlers.editForm = {
   initialize:->
-    
   initializeForm:->
 }

@@ -63,9 +63,9 @@
   .mercury-line-separator{ background:lighten($transit-edit-bar-color, 10%); }
   .mercury-button-group{ white-space:nowrap; }
   .mercury-button{ width:$transit-edit-bar-button-size; height:$transit-edit-bar-button-size; margin:0 1px; border-radius:2px; background:lighten($transit-edit-bar-color, 10%);
-    border:1px solid darken($transit-edit-bar-color, 10%); 
+    border:1px solid darken($transit-edit-bar-color, 3%); 
     &:before{ content:" "; font-family:"FontAwesome"; display:block; width:$transit-edit-bar-button-size; height:$transit-edit-bar-button-size; color:$transit-edit-bar-button-color; 
-      line-height:$transit-edit-bar-button-size; text-align:center; -webkit-font-smoothing:antialiased; text-shadow:rgba(black, .5) -1px -1px 0px; font-size:$transit-edit-bar-button-size - 6px;
+      line-height:$transit-edit-bar-button-size; text-align:center; -webkit-font-smoothing:antialiased; text-shadow:rgba(black, .2) -1px -1px 0px; font-size:$transit-edit-bar-button-size - 6px;
       text-align:center;
     }
   }

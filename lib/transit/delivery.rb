@@ -42,8 +42,8 @@ module Transit
     # Tell the controller where to find template files
     # 
     def setup_templates_path
-      prepend_view_path( transit_templates_dir )
       prepend_view_path( File.join( Rails.root, 'app', 'templates' ) )
+      append_view_path( transit_templates_dir )
     end
     
     
