@@ -1,13 +1,23 @@
 module Transit
-  module Delivery
-    autoload :Actions,  'transit/delivery/actions'
+  module Delivery    
+    autoload :Regions, 'transit/delivery/regions'
     
     extend ActiveSupport::Concern
     
     included do
       helper_method :current_page, :current_template
-      include Transit::Delivery::Actions  
+      before_filter :setup_templates_path, only: [:show]
     end
+
+    
+    ##
+    # Default show action for controllers responsible 
+    # for rendering pages.
+    # 
+    def show
+      render template: current_template and return
+    end
+    
     
     protected
     
@@ -25,6 +35,25 @@ module Transit
     # 
     def current_template
       current_page.try(:template) || 'transit/templates/default'
+    end
+    
+    
+    ##
+    # Tell the controller where to find template files
+    # 
+    def setup_templates_path
+      prepend_view_path( transit_templates_dir )
+      prepend_view_path( File.join( Rails.root, 'app', 'templates' ) )
+    end
+    
+    
+    private
+    
+    ##
+    # The templates dir within the gem.
+    # 
+    def transit_templates_dir
+      @ttdir ||= File.join( Gem::Specification.find_by_name("transit").gem_dir, 'app', 'templates' ) 
     end
   end
 end

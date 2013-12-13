@@ -1,0 +1,8 @@
+<% if params[:mercury].present? %>
+<%= render partial: "form" %>
+<% else %>
+<div id="transit_edit_page" class='transit-pages'>
+    <h1>Add a New Page</h1>
+    <%= render partial: "form" %>
+</div>
+<% end %>

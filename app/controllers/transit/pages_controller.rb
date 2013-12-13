@@ -16,6 +16,7 @@ module Transit
     
     def show
       if params[:mercury_frame].present?
+        append_view_path(Rails.root + '/app/views/transit/templates')
         render template: resource.template and return
       end
       respond_with(resource)
@@ -42,6 +43,10 @@ module Transit
     
     
     def edit
+      if params[:mercury].present?
+        render action: :edit, layout: false
+        return
+      end
       respond_with(resource)
     end
     

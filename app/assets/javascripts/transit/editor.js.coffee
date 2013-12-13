@@ -9,6 +9,11 @@
   snippets: @snippets()
 
 class @Transit.Editor extends @Mercury.PageEditor
+  editURL: null
+  constructor:->
+    super
+    jQuery(document).on 'click', 'div.mercury-editForm-button', (event)-> Transit.behaviors.editForm()
+    
   save: (callback) ->
     url = @saveUrl ? Mercury.saveUrl ? @iframeSrc()
     data = @serialize()

@@ -12,6 +12,7 @@
         <%= i.hidden_field :position, rel: "position" %>
         <%= i.hidden_field :parent_id %>
         <%= i.hidden_field :target %>
+        <%= i.hidden_field :temp_id %>
         <a href="#" class="remove-item-link">&times;</a>
     </div>
     <% if i.object.persisted? %>

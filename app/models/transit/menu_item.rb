@@ -6,5 +6,6 @@ module Transit
     
     validates :title, :url, presence: true
     alias :items :children
+
   end
 end

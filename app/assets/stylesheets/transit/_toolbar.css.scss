@@ -1,57 +1,35 @@
-/*
- * Toolbar
- *----------------------------------------------------------------------------*/
-.mercury-toolbar-container{ user-select:none; position:fixed; z-index:10010; top:0;
-  left:0; width:100%; border-bottom:1px solid #E2E1E2;
+/*------------------------------------------------------
+ Toolbar
+//------------------------------------------------------*/
+.mercury-toolbar-container{ user-select:none; position:fixed; z-index:10010; top:0; left:0; width:100%; }
+.mercury-toolbar { -webkit-user-select:none; -moz-user-select:none; user-select:none; background:$transit-toolbar-background;
+  border-bottom:1px solid darken($transit-toolbar-background, 5%); cursor:default;
 }
 
-.mercury-toolbar { -webkit-user-select:none; -moz-user-select:none; user-select:none; background:$transit-toolbar-color;
-  border-bottom:1px solid darken($transit-toolbar-color, 5%); cursor:default;
-}
-
-.mercury-toolbar-button-container{ float:left; }
-.mercury-toolbar-expander{ position:absolute; display:none; right:0; border-left:1px solid #727272; }
+.mercury-toolbar-button-container{ display:inline-block; }
+.mercury-toolbar-expander{ position:absolute; display:none; right:0; border-left:1px solid lighten($transit-toolbar-background, 7%); }
 .mercury-button, .mercury-button-group, .mercury-separator, .mercury-line-separator{ display:block; float:left; }
 .mercury-separator,.mercury-line-separator{ width:1px; border:0; margin:0; }
-.mercury-line-separator{ width:1px; background:lighten($transit-toolbar-color, 10%); }
+.mercury-line-separator{ width:1px; background:lighten($transit-toolbar-background, 10%); }
 .mercury-button{ cursor:pointer; }
 .mercury-button em{ display:block; font-style:normal; }
 .mercury-expander{ padding:5px 0; border-radius:4px; -moz-border-radius:4px; }
 .mercury-expander .mercury-expander-button{ cursor:default; white-space:nowrap; padding:0 20px 0 10px; }
 .mercury-expander .mercury-expander-button:hover{ background:#CCC; }
-.mercury-expander .mercury-expander-button em{
-  display: inline-block;
-  float: left;
-  width: 20px;
-  height: 20px;
-  margin-right: 10px;
-  -webkit-background-size: 100% 100%;
-  -moz-background-size: 100% 100%;
-  background-size: 100% 100%;
+.mercury-expander .mercury-expander-button em{ display:inline-block; float:left; width:20px; height:20px; margin-right:10px; -webkit-background-size: 100% 100%;
+  -moz-background-size: 100% 100%; background-size: 100% 100%;
 }
-.mercury-expander .mercury-expander-button span {
-  display: inline-block;
-  line-height: 20px;
-}
-.disabled .mercury-button,
-.mercury-button.disabled {
-  opacity: 0.33;
-}
-/*
- * Toolbar: Primary Toolbar
- *----------------------------------------------------------------------------*/
-.mercury-primary-toolbar { position:relative; overflow:hidden; text-shadow:black 0 1px 0; 
-  .mercury-button{ display: inline-block; min-width:55px;
-    text-align: center; white-space: nowrap; text-decoration: none;
-    font-family:$transit-toolbar-font-family;
-  }
-  .mercury-separator, .mercury-line-separator{
-    display:inline-block; width:1px; height:2.5em; margin:.5em .5em 0; background:lighten($transit-toolbar-color, 15%);
-  }
-  
+.mercury-expander .mercury-expander-button span{ display:inline-block; line-height:20px; }
+.disabled .mercury-button, .mercury-button.disabled { opacity: 0.33; }
+
+/*------------------------------------------------------
+ Primary Toolbar
+//------------------------------------------------------*/
+.mercury-primary-toolbar{ position:relative; overflow:hidden; text-shadow:black 0 1px 0; 
+  .mercury-button{ display:inline-block; min-width:55px; text-align:center; white-space:nowrap; text-decoration:none; font-family:$transit-toolbar-font-family; }
+  .mercury-separator, .mercury-line-separator{ display:inline-block; width:1px; height:2.5em; margin:.5em .5em 0; background:lighten($transit-toolbar-background, 15%); }
   .mercury-toolbar-button-container{ padding:.25em 0 0 0; white-space:nowrap; width:100%; }
   .mercury-toolbar-expander{ height:0px; }
-  
   .mercury-button em{ margin:0 -5px; background-repeat:no-repeat; background-position:50% 7px; padding-top:.35em;
     font-size:8.5pt; line-height:15px; color:$transit-toolbar-button-color;
     &:before{ content:" "; font-family:'FontAwesome'; display:block; text-align:center; height:24px; line-height:24px; font-size:1.45em; 
@@ -61,179 +39,76 @@
   
   // Buttons
   .mercury-save-button{ float:right; }
-  .mercury-save-button em:before{ content:$fa-check; }
+  .mercury-save-button em:before{ content:$fa-floppy-o; }
   .mercury-preview-button em:before{ content:$fa-eye; }
   .mercury-undo-button em:before{ content:$fa-undo; }
   .mercury-redo-button em:before{ content:$fa-repeat; }
   
   .mercury-insertLink-button em:before{ content:$fa-link; }
-  .mercury-insertMedia-button em:before{ content:$fa-desktop; }
+  .mercury-insertMedia-button em:before{ content:$fa-picture-o; }
   .mercury-snippetPanel-button em:before{ content:$fa-file-text-o; }
+  .mercury-editForm-button em:before{ content:$fa-file-text; }
+  .mercury-mediaLibrary-button em:before{ content:$fa-archive; }
 }
 
+/*------------------------------------------------------
+ Editor/Secondary Toolbar
+//------------------------------------------------------*/
 
+.mercury-editable-toolbar{ padding:.25em 1em 0; border-top: 1px solid darken($transit-edit-bar-color, 5%); background:$transit-edit-bar-color; }
+.mercury-editable-toolbar:after{ content:'\00a0'; display:block; visibility:hidden; clear:both; height:0; }
+.mercury-editable-toolbar{
+  .mercury-separator, .mercury-line-separator{ height:$transit-edit-bar-button-size - 8px; padding:0; margin:4px .5em; }
+  .mercury-separator{ margin:0 3px 2px; }
+  .mercury-line-separator{ background:lighten($transit-edit-bar-color, 10%); }
+  .mercury-button-group{ white-space:nowrap; }
+  .mercury-button{ width:$transit-edit-bar-button-size; height:$transit-edit-bar-button-size; margin:0 1px; border-radius:2px; background:lighten($transit-edit-bar-color, 10%);
+    border:1px solid darken($transit-edit-bar-color, 10%); 
+    &:before{ content:" "; font-family:"FontAwesome"; display:block; width:$transit-edit-bar-button-size; height:$transit-edit-bar-button-size; color:$transit-edit-bar-button-color; 
+      line-height:$transit-edit-bar-button-size; text-align:center; -webkit-font-smoothing:antialiased; text-shadow:rgba(black, .5) -1px -1px 0px; font-size:$transit-edit-bar-button-size - 6px;
+      text-align:center;
+    }
+  }
+  .mercury-button em{ display:none; }
+  .mercury-button-palette{ width:23px; background-position: 0 -36px; }
+  
+  // Buttons
+  .mercury-bold-button:before{ content:$fa-bold; }
+  .mercury-italic-button:before{ content:$fa-italic; }
+  .mercury-strikethrough-button:before{ content:$fa-strikethrough; }
+  .mercury-underline-button:before{ content:$fa-underline; }
+  .mercury-subscript-button:before{ content:$fa-subscript; }
+  .mercury-superscript-button:before{ content:$fa-superscript; }
+  .mercury-justifyLeft-button:before{ content:$fa-align-left; }
+  .mercury-justifyCenter-button:before{ content:$fa-align-center; }
+  .mercury-justifyRight-button:before{ content:$fa-align-right; }
+  .mercury-justifyFull-button:before{ content:$fa-align-justify; }
+  .mercury-insertUnorderedList-button:before{ content:$fa-list-ul; }
+  .mercury-insertOrderedList-button:before{ content:$fa-list-ol; }
+  .mercury-outdent-button:before{ content:$fa-outdent; }
+  .mercury-indent-button:before{ content:$fa-indent; }
+  .mercury-removeFormatting-button:before{ content:$fa-times; }
+  .mercury-horizontalRule-button:before{ content:"\2014"; font-family:'Helvetica', 'Arial', sans-serif; font-weight:bold; }
+  
+  // Selects
+  .mercury-button-select{ width:auto !important; overflow:hidden; padding-left:1em; 
+    em{ display:block; padding-right:2em; cursor:pointer; white-space:nowrap; font-style:normal; font-size:.85em; line-height:24px; color:$transit-edit-bar-button-color; }
+  }
+}
 
+/*------------------------------------------------------
+ Snippet Toolbar
+//------------------------------------------------------*/
 
-/*
- * Toolbar: Editable Region Toolbar
- *----------------------------------------------------------------------------*/
-.mercury-editable-toolbar {
-  padding: 3px 13px 1px 10px;
-  border-top: 1px solid #E2E1E2;
-  background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, rgb(198,198,198)), color-stop(1, rgb(210,210,209)));
-  background-image: -moz-linear-gradient(center bottom, rgb(198,198,198) 0%, rgb(210,210,209) 100%);
-}
-.mercury-editable-toolbar:after {
-  content: '\00a0';
-  display: block;
-  visibility: hidden;
-  clear: both;
-  height: 0;
-}
-.mercury-editable-toolbar .mercury-separator,
-.mercury-editable-toolbar .mercury-line-separator {
-  height: 18px;
-  padding: 0;
-  margin: 0 7px 2px;
-}
-.mercury-editable-toolbar .mercury-separator {
-  margin: 0 3px 2px;
-}
-.mercury-editable-toolbar .mercury-button-group {
-  white-space: nowrap;
-}
-.mercury-editable-toolbar .mercury-button-group .mercury-button:first-child {
-  width: 23px;
-}
-.mercury-editable-toolbar .mercury-button {
-  width: 22px;
-  height: 18px;
-  margin: 0 0 2px;
-}
-.mercury-editable-toolbar .mercury-button em {
-  display: none;
-}
-.mercury-editable-toolbar .mercury-button-palette {
-  width: 23px;
-  background-position: 0 -36px;
-}
-.mercury-editable-toolbar .mercury-button-select {
-  width: auto !important;
-  overflow: hidden;
-  padding-left: 6px;
-  background-position: -24px -36px;
-}
-.mercury-editable-toolbar .mercury-button-select em {
-  display: block;
-  padding-right: 15px;
-  background-position: right -36px;
-  cursor: pointer;
-  white-space: nowrap;
-  font-style: normal;
-  font-family: Helvetica, Tahoma, Arial, sans-serif;
-  font-size: 8.5pt;
-  line-height: 19px;
-  color: #222;
-}
-/* default buttons */
-.mercury-editable-toolbar .mercury-bold-button                       { background-position: 0 0 }
-.mercury-editable-toolbar .mercury-bold-button.active                { background-position: 0 -18px }
-.mercury-editable-toolbar .mercury-italic-button                     { background-position: -23px 0 }
-.mercury-editable-toolbar .mercury-italic-button.active              { background-position: -23px -18px }
-.mercury-editable-toolbar .mercury-overline-button                   { background-position: -45px 0 }
-.mercury-editable-toolbar .mercury-overline-button.active            { background-position: -45px -18px }
-.mercury-editable-toolbar .mercury-strikethrough-button              { background-position: -67px 0 }
-.mercury-editable-toolbar .mercury-strikethrough-button.active       { background-position: -67px -18px }
-.mercury-editable-toolbar .mercury-underline-button                  { background-position: -89px 0 }
-.mercury-editable-toolbar .mercury-underline-button.active           { background-position: -89px -18px }
-.mercury-editable-toolbar .mercury-subscript-button                  { background-position: -112px 0 }
-.mercury-editable-toolbar .mercury-subscript-button.active           { background-position: -112px -18px }
-.mercury-editable-toolbar .mercury-superscript-button                { background-position: -135px 0 }
-.mercury-editable-toolbar .mercury-superscript-button.active         { background-position: -135px -18px }
-.mercury-editable-toolbar .mercury-justifyLeft-button                { background-position: -158px 0 }
-.mercury-editable-toolbar .mercury-justifyLeft-button.active         { background-position: -158px -18px }
-.mercury-editable-toolbar .mercury-justifyCenter-button              { background-position: -181px 0 }
-.mercury-editable-toolbar .mercury-justifyCenter-button.active       { background-position: -181px -18px }
-.mercury-editable-toolbar .mercury-justifyRight-button               { background-position: -203px 0 }
-.mercury-editable-toolbar .mercury-justifyRight-button.active        { background-position: -203px -18px }
-.mercury-editable-toolbar .mercury-justifyFull-button                { background-position: -225px 0 }
-.mercury-editable-toolbar .mercury-justifyFull-button.active         { background-position: -225px -18px }
-.mercury-editable-toolbar .mercury-insertUnorderedList-button        { background-position: -248px 0 }
-.mercury-editable-toolbar .mercury-insertUnorderedList-button.active { background-position: -248px -18px }
-.mercury-editable-toolbar .mercury-insertOrderedList-button          { background-position: -271px 0 }
-.mercury-editable-toolbar .mercury-insertOrderedList-button.active   { background-position: -271px -18px }
-.mercury-editable-toolbar .mercury-outdent-button                    { background-position: -294px 0 }
-.mercury-editable-toolbar .mercury-outdent-button.active             { background-position: -294px -18px }
-.mercury-editable-toolbar .mercury-indent-button                     { background-position: -317px 0 }
-.mercury-editable-toolbar .mercury-indent-button.active              { background-position: -317px -18px }
-.mercury-editable-toolbar .mercury-insertRowBefore-button            { background-position: -340px 0 }
-.mercury-editable-toolbar .mercury-insertRowBefore-button.active     { background-position: -340px -18px }
-.mercury-editable-toolbar .mercury-insertRowAfter-button             { background-position: -363px 0 }
-.mercury-editable-toolbar .mercury-insertRowAfter-button.active      { background-position: -363px -18px }
-.mercury-editable-toolbar .mercury-deleteRow-button                  { background-position: -385px 0 }
-.mercury-editable-toolbar .mercury-deleteRow-button.active           { background-position: -385px -18px }
-.mercury-editable-toolbar .mercury-insertColumnBefore-button         { background-position: -407px 0 }
-.mercury-editable-toolbar .mercury-insertColumnBefore-button.active  { background-position: -407px -18px }
-.mercury-editable-toolbar .mercury-insertColumnAfter-button          { background-position: -429px 0 }
-.mercury-editable-toolbar .mercury-insertColumnAfter-button.active   { background-position: -429px -18px }
-.mercury-editable-toolbar .mercury-deleteColumn-button               { background-position: -451px 0 }
-.mercury-editable-toolbar .mercury-deleteColumn-button.active        { background-position: -451px -18px }
-.mercury-editable-toolbar .mercury-increaseColspan-button            { background-position: -474px 0; width: 23px }
-.mercury-editable-toolbar .mercury-increaseColspan-button.active     { background-position: -474px -18px }
-.mercury-editable-toolbar .mercury-decreaseColspan-button            { background-position: -497px 0 }
-.mercury-editable-toolbar .mercury-decreaseColspan-button.active     { background-position: -497px -18px }
-.mercury-editable-toolbar .mercury-increaseRowspan-button            { background-position: -520px 0 }
-.mercury-editable-toolbar .mercury-increaseRowspan-button.active     { background-position: -520px -18px }
-.mercury-editable-toolbar .mercury-decreaseRowspan-button            { background-position: -542px 0 }
-.mercury-editable-toolbar .mercury-decreaseRowspan-button.active     { background-position: -542px -18px }
-.mercury-editable-toolbar .mercury-horizontalRule-button             { background-position: -564px 0 }
-.mercury-editable-toolbar .mercury-horizontalRule-button.active      { background-position: -564px -18px }
-.mercury-editable-toolbar .mercury-removeFormatting-button           { background-position: -588px 0 }
-.mercury-editable-toolbar .mercury-removeFormatting-button.active    { background-position: -588px -18px }
-.mercury-editable-toolbar .mercury-htmlEditor-button                 { background-position: -612px 0 }
-.mercury-editable-toolbar .mercury-htmlEditor-button.active          { background-position: -612px -18px }
-/*
- * Toolbar: Snippets Region Toolbar
- *----------------------------------------------------------------------------*/
-.mercury-snippet-toolbar {
-  position: absolute;
-  top: 100px;
-  left: 15px;
-  border: 1px solid #727272;
-  border-radius: 3px;
-  -moz-border-radius: 3px;
-  box-shadow: 1px 1px 2px rgba(0, 0, 0, .5);
-  padding: 3px 7px 1px 7px;
-}
-.mercury-snippet-toolbar:after {
-  content: '\00a0';
-  display: block;
-  visibility: hidden;
-  clear: both;
-  height: 0;
-}
-.mercury-snippet-toolbar .mercury-separator,
-.mercury-snippet-toolbar .mercury-line-separator {
-  height: 18px;
-  padding: 0;
-  margin: 0 7px 2px;
-}
-.mercury-snippet-toolbar .mercury-separator {
-  margin: 0 3px 2px;
-}
-.mercury-snippet-toolbar .mercury-button-group {
-  white-space: nowrap;
-}
-.mercury-snippet-toolbar .mercury-button-group .mercury-button:first-child {
-  width: 23px;
-}
-.mercury-snippet-toolbar .mercury-button {
-  width: 23px;
-  height: 18px;
-  margin: 0 0 2px;
-}
-.mercury-snippet-toolbar .mercury-button em {
-  display: none;
+.mercury-snippet-toolbar{ position:absolute; top:100px; left:15px;
+  border:1px solid $transit-toolbar-background; border-radius:3px; -moz-border-radius:3px; box-shadow: 1px 1px 2px rgba(0, 0, 0, .5); padding:3px 7px 1px 7px;
+  &:after{ content:'\00a0'; display:block; visibility:hidden; clear:both; height:0; }
+  .mercury-separator, .mercury-line-separator{ height:18px; padding:0; margin:0 7px 2px; }
+  .mercury-separator{ margin:0 3px 2px; }
+  .mercury-button-group{ white-space:nowrap; }
+  .mercury-button-group .mercury-button{ width:24px; height:24px; margin:0 0 2px; 
+    em{ display:none; }
+  }
 }
 /* default buttons */
 .mercury-snippet-toolbar .mercury-editSnippet-button                { background-position: -24px 0 }

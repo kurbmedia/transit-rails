@@ -1,6 +1,6 @@
-//@import 'mercury';
 @import 'transit/config';
 @import 'transit/reset';
+@import 'transit/mixins';
 @import 'transit/forms';
 
 html { -webkit-text-size-adjust:none; margin:0; padding:0; height:100%; }
@@ -13,3 +13,4 @@ div.mercury-statusbar{ background:black; height:1px; overflow:hidden; }
 .filter{ margin:0; padding:0; }
 
 @import 'transit/toolbar';
+@import 'transit/dialogs';

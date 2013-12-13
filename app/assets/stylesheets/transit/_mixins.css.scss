@@ -12,3 +12,19 @@
     &{ zoom:1; }
   }
 }
+
+@mixin clearfix-after{
+  &:after{
+    content:'\00a0';
+    display:block;
+    visibility:hidden;
+    clear:both;
+    height:0;
+  }
+}
+
+@mixin noselect{
+  -webkit-user-select:none;
+  -moz-user-select:none;
+  user-select:none;
+}

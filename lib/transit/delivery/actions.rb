@@ -4,14 +4,21 @@ module Transit
     # Controller actions
     # 
     module Actions
+      extend ActiveSupport::Concern
       
-      ##
-      # Default show action for controllers responsible 
-      # for rendering pages.
-      # 
-      def show
-        render template: current_template and return
+      included do
+        before_filter :setup_templates_dir, only: [:show]
       end
+      def self.included(base)
+        base.class_eval <<-CODE
+          Rails.logger.info("ASDLASKJDLASJDASLKDJSALKJDLASKJ")
+          def show
+            Rails.logger.info("ASDLASKJDLASJDASLKDJSALKJDLASKJ")
+            render template: current_template and return
+          end
+        CODE
+      end
+      
     end
   end
 end

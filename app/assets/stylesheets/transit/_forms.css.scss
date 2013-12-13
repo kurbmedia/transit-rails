@@ -1428,3 +1428,32 @@ label input[type=radio] {
 .form-actions {
   padding-bottom: 0;
 }
+
+form.transit-form{
+  label{ font-size:12px; margin-bottom:0; }
+  ul.fields{ list-style:none; margin:0 0 1em 0; padding:0; 
+    li{ 
+      textarea, select, input[type=text], input[type=email], input[type=tel], input[type=url]{ width:100%; 
+        box-sizing:border-box; -webkit-box-sizing:border-box; -moz-box-sizing:border-box; -ms-box-sizing:border-box;
+      }
+    }
+  }
+  ul.cols{
+    li{ display:inline-block; box-sizing:border-box; -webkit-box-sizing:border-box; -moz-box-sizing:border-box; -ms-box-sizing:border-box; }
+    &.two-col{
+      li{ width:49%; padding:0 1em 0 0; }
+    }
+    &.three-col{
+      li{ width:32%; padding:0 1em 0 0; }
+    }
+    
+    &.four-col{
+      li{ width:22%; padding:0 1em 0 0; }
+    }
+    
+    li.buttons, li.actions{ width:100%; padding-top:.5em; }
+    li.full{ width:100%; padding:0; }
+    li.half{ width:49%; }
+  }  
+
+}

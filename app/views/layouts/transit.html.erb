@@ -21,6 +21,7 @@
     <script type="text/javascript" charset="utf-8">    
     //<![CDATA[
         (function(){
+            Transit.editURL = "<%= transit.edit_page_path(resource) %>";
             Transit.editor = new Transit.Editor("<%= transit.page_path(resource) %>");
             Transit.editor.loadIframeSrc("<%= resource.absolute_path %>");
         })();

@@ -77,10 +77,9 @@ module Transit
     # 
     def permitted_params
       return params[:menu] unless Rails.version.to_i >= 4
-      params.require(:menu).permit!
-      # params.permit(:page => [ 
-      #   :id, :name, :title, :description, :keywords, :slug, :template, :parent_id, :published, :publish_on, :regions_attributes => {}
-      # ])
+      params.require(:menu).permit([ 
+        :id, :name, :identifier, items_attributes: [ :id, :temp_id, :_destroy, :url, :title, :target, :parent_id, :position ]
+      ])
     end
     
     

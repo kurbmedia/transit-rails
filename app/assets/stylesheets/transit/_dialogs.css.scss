@@ -1,0 +1,179 @@
+/*------------------------------------------------------
+ Dialogs
+//------------------------------------------------------*/
+.mercury-dialog, .mercury-select, .mercury-palette{ @include noselect; position:absolute; z-index:10012; width:30px;
+  height:30px; border:1px solid $transit-toolbar-background; border-radius:2px; -moz-border-radius:2px; margin-top:-1px;
+  background-color:#FFFFFF; box-shadow:1px 1px 4px rgba(0,0,0, .5); -moz-box-shadow:1px 1px 4px rgba(0,0,0, .5); font-size:.85em; color:#333;
+}
+.mercury-dialog.loading, .mercury-select.loading, .mercury-palette.loading { background-repeat:no-repeat; background-position:center; }
+
+/*------------------------------------------------------
+ Selects
+//------------------------------------------------------*/
+
+.mercury-select { border-radius:4px; -moz-border-radius:4px; overflow:auto; background-color:#FFF; }
+
+/*------------------------------------------------------
+ Panels
+//------------------------------------------------------*/
+
+.mercury-panel{ position:fixed; z-index:10011; background-color:$transit-panel-background; opacity:.9; font-family:$transit-font-family;
+  box-shadow:1px 1px 4px rgba(0,0,0, .5); -moz-box-shadow:1px 1px 4px rgba(0,0,0, .5); border-radius:6px; -moz-border-radius:6px;
+  color:$transit-panel-color; font-size:.9em; max-width:500px;
+  &.loading{ }
+  h1, h3{ font-size:1em; padding:.5em 1em; margin:0; background:$transit-toolbar-background; white-space:nowrap; line-height:normal; font-weight:normal; }
+  h1{ @include noselect; -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3); -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3); font-family:$transit-font-family;
+    box-shadow:0 1px 4px rgba(0, 0, 0, 0.3); -moz-border-radius-topleft:4px; -moz-border-radius-topright:4px; 
+    border-top-left-radius:4px; border-top-right-radius:4px; color:white; font-size:1.1em; border-bottom:1px solid darken($transit-toolbar-background, 5%); cursor:move; 
+    span{ display:block; width:100%; }
+    a.mercury-panel-close{ position:absolute; right:0px; top:0px; width:32px; height:32px; color:rgba(white, .5); cursor:pointer;
+      &:before{ font-family:'FontAwesome'; content:$fa-times; font-size:20px; line-height:32px; display:block; width:100%; height:100%; }
+    }
+  }
+  h4, h5, h6{ margin:0; }
+
+  .mercury-panel-pane{ box-sizing:border-box; -moz-box-sizing:border-box; -webkit-box-sizing:border-box; padding:15px; overflow-y:auto; overflow-x:hidden; width:100%; 
+    h3{ margin:10px -15px; font-size:1.2em; font-weight:normal; padding:8px 14px; }
+  }
+}
+
+/*------------------------------------------------------
+ Dialogs
+//------------------------------------------------------*/
+
+.mercury-color-picker{ width:170px; height:auto; padding:1px; cursor:default; 
+  .picker{ float:left; width:15px; height:15px; margin:1px; 
+    &:hover{ outline:1px solid #333; }
+  }
+  .last-picked{ position:relative; top:1px; width:166px; border:1px solid #333; border-radius:2px; margin:1px 1px 2px 1px; -moz-border-radius:2px; clear:left; text-align:center; }
+}
+
+.mercury-select-options{ margin:10px 0; white-space:nowrap; }
+.mercury-select-options *{ cursor:default; padding:0 10px; margin:0; line-height:1.6em; }
+.mercury-select-options div:hover,
+.mercury-select-options h1:hover,
+.mercury-select-options h2:hover,
+.mercury-select-options h3:hover,
+.mercury-select-options h4:hover,
+.mercury-select-options h5:hover,
+.mercury-select-options h6:hover,
+.mercury-select-options pre:hover {
+  background-color:#E2E1E2 !important;
+  color:#000 !important;
+}
+.mercury-select-options div[data-tag=pre] {
+  font-family:monospace;
+}
+
+/*------------------------------------------------------
+ Specific Panels
+//------------------------------------------------------*/
+.mercury-snippet-panel{ width:300px;
+  input.filter{ outline:none; font-size:1em;
+    border-radius:30px; -moz-border-radius:30px; box-sizing:border-box; -moz-box-sizing:border-box; -webkit-box-sizing:border-box; width:100%;
+    height:auto; padding-left:20px; background-color:#FFF; background-repeat:no-repeat;
+  }
+  
+  ul{ font-size:.9em; padding:10px 0 0 0; margin:0; list-style-type:none; 
+    li{ clear:both; padding-top:20px; 
+      img{ float:left; cursor:move; }
+      .description{ float:right; width:245px; }
+      h4{ margin-bottom:5px; }
+    }
+  }
+}
+
+.mercury-history-panel, .mercury-notes-panel{ width:250px; }
+
+
+/*------------------------------------------------------
+ Modals
+//------------------------------------------------------*/
+
+.mercury-modal-overlay { position:fixed; z-index:10040; top:0; left:0; width:100%; height:100%; opacity:0; display:none; background:$transit-modal-overlay-color; }
+.mercury-modal{ position:fixed; z-index:10050; top:0; width:500px; overflow:hidden; padding:0 0 10px; background:$transit-modal-background; -webkit-border-bottom-left-radius:4px; 
+  -webkit-border-bottom-right-radius:4px; -moz-border-radius-bottomleft:4px; -moz-border-radius-bottomright:4px; border-bottom-left-radius:4px; border-bottom-right-radius:4px; 
+  -moz-box-shadow:0 0 40px rgba(0, 0, 0, .9); box-shadow:0 0 40px rgba(0, 0, 0, .9); font:normal normal normal 12px/normal Helvetica, Tahoma, Arial, sans-serif;
+  &.loading{
+    .mercury-modal-content-container{ background-color:$transit-modal-background; background-repeat:no-repeat; background-position:center; }
+  }
+  
+  h1.mercury-modal-title { -webkit-user-select:none; -moz-user-select:none; user-select:none; margin:0; padding:.5em 1em; background:$transit-modal-header-background; 
+    border-bottom:1px solid darken($transit-modal-header-background, 5%); white-space:nowrap; font-size:1.2em; line-height:24px; overflow:hidden;
+    @include clearfix-after;
+    span{ float:left; color:$transit-modal-header-color; text-shadow:rgba(black, .2) 1px 1px 0; }
+    a{ display:block; float:right; font-size:10px; cursor:pointer; color:rgba(white, 0.5); padding:0 4px; line-height:23px; opacity:0.5; font-size:24px;
+      &:hover{ opacity:1; }
+    }
+  }
+  
+  .mercury-modal-content-container{ float:left; width:100%; }
+  .mercury-modal-content{ position:relative; overflow:auto; float:left; box-sizing:border-box; -moz-box-sizing:border-box; -webkit-box-sizing:border-box; 
+    padding:20px 20px 10px; font-family:$transit-font-family; color:black; @include clearfix-after;
+    form, ul.fields{ margin-bottom:0; }
+  }
+  
+  .mercury-display-pane-container{ overflow:auto; margin:-20px -20px 0; padding:20px 20px 0; 
+    .mercury-display-pane{ float:left; }
+  }
+  
+  .mercury-display-controls{ padding-right:0; border-top:1px solid darken($transit-modal-background, 5%); text-align:right; }
+}
+
+/*------------------------------------------------------
+ Specific Modals
+//------------------------------------------------------*/
+
+#mercury_html_editor textarea {
+  resize:none;
+  padding:0;
+  box-sizing:border-box;
+  -moz-box-sizing:border-box;
+  -webkit-box-sizing:border-box;
+  margin:0 0 -2px 0;
+  border:2px solid #CCC;
+  width:100%;
+}
+
+/* character */
+#mercury_character .character {
+  float:left;
+  width:20px;
+  height:20px;
+  border:1px solid #999;
+  background:#FFF;
+  margin:0 2px 2px 0;
+  text-align:center;
+  font-size:11pt;
+  line-height:23px;
+  cursor:pointer;
+}
+#mercury_character .character:hover {
+  position:relative;
+  margin:-11px -5px 1px -5px;
+  width:32px;
+  height:32px;
+  font-size:19pt;
+  line-height:35px;
+  background:#DDD;
+}
+/* table */
+#mercury_table #table_display {
+  float:left;
+  margin-right:13px;
+  overflow:auto;
+  padding:0;
+}
+#mercury_table #table_display .controls {
+  margin:0;
+  width:225px;
+  height:259px;
+  padding:10px;
+}
+#mercury_table #table_display table {
+  width:100%;
+  height:100%;
+}
+#mercury_table #table_display .selected {
+  background:#09F;
+}
