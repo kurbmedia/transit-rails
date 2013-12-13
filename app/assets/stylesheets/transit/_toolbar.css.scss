@@ -30,20 +30,29 @@
   .mercury-separator, .mercury-line-separator{ display:inline-block; width:1px; height:2.25em; margin:.5em .5em 0; background:lighten($transit-toolbar-background, 15%); }
   .mercury-toolbar-button-container{ padding:0; white-space:nowrap; width:100%; }
   .mercury-toolbar-expander{ height:0px; }
-  .mercury-button:hover{ background:lighten($transit-toolbar-background, 3%); }
-  .mercury-button em{ margin:0 -5px; padding:.35em 0; font-size:8.5pt; line-height:15px; color:$transit-toolbar-button-color;
-    &:before{ content:" "; font-family:'FontAwesome'; display:block; text-align:center; height:24px; line-height:24px; font-size:1.45em; 
-      -webkit-font-smoothing:antialiased;
+  .mercury-button{ border:solid transparent; border-width:0 1px;
+    &:hover{ background:$transit-toolbar-hover; color:$transit-toolbar-hover-color; }
+    em{ margin:0 -5px; padding:.35em 0; font-size:8.5pt; line-height:15px; color:$transit-toolbar-color;
+      &:before{ content:" "; font-family:'FontAwesome'; display:block; text-align:center; height:24px; line-height:24px; font-size:1.45em; 
+        -webkit-font-smoothing:antialiased;
+      }
     }
   }
   
   // Buttons
-  .mercury-save-button{ float:right; background:lighten($transit-toolbar-background, 5%); border-left:1px solid darken($transit-toolbar-background, 3%); }
-  .mercury-close-button{ float:right; 
+  .mercury-rightSide-group{ float:right; }
+  .mercury-save-button{ background:lighten($transit-toolbar-background, 5%); border-left:1px solid darken($transit-toolbar-background, 3%); }
+  .mercury-close-button{ float:right; margin-left:1em; opacity:0.5;
+    &:hover{ opacity:1; }
     em:before{ content:$fa-chevron-circle-left; }
   }
   .mercury-save-button em:before{ content:$fa-floppy-o; }
-  .mercury-preview-button em:before{ content:$fa-eye; }
+  .mercury-preview-button{
+    &.pressed{ background:$transit-toolbar-pressed; border-color:darken($transit-toolbar-pressed, 3%);
+      em{ color:$transit-toolbar-pressed-color; }
+    }
+    em:before{ content:$fa-eye; }
+  }
   .mercury-undo-button em:before{ content:$fa-undo; }
   .mercury-redo-button em:before{ content:$fa-repeat; }
   

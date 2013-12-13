@@ -3,9 +3,16 @@
 //------------------------------------------------------*/
 
 $transit-font-family:Helvetica, Tahoma, Arial, sans-serif !default;
+
 $transit-toolbar-font-family:$transit-font-family !default;
+
 $transit-toolbar-background:#222 !default;
-$transit-toolbar-button-color:white !default;
+$transit-toolbar-color:white !default;
+$transit-toolbar-hover:lighten($transit-toolbar-background, 5%) !default;
+$transit-toolbar-hover-color:$transit-toolbar-color !default;
+$transit-toolbar-pressed:darken($transit-toolbar-background, 5%) !default;
+$transit-toolbar-pressed-color:$transit-toolbar-color !default;
+
 $transit-edit-bar-color:#444 !default;
 $transit-edit-bar-button-color:white !default;
 $transit-form-tint-color:#e8e8e8 !default;

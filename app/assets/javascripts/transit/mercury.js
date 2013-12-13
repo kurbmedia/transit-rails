@@ -92,12 +92,12 @@ window.Mercury = {
     // `Mercury.Toolbar.Button.contexts` and `Mercury.Toolbar.ButtonGroup.contexts`
     toolbars: {
       primary: {
-        save:                  ['Save', 'Save this page'],
-        close:                 ['Back', 'Go Back'],
-        transit:{
-          editForm:            ['Details', 'Page Details'],
-          mediaLibrary:        ['Assets', 'Media Library'],
+        rightSide: {
+          close:               ['Back', 'Go Back'],
+          mediaLibrary:        ['Library', 'Media Library'],
         },
+        save:                  ['Save', 'Save this page'],
+        editForm:              ['Details', 'Page Details'],
         preview:               ['Preview', 'Preview this page', { toggle: true, mode: true }],
         sep1:                  ' ',
         undoredo:              {
