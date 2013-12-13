@@ -93,6 +93,7 @@ window.Mercury = {
     toolbars: {
       primary: {
         save:                  ['Save', 'Save this page'],
+        close:                 ['Back', 'Go Back'],
         transit:{
           editForm:            ['Details', 'Page Details'],
           mediaLibrary:        ['Assets', 'Media Library'],
@@ -106,7 +107,7 @@ window.Mercury = {
           },
         insertLink:            ['Link', 'Insert Link', { modal: '/mercury/modals/link.html', regions: ['full', 'markdown'] }],
         insertMedia:           ['Media', 'Insert Media (images and videos)', { modal: '/mercury/modals/media.html', regions: ['full', 'markdown'] }],
-        snippetPanel:          ['Snippet', 'Snippet Panel', { panel: '/mercury/panels/snippets.html' }]
+        snippetPanel:          ['Snippet', 'Snippet Panel', { panel: '/mercury/panels/snippets.html', regions: ['full'] }]
       },
 
       editable: {

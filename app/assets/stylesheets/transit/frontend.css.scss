@@ -12,6 +12,8 @@ i[class^="icon-"], i[class*=" icon-"]{ font-style:normal; }
   }
 }
 
+*[contenteditable]:focus{ outline:1px dotted #efefef; }
+
 form.transit-form{
   ul.fields{ list-style:none; margin:0 0 1em 0; }
   ul.cols{

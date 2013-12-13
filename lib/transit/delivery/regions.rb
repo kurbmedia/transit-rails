@@ -10,7 +10,7 @@ module Transit
       # 
       def region(id, type, options = {}, &block)
         tag     = options[:tag] || :div
-        content = region_content(id)
+        content = region_content(id) || options[:default]
         content_tag(tag, id: id.to_s, data: { mercury: type.to_s }) do
           block_given? ? capture(content, &block) : content.to_s.html_safe
         end

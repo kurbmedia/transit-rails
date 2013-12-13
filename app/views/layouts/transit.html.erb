@@ -24,6 +24,10 @@
             Transit.editURL = "<%= transit.edit_page_path(resource) %>";
             Transit.editor = new Transit.Editor("<%= transit.page_path(resource) %>");
             Transit.editor.loadIframeSrc("<%= resource.absolute_path %>");
+            
+            $(document).on('click', '.mercury-primary-toolbar div.mercury-close-button', function(event){
+               window.location.href = "<%= transit.pages_path %>";
+            });
         })();
     //]]>
     </script>

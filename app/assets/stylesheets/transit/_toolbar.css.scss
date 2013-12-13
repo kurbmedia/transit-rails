@@ -25,20 +25,23 @@
 /*------------------------------------------------------
  Primary Toolbar
 //------------------------------------------------------*/
-.mercury-primary-toolbar{ position:relative; overflow:hidden; text-shadow:black 0 1px 0; 
+.mercury-primary-toolbar{ position:relative; overflow:hidden; text-shadow:rgba(black, .2) -1px -1px 0; 
   .mercury-button{ display:inline-block; min-width:55px; text-align:center; white-space:nowrap; text-decoration:none; font-family:$transit-toolbar-font-family; }
-  .mercury-separator, .mercury-line-separator{ display:inline-block; width:1px; height:2.5em; margin:.5em .5em 0; background:lighten($transit-toolbar-background, 15%); }
-  .mercury-toolbar-button-container{ padding:.25em 0 0 0; white-space:nowrap; width:100%; }
+  .mercury-separator, .mercury-line-separator{ display:inline-block; width:1px; height:2.25em; margin:.5em .5em 0; background:lighten($transit-toolbar-background, 15%); }
+  .mercury-toolbar-button-container{ padding:0; white-space:nowrap; width:100%; }
   .mercury-toolbar-expander{ height:0px; }
-  .mercury-button em{ margin:0 -5px; background-repeat:no-repeat; background-position:50% 7px; padding-top:.35em;
-    font-size:8.5pt; line-height:15px; color:$transit-toolbar-button-color;
+  .mercury-button:hover{ background:lighten($transit-toolbar-background, 3%); }
+  .mercury-button em{ margin:0 -5px; padding:.35em 0; font-size:8.5pt; line-height:15px; color:$transit-toolbar-button-color;
     &:before{ content:" "; font-family:'FontAwesome'; display:block; text-align:center; height:24px; line-height:24px; font-size:1.45em; 
       -webkit-font-smoothing:antialiased;
     }
   }
   
   // Buttons
-  .mercury-save-button{ float:right; }
+  .mercury-save-button{ float:right; background:lighten($transit-toolbar-background, 5%); border-left:1px solid darken($transit-toolbar-background, 3%); }
+  .mercury-close-button{ float:right; 
+    em:before{ content:$fa-chevron-circle-left; }
+  }
   .mercury-save-button em:before{ content:$fa-floppy-o; }
   .mercury-preview-button em:before{ content:$fa-eye; }
   .mercury-undo-button em:before{ content:$fa-undo; }
@@ -64,6 +67,7 @@
   .mercury-button-group{ white-space:nowrap; }
   .mercury-button{ width:$transit-edit-bar-button-size; height:$transit-edit-bar-button-size; margin:0 1px; border-radius:2px; background:lighten($transit-edit-bar-color, 10%);
     border:1px solid darken($transit-edit-bar-color, 3%); 
+    &:hover{ background:lighten($transit-edit-bar-color, 15%); }
     &:before{ content:" "; font-family:"FontAwesome"; display:block; width:$transit-edit-bar-button-size; height:$transit-edit-bar-button-size; color:$transit-edit-bar-button-color; 
       line-height:$transit-edit-bar-button-size; text-align:center; -webkit-font-smoothing:antialiased; text-shadow:rgba(black, .2) -1px -1px 0px; font-size:$transit-edit-bar-button-size - 6px;
       text-align:center;
