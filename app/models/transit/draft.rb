@@ -9,7 +9,7 @@ module Transit
     # Read a property from the draft
     # 
     def read_property(name)
-      content_hash[name]
+      content_hash[name.to_s]
     end
     
     
@@ -17,7 +17,7 @@ module Transit
     # Write a property to the draft
     # 
     def write_property(name, value)
-      content_hash[name] = value
+      content_hash[name.to_s] = value
     end
     
     

@@ -10,9 +10,10 @@ module Transit
       # 
       def region(id, type, options = {}, &block)
         tag     = options[:tag] || :div
-        content = region_content(id) || options[:default]
+        content = region_content(id)
+        content ||= capture(&block) if block_given?
         content_tag(tag, id: id.to_s, data: { mercury: type.to_s }) do
-          block_given? ? capture(content, &block) : content.to_s.html_safe
+          content.to_s.strip.html_safe
         end
       end
     
@@ -23,10 +24,8 @@ module Transit
       ##
       # Capture the content from a particular region.
       # 
-      def region_content(name)
-        current_page.regions.detect do |reg|
-          reg.dom_id.to_s == name
-        end.try(:content)
+      def region_content(domid)
+        current_page.regions.find(domid).try(:content)
       end
     
     end

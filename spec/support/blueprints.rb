@@ -11,10 +11,10 @@ end
 Transit::Page.blueprint(:region) do
   regions(1)
 end
-
-Transit::Region.blueprint do
-  content { "Sample content" }
-end
+# 
+# Transit::Region.blueprint do
+#   content { "Sample content" }
+# end
 
 Business.blueprint do
 end

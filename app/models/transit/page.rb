@@ -6,7 +6,8 @@ module Transit
     
     # All pages should use publishing, slugs, and tracking
     transit :publishable, 
-            :sluggable => ':name'
+            sluggable: ':name',
+            draftable: :region_data
     
     validates :title, :name, :slug, presence: true
     validate :slug_is_unique
@@ -54,20 +55,18 @@ module Transit
     # deploy all region changes.
     # 
     def publish!
-      self.regions.each(&:deploy)
+      deploy
       super
     end
     
     
     ##
-    # Assigns regions based off of their dom ids.
+    # Build regions from the stored data hash. 
     # 
-    def regions_attributes=(hash)
-      hash.stringify_keys!.each do |dom, props|
-        region = self.regions.where(:dom_id => dom).first || self.regions.build(:dom_id => dom)
-        region.update_attributes(props)
-      end
+    def regions
+      @regions ||= RegionBuilder.new(self.region_data || self.draft_region_data)
     end
+    
     
     private
 

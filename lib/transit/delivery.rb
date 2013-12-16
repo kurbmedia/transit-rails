@@ -6,7 +6,7 @@ module Transit
     
     included do
       helper_method :current_page, :current_template
-      before_filter :setup_templates_path, only: [:show]
+      before_filter :setup_edit_mode, only: [:show]
     end
 
     
@@ -41,9 +41,10 @@ module Transit
     ##
     # Tell the controller where to find template files
     # 
-    def setup_templates_path
+    def setup_edit_mode
       prepend_view_path( File.join( Rails.root, 'app', 'templates' ) )
       append_view_path( transit_templates_dir )
+      current_page.preview! if params[:mercury_frame].present?
     end
     
     

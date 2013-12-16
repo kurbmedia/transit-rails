@@ -123,7 +123,9 @@
 /*------------------------------------------------------
  Specific Modals
 //------------------------------------------------------*/
-
+#mercury_media{
+  .icon-check:before{ font-family:'FontAwesome'; content:$fa-check; display:inline-block; margin-right:.5em; }
+}
 #mercury_html_editor textarea {
   resize:none;
   padding:0;

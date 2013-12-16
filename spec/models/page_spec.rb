@@ -182,32 +182,25 @@ describe Transit::Page do
         Transit::Page.make!
       end
       
-      let(:region) do
-        page.regions.where(dom_id: "test_node").first
-      end
-      
       before do
         page.update_attributes({
-          regions_attributes: { "test_node" => { "content" => "original" }}
+          region_data: { "test_node" => { "content" => "original" }}
         })
-        region.deploy!
       end
       
-      context 'when new content is assigned' do
-        
-        before do
-          page.update_attributes(regions_attributes: data)
-          region.reload.deploy!
-        end
-
-        let(:data) do
-          { "test_node" => { "content" => "replaced" }}
-        end
-
-        it 'updates the content of each region' do
-          region.content
-            .should eq 'replaced'
-        end
+      it 'generates a collection of regions' do
+        page.regions
+          .should_not be_nil
+      end
+      
+      specify do
+        page.regions.first
+          .should be_a(Transit::Region)
+      end
+      
+      it 'generates a region for each item in the hash' do
+        page.regions.count
+          .should eq 1
       end
     end
   end

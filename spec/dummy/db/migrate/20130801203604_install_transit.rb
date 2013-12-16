@@ -7,6 +7,8 @@ class InstallTransit < ActiveRecord::Migration
       t.text     :keywords
       t.string   :slug
       t.string   :identifier
+      t.text     :region_data, :default => nil
+      t.string   :draft_state, :default => 'draft'
       t.string   :template, :default => "default"
       t.string   :ancestry
       t.integer  :ancestry_depth, :default => nil
@@ -17,18 +19,9 @@ class InstallTransit < ActiveRecord::Migration
       ##
       # Orderable
       # 
-      t.integer :position, :default => nil
+      # t.integer :position, :default => nil
       
       t.timestamps
-    end
-    
-    create_table(:transit_regions) do |t|
-      t.belongs_to  :page
-      t.string      :dom_id
-      t.text        :content
-      t.string      :type
-      t.text        :data
-      t.text        :snippet_data
     end
     
     create_table(:transit_drafts) do |t|
@@ -49,12 +42,25 @@ class InstallTransit < ActiveRecord::Migration
       t.string     :ancestry
       t.belongs_to :menu
       t.integer    :ancestry_depth, :default => nil
+      t.integer    :position
+      t.timestamps
+    end
+    
+    create_table(:transit_medias) do |t|
+      t.string     :name
+      t.belongs_to :folder
+      t.timestamps
+    end
+    
+    create_table(:transit_media_folders) do |t|
+      t.string  :name
+      t.string  :ancestry
+      t.integer :ancestry_depth, :default => nil
       t.timestamps
     end
     
     
     add_index :transit_pages, :identifier, :unique => true
     add_index :transit_menus, :identifier, :unique => true
-    
   end
 end

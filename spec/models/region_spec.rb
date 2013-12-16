@@ -6,21 +6,23 @@ describe Transit::Region do
     Transit::Page.make!
   end
   
-  describe 'associations' do
+  describe 'attributes' do
     
-    when_active_record do
-      it 'belongs_to a page' do
-        should belong_to(
-          :page)
-      end
+    let!(:region) do
+      Transit::Region.new(
+        id: "dom_id",
+        content: "test"
+      )
     end
     
-    when_mongoid do
-      it 'is embedded in a page' do
-        should be_embedded_in(
-          :page)
-      end
+    it 'accepts a hash and assigns variables' do
+      region.id
+        .should eq 'dom_id'
+    end
+    
+    it 'assigns the hash to .attributes' do
+      region.attributes
+        .keys.should include('id')
     end
   end
-  
 end

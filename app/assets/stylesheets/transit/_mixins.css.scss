@@ -28,3 +28,71 @@
   -moz-user-select:none;
   user-select:none;
 }
+
+@mixin transit-button($font:white, $color: $notice-color){
+  $plain:lighten($color, 5%);
+  $light:lighten($color, 7%);
+  color:$font;
+  border-width:1px;
+	border-color:darken($color, 10%);
+	border-top:1px solid darken($color, 10%);
+  box-shadow:inset lighten($color, 30%) 0 1px 1px 0;
+  -moz-box-shadow:inset lighten($color, 30%) 0 1px 1px 0;
+  -webkit-box-shadow:inset lighten($color, 30%) 0 1px 1px 0;
+  
+	background-color:$color;
+	text-shadow:darken($color, 5%) 0px 1px 0px;
+  background-image: -ms-linear-gradient(top, $plain, $color);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from($plain), to($color));
+  background-image: -webkit-linear-gradient(top, $plain, $color);
+  background-image: -o-linear-gradient(top, $plain, $color);
+  background-image: -moz-linear-gradient(top, $plain, $color);
+  background-image: linear-gradient(top, $plain, $color);
+	
+	&:hover{
+		background-color:$light;
+    background-image: -ms-linear-gradient(top, $light, $color);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from($light), to($color));
+    background-image: -webkit-linear-gradient(top, $light, $color);
+    background-image: -o-linear-gradient(top, $light, $color);
+    background-image: -moz-linear-gradient(top, $light, $color);
+    background-image: linear-gradient(top, $light, $color);
+    box-shadow:inset lighten($color, 20%) 0 1px 1px 0;
+    -moz-box-shadow:inset lighten($color, 20%) 0 1px 1px 0;
+    -webkit-box-shadow:inset lighten($color, 20%) 0 1px 1px 0;
+	}
+	
+	&:active{
+    outline:0px;
+    $dark:darken($color, 3%);
+		background-color:$dark;
+    background-image: -ms-linear-gradient(top, $dark, $color);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from($dark), to($color));
+    background-image: -webkit-linear-gradient(top, $dark, $color);
+    background-image: -o-linear-gradient(top, $dark, $color);
+    background-image: -moz-linear-gradient(top, $dark, $color);
+    background-image: linear-gradient(top, $dark, $color);    
+    box-shadow:inset $color 0 1px 1px 0;
+    -moz-box-shadow:inset $color 0 1px 1px 0;
+    -webkit-box-shadow:inset $color 0 1px 1px 0;
+	}
+	
+}
+
+@mixin transit-button-colors($base){
+  background-color:$base;
+  *background-color:$base;
+  $light:lighten($base, 8%);
+  background-image: -ms-linear-gradient(top, $light, $base);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from($light), to($base));
+  background-image: -webkit-linear-gradient(top, $light, $base);
+  background-image: -o-linear-gradient(top, $light, $base);
+  background-image: -moz-linear-gradient(top, $light, $base);
+  background-image: linear-gradient(top, $light, $base);
+  background-repeat: repeat-x;
+  border-color: $base $base $light;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  filter: progid:dximagetransform.microsoft.gradient(startColorstr='#{$light}', endColorstr='#{$base}', GradientType=0);
+  filter: progid:dximagetransform.microsoft.gradient(enabled=false);
+  
+}

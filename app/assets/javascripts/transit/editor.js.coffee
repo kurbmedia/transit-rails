@@ -3,7 +3,7 @@
 #= require ./ext
 
 @Mercury.Region::serialize = ->
-  region_type: @type()
+  type: @type()
   data: @dataAttributes()
   content: @content(null, true)
   snippets: @snippets()
@@ -14,7 +14,7 @@ class @Transit.Editor extends @Mercury.PageEditor
   save: (callback) ->
     url = @saveUrl ? Mercury.saveUrl ? @iframeSrc()
     data = @serialize()
-    data = { page: { regions_attributes: data } }
+    data = { page: { region_data: data } }
 
     if @options.saveMethod == 'POST'
       method = 'POST'

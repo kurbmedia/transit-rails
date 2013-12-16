@@ -6,8 +6,9 @@ module Transit
   
   autoload :DeliveryOptions,  'transit/delivery_options'
   autoload :Delivery,         'transit/delivery'
+  autoload :RegionBuilder,    'transit/region_builder'
   autoload :Templating,       'transit/templating'
-  
+
   mattr_accessor :orm
   @@orm = :mongoid
   

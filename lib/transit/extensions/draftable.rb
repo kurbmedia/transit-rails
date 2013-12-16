@@ -27,6 +27,7 @@ module Transit
           # 
           define_method(:"#{prop}=") do |value|
             raise Transit::ReadOnlyRecord and return if preview?
+            write_attribute('draft_state', 'draft') if respond_to?(:draft_state=)
             draft.write_property(prop, value)
           end
           
@@ -117,6 +118,7 @@ module Transit
         draftable_attributes.each do |prop|
           write_attribute(prop, draft.read_property(prop))
         end
+        write_attribute('draft_state', 'published') if respond_to?(:draft_state=)
         self
       end
       
@@ -135,6 +137,15 @@ module Transit
       # 
       def draft
         super || build_draft
+      end
+      
+      
+      ##
+      # Are we in draft mode?
+      # 
+      def draft?
+        return false unless self.respond_to?(:draft_state=)
+        self.draft_state == 'draft'
       end
       
       

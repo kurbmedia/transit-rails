@@ -11,6 +11,16 @@ en:
         destroy:
           notice: "Menu was successfully removed"
           alert: "There was a problem deleting this menu."
+      medias:
+        create:
+          notice: "File has been successfully created"
+          alert: "There was a problem uploading this file. Please check the errors below"
+        update:
+          notice: "File has been successfully updated."
+          alert: "There was a problem saving this file. Please check the errors below"
+        destroy:
+          notice: "File was successfully removed"
+          alert: "There was a problem deleting this file."
           
     help: 
       menu_items: "Drag & drop menu items to set their order. Click a title to change it's text."

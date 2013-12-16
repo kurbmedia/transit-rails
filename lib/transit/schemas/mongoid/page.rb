@@ -14,10 +14,12 @@ module Transit
     field :slug,              :type => String
     field :identifier,        :type => String
     field :template,          :type => String,  :default => 'default'
-    field :ancestry_depth,    :type => String
+    field :ancestry           :type => String,
+    field :ancestry_depth,    :type => Integer
     field :position,          :type => Integer
     field :published,         :type => Boolean, :default => false
     field :publish_on,        :type => Date
+    field :region_data,       :type => Hash, :default => nil
     
     # Non-editable pages can only have their properties modified, and should not contain regions.
     # This allows using pages to only control/dictate metadata and other properties, for use with 
@@ -26,6 +28,5 @@ module Transit
     field :editable,          :type => Boolean, :default => true
     
     has_ancestry :orphan_strategy => :rootify, :cache_depth => true
-    embeds_many :regions, :class_name => "Transit::Region", :cascade_callbacks => true
   end
 end
