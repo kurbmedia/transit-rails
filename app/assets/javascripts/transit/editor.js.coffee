@@ -1,6 +1,7 @@
 #= require ./mercury
 #= require_self
 #= require ./ext
+#= require ./ui/flash
 
 @Mercury.Region::serialize = ->
   type: @type()
@@ -23,13 +24,21 @@ class @Transit.Editor extends @Mercury.PageEditor
       data['_method'] = method
 
     Mercury.log('saving', data)
+    
+    doFlash = (xhr)->
+      flash = xhr.getResponseHeader('X-Flash-Messages')
+      return false unless flash
+      list = $.parseJSON(flash)
+      for item in list
+        Transit.showFlash(type, msg) for type, msg of item
 
     options = 
       headers: Mercury.ajaxHeaders()
       type: method
       dataType: @options.saveDataType
       data: data
-      success: (response) =>
+      success: (response, type, xhr) =>
+        doFlash(xhr)
         Mercury.changes = false
         Mercury.trigger('saved', response)
         callback() if typeof(callback) == 'function'

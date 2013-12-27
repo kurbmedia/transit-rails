@@ -1,6 +1,6 @@
 module Transit
   class PagesController < TransitController
-    helper_method :resource, :collection, :current_page
+    helper_method :resource, :collection, :current_page, :parent_page
     layout :transit_layout, only: [:show]
     respond_to :html, :js, :json
     
@@ -36,8 +36,10 @@ module Transit
     def create
       @page = Transit::Page.new(permitted_params)
       unless resource.save
+        set_flash_message(:alert, I18n.t("transit.flash.pages.create.alert"))
         respond_with(resource) and return
       end
+      set_flash_message(:notice, I18n.t("transit.flash.pages.create.notice"))
       respond_with(resource, location: transit.page_path(resource))
     end
     
@@ -52,13 +54,15 @@ module Transit
     
     
     def update
-      resource.update_attributes(permitted_params)
+      ftype = resource.update_attributes(permitted_params) ? :notice : :alert
+      set_flash_message(ftype, I18n.t("transit.flash.pages.update.#{ftype.to_s}"))
       respond_with(resource, location: transit.page_path(resource))
     end
     
     
     def destroy
-      resource.destroy
+      ftype = resource.destroy ? :notice : :alert
+      set_flash_message(ftype, I18n.t("transit.flash.pages.destroy.#{ftype.to_s}"))
       respond_with(resource, location: transit.pages_path)
     end
     
@@ -70,6 +74,18 @@ module Transit
     # 
     def collection
       @pages ||= Transit::Page.roots
+    end
+    
+    
+    ##
+    # If a parent param is present, this is the 'parent' page 
+    # we should load children for.
+    # 
+    def parent_page
+      @parent ||= if params[:parent].present?
+        Transit::Page.find(params[:parent])
+      else nil
+      end
     end
     
     

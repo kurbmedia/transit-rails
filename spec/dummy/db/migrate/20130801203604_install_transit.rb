@@ -41,6 +41,7 @@ class InstallTransit < ActiveRecord::Migration
       t.string     :target
       t.string     :ancestry
       t.belongs_to :menu
+      t.belongs_to :page
       t.integer    :ancestry_depth, :default => nil
       t.integer    :position
       t.timestamps

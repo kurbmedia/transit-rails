@@ -14,5 +14,6 @@ module Transit
     has_ancestry :orphan_strategy => :rootify, :cache_depth => true
     
     embedded_in :menu, :class_name => "Transit::Menu"
+    belongs_to  :page, :class_name => 'Transit::Page'
   end
 end

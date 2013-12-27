@@ -9,6 +9,7 @@ module Transit
   autoload :RegionBuilder,    'transit/region_builder'
   autoload :Templating,       'transit/templating'
 
+  
   mattr_accessor :orm
   @@orm = :mongoid
   

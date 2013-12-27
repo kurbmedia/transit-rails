@@ -39,7 +39,7 @@ class Menu
     @plist.find('input:checkbox').each (i, fd)=>
       return true unless $(fd).is(":checked")
       fd = $(fd)
-      data.push(url: fd.val(), title: fd.data('title'))
+      data.push(page_id: fd.val(), title: fd.data('title'), url: fd.data('url'))
       fd.removeAttr('checked')
 
     $.ajax(

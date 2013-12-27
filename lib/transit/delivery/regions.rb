@@ -9,10 +9,10 @@ module Transit
       # Render html tag for a region, including the content.
       # 
       def region(id, type, options = {}, &block)
-        tag     = options[:tag] || :div
+        tag     = options.delete(:tag) || :div
         content = region_content(id)
         content ||= capture(&block) if block_given?
-        content_tag(tag, id: id.to_s, data: { mercury: type.to_s }) do
+        content_tag(tag, { id: id.to_s, data: { mercury: type.to_s }}.merge(options)) do
           content.to_s.strip.html_safe
         end
       end

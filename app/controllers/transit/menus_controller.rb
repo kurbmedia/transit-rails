@@ -68,7 +68,7 @@ module Transit
     # Get a list of all of the existing pages
     # 
     def pages
-      @pages ||= Transit::Page.order('name ASC').all
+      @pages ||= Transit::Page.roots.order('name ASC').all
     end
     
     
@@ -78,7 +78,7 @@ module Transit
     def permitted_params
       return params[:menu] unless Rails.version.to_i >= 4
       params.require(:menu).permit([ 
-        :id, :name, :identifier, items_attributes: [ :id, :temp_id, :_destroy, :url, :title, :target, :parent_id, :position ]
+        :id, :name, :identifier, items_attributes: [ :id, :_destroy, :url, :title, :target, :parent_id, :position, :page_id ]
       ])
     end
     

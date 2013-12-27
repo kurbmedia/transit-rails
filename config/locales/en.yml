@@ -3,33 +3,54 @@ en:
     flash:
       menus:
         create:
-          notice: "Menu has been successfully created"
-          alert: "There was a problem creating this menu. Please check the errors below"
+          notice: "Menu has been successfully created."
+          alert: "There was a problem creating this menu. Please check the errors below."
         update:
           notice: "Menu has been successfully updated."
-          alert: "There was a problem saving this menu. Please check the errors below"
+          alert: "There was a problem saving this menu. Please check the errors below."
         destroy:
-          notice: "Menu was successfully removed"
+          notice: "Menu was successfully removed."
           alert: "There was a problem deleting this menu."
       medias:
         create:
-          notice: "File has been successfully created"
-          alert: "There was a problem uploading this file. Please check the errors below"
+          notice: "File has been successfully created."
+          alert: "There was a problem uploading this file. Please check the errors below."
         update:
           notice: "File has been successfully updated."
-          alert: "There was a problem saving this file. Please check the errors below"
+          alert: "There was a problem saving this file. Please check the errors below."
         destroy:
-          notice: "File was successfully removed"
+          notice: "File was successfully removed."
           alert: "There was a problem deleting this file."
+      pages:
+        create:
+          notice: "Page has successfully been created."
+          alert: "There was a problem creating this page. Please check the errors below."
+        update:
+          notice: "Page has been successfully updated."
+          alert: "There was a problem saving this page. Please check the errors below."
+        destroy:
+          notice: "Page was successfully removed."
+          alert: "There was a problem deleting this page."
           
     help: 
-      menu_items: "Drag & drop menu items to set their order. Click a title to change it's text."
+      menu_items: "Drag & drop menu items to set their order. Click a title to change it."
+
     ui:
       buttons:
         save_page: "Save Page"
         save_menu: "Save Menu"
+      confirmations:
+        pages:
+          delete: "Are you sure you want to delete this page?"
+      links:
+        pages:
+          edit: 'Edit Page'
+          children: 'View Sub-Pages'
+          delete: 'Delete Page'
+
     menus:
       name: "Menu Name"
+
     menu_items:
       url: "URL"
       title: "Title"

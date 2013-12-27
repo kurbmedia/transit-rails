@@ -1,0 +1,12 @@
+<li>
+    <label>
+        <input type="checkbox" value="<%= page.id %>" data-url="<%= page.absolute_path %>" data-title="<%= page.name %>" /> <%= page.name %>
+    </label>
+    <% if page.children.any? %>
+    <ul class="sub-tree">
+        <% page.children.each do |sub| %>
+        <%= render partial: 'transit/menus/page', locals: { page: sub } %>
+        <% end %>
+    </ul>
+    <% end %>
+</li>
