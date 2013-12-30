@@ -44,6 +44,7 @@ class InstallTransit < ActiveRecord::Migration
       t.belongs_to :menu
       t.belongs_to :page
       t.integer    :position
+      t.string     :uid
       t.timestamps
     end
     

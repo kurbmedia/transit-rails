@@ -1,5 +1,3 @@
-require "transit/engine"
-
 module Transit
   extend self
   include ActiveSupport::Configurable
@@ -35,6 +33,7 @@ end
 
 require 'transit/error'
 require 'transit/configuration'
+require "transit/engine"
 require 'transit/adapter'
 require 'transit/interpolations'
 require 'transit/model'

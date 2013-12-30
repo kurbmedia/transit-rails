@@ -11,4 +11,21 @@ describe Transit do
     Transit.config
       .should_not be_nil
   end
+  
+  describe 'updating configuration' do
+    
+    context 'when Transit.setup is run' do
+      
+      before do
+        Transit.setup do |conf|
+          conf.authentication_method = :check_it!
+        end
+      end
+      
+      it 'updates config values' do
+        Transit.config.authentication_method
+          .should eq :check_it!
+      end
+    end
+  end
 end

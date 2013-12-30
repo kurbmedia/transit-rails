@@ -13,7 +13,10 @@ module Transit
       # Copy initializer and optional migration
       # 
       def copy_files
-        template "transit.rb", "config/initializers/transit.rb"
+        template "transit.rb",        "config/initializers/transit.rb"
+        template "transit.js",        "app/assets/javascripts"
+        template "transit.css.scss",  "app/assets/stylesheets"
+        
         return unless active_record?
         require_migration_helpers!
         migration_template "transit_migration.rb", "db/migrate/install_transit.rb"

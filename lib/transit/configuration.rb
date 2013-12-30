@@ -1,16 +1,8 @@
 ## 
 # Setup default configuration options
 # 
-module Transit
+Transit.setup do |config|
   
-  # Enable translations globally
-  config.translate = false
-
-  ##
-  # Allow for disabling built-in model validations
-  # 
-  config.enable_validations = true
-
   ##
   # Method used for authentication in controllers. Before any 
   # actions are called within the Pages/Posts controller, this 
@@ -19,17 +11,29 @@ module Transit
   # of user_signed_in?
   # 
   # 
-  config.authentication_method = :user_signed_in?
+  config.authentication_method = :authenticate_user!
+  
+
+  ##
+  # Allow for disabling built-in model validations
+  # 
+  config.enable_validations = true
+  
+  
+  ##
+  # When using the active extension, should a active_date be used?
+  # 
+  config.publish_with_date = true
+  
   
   ##
   # When generating post slugs, use this interpolation
   # 
   config.sluggable_via = ":name"
   
-  ##
-  # When using the active extension, should a active_date be used?
-  # 
-  config.publish_with_date = true
+  
+  # Enable translations globally
+  config.translate = false
   
   
   ##

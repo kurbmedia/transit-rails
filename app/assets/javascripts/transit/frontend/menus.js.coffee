@@ -67,9 +67,11 @@ class Menu
   sort:(item, container, supa)=>
     supa(item)
     position = (pos, item)->
-      $(item).find('input[rel="position"]').val( pos + 1 )
-      if $(item).find('ul.sub').length isnt 0
-        $('ul.sub > li', $(item)).each( position )
+      li = $(item)
+      li.find('input[rel="position"]').val( pos + 1 )
+      if li.find('ul.sub').length isnt 0
+        $('ul.sub > li', li).each( position )
+          .find('> div.item input.parent').val( li.data('item-key') )
       
     @list.find('> li').each(position)
       

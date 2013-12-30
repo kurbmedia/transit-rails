@@ -7,8 +7,10 @@
     <div id="transit_menu_items" data-item-path="<%= transit.menu_items_path %>">
         <p class='menu-item-help'><%= t('transit.help.menu_items') %></p>
         <ul id="menu_item_list">
-            <%= f.fields_for :items do |i| %>
-            <%= render partial: 'item', locals: { i: i } %>
+            <% resource.items.roots.each do |item| %>
+                <%= f.fields_for :items, item do |i| %>
+                    <%= render partial: 'item', locals: { i: i, f: f, item: item } %>
+                <% end %>
             <% end %>
         </ul>
     </div>

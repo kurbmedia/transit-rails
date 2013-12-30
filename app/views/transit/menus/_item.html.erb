@@ -1,11 +1,11 @@
-<li data-item-id="<%= i.object.id %>">
+<li data-item-id="<%= item.id %>" data-item-key="<%= item.uid %>">
     <div class="item">
         <h5><%= i.text_field :title %></h5>
         <span class="url">
-            <%= i.object.url.to_s %>
+            <%= item.url.to_s %>
             <%= i.hidden_field :url %>
         </span>
-        <% if i.object.persisted? %>
+        <% if item.persisted? %>
         <%= i.hidden_field :id %>
         <%= i.hidden_field :_destroy, rel: 'remove' %>
         <% end %>
@@ -13,9 +13,17 @@
         <%= i.hidden_field :parent_id %>
         <%= i.hidden_field :target %>
         <%= i.hidden_field :page_id %>
+        <%= i.hidden_field :temp_parent, rel: "parent", class: "parent" %>
+        <%= i.hidden_field :uid %>
         <a href="#" class="remove-item-link">&times;</a>
     </div>
-    <% if i.object.persisted? %>
-    <ul class="sub"></ul>
+    <% if item.persisted? && item.children.any? %>
+    <ul class="sub">
+        <% item.children.each do |sub| %>
+        <%= f.fields_for :items, sub do |ii| %>
+        <%= render partial: 'item', locals: { i: ii, f: f, item: sub } %>
+        <% end %>
+        <% end %>
+    </ul>
     <% end %>
 </li>

@@ -14,7 +14,7 @@ module Transit
     field :slug,              :type => String
     field :identifier,        :type => String
     field :template,          :type => String,  :default => 'default'
-    field :ancestry           :type => String,
+    field :ancestry,          :type => String
     field :ancestry_depth,    :type => Integer
     field :position,          :type => Integer
     field :published,         :type => Boolean, :default => false

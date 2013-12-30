@@ -16,6 +16,7 @@ module Transit
     
     def show
       if params[:mercury_frame].present?
+        flash.discard
         append_view_path(Rails.root + '/app/views/transit/templates')
         render template: resource.template and return
       end

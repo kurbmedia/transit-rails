@@ -1,7 +1,7 @@
 <% content = capture do
   collection.each_with_index do |item, ind| %>
   <%= fields_for "menu[items_attributes][#{Time.now.to_i + ind}]", item do |i| %>
-    <%= render partial: 'transit/menus/item', locals: { i: i } %>
+    <%= render partial: 'transit/menus/item', locals: { i: i, item: item } %>
   <% end
   end
 end %>

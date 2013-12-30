@@ -1,5 +1,5 @@
 # Use this file to configure any default / global options.
-Transit.configure do |config|
+Transit.setup do |config|
   require 'transit/adapters/<%= options[:orm] %>'
   
   ##
@@ -11,7 +11,8 @@ Transit.configure do |config|
   # When generating page slugs, use this interpolation
   # 
   #config.sluggable_via = ":name"
-
+  
+  
   ##
   # When using the available extension, by default available state 
   # is determined by checking the value of the 'available' attribute 
