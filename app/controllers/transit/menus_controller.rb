@@ -1,5 +1,6 @@
 module Transit
   class MenusController < TransitController
+    before_filter :perform_authentication_method
     helper_method :resource, :collection, :pages
     respond_to :html, :js, :json
     

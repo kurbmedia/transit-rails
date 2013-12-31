@@ -96,3 +96,17 @@
   filter: progid:dximagetransform.microsoft.gradient(enabled=false);
   
 }
+
+@mixin clipped{
+  @include clip(1px, 1px, 1px, 1px);
+}
+
+@mixin clip($top: 1px, $right: 1px, $bottom: 1px, $left: 1px, $shape: rect, $abs: true){
+  $shape:unquote($shape);
+  
+  clip: unquote("#{$shape}(#{$top}, #{$right}, #{$bottom}, #{$left})"); 
+  @if $legacy-support-for-ie{
+    clip: unquote("#{$shape}(#{$top} #{$right} #{$bottom} #{$left})"); // Stupid IE
+  }
+  @if $abs{ position: absolute;  }
+}

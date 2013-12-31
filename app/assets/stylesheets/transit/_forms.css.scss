@@ -865,6 +865,7 @@ legend + .control-group {
 
 
 .btn {
+  border-width:1px;
   border-color: #ccc;
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
 }
@@ -1191,6 +1192,9 @@ form.transit-form{
       li{ width:22%; padding:0 1em 0 0; }
     }
     
+    li.boolean{
+      input, label{ display:inline-block; vertical-align:middle; }
+    }
     li.buttons, li.actions{ width:100%; padding-top:.5em; }
     li.full{ width:100%; padding:0; }
     li.half{ width:49%; }

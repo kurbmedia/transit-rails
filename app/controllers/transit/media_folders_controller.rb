@@ -2,6 +2,7 @@ module Transit
   class MediaFoldersController < TransitController
     helper_method :resource, :collection
     respond_to :html, :js, :json
+    layout false
     
     def index
       @menus = Transit::MediaFolder.all
@@ -60,7 +61,7 @@ module Transit
     # All available uploads
     # 
     def collection
-      @menus ||= Transit::MediaFolder.order('name ASC').all
+      @menus ||= Transit::MediaFolder.roots.order('name ASC').all
     end
     
     

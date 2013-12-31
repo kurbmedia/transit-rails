@@ -58,6 +58,7 @@ class InstallTransit < ActiveRecord::Migration
       t.string  :name
       t.string  :ancestry
       t.integer :ancestry_depth, :default => nil
+      t.text    :full_path
       t.timestamps
     end
     

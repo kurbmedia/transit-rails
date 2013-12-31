@@ -1,6 +1,6 @@
 module Transit
   class MediasController < TransitController
-    helper_method :resource, :collection
+    helper_method :resource, :collection, :folder_list
     respond_to :html, :js, :json
     
     def index
@@ -60,7 +60,15 @@ module Transit
     # All available uploads
     # 
     def collection
-      @menus ||= Transit::Media.order('name ASC').all
+      @menus ||= Transit::Media.roots.order('name ASC').all
+    end
+    
+    
+    ##
+    # All top level folders.
+    # 
+    def folder_list
+      @folders ||= Transit::MediaFolder.roots.order('name ASC').all
     end
     
     

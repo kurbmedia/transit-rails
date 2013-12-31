@@ -15,11 +15,7 @@ class InstallTransit < ActiveRecord::Migration
       t.boolean  :published, :default => false
       t.datetime :publish_on
       t.boolean  :editable, :default => true
-      
-      ##
-      # Orderable
-      # 
-      # t.integer :position, :default => nil
+      t.integer :position, :default => nil
       
       t.timestamps
     end
@@ -40,10 +36,11 @@ class InstallTransit < ActiveRecord::Migration
       t.string     :url
       t.string     :target
       t.string     :ancestry
+      t.integer    :ancestry_depth, :default => nil
       t.belongs_to :menu
       t.belongs_to :page
-      t.integer    :ancestry_depth, :default => nil
       t.integer    :position
+      t.string     :uid
       t.timestamps
     end
     
@@ -57,6 +54,7 @@ class InstallTransit < ActiveRecord::Migration
       t.string  :name
       t.string  :ancestry
       t.integer :ancestry_depth, :default => nil
+      t.text    :full_path
       t.timestamps
     end
     

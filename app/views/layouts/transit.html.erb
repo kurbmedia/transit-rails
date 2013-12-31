@@ -14,6 +14,158 @@
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" />
     <%= stylesheet_link_tag 'transit' %>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" charset="utf-8"></script>
+    <script type="text/javascript" charset="utf-8">
+    //<![CDATA[
+            window.Mercury = {
+              config: {
+                toolbars: {
+                  primary: {
+                    rightSide: {
+                      close:               ['Back', 'Go Back'],
+                      mediaLibrary:        ['Library', 'Media Library'],
+                    },
+                    save:                  ['Save', 'Save this page'],
+                    editForm:              ['Details', 'Page Details'],
+                    preview:               ['Preview', 'Preview this page', { toggle: true, mode: true }],
+                    sep1:                  ' ',
+                    undoredo:              {
+                      undo:                ['Undo', 'Undo your last action'],
+                      redo:                ['Redo', 'Redo your last action'],
+                      sep:                 ' '
+                      },
+                    insertLink:            ['Link', 'Insert Link', { modal: "<%= mercury_resource_path('modals', 'link.html') %>", regions: ['full', 'markdown'] }],
+                    insertMedia:           ['Media', 'Insert Media (images and videos)', { modal: "<%= mercury_resource_path('modals','media.html') %>", regions: ['full', 'markdown'] }],
+                    snippetPanel:          ['Snippet', 'Snippet Panel', { panel: "<%= snippets_path %>", regions: ['full'] }]
+                  },
+
+                  editable: {
+                    _regions:              ['full', 'markdown'],
+                    predefined:            {},
+                    decoration:            {
+                      bold:                ['Bold', null, { context: true }],
+                      italic:              ['Italicize', null, { context: true }],
+                      strikethrough:       ['Strikethrough', null, { context: true, regions: ['full'] }],
+                      sep:                 '-'
+                      },
+                    script:                {
+                      subscript:           ['Subscript', null, { context: true }],
+                      superscript:         ['Superscript', null, { context: true }],
+                      sep: '-'
+                      },
+                    list:                  {
+                      insertUnorderedList: ['Unordered List', null, { context: true }],
+                      insertOrderedList:   ['Numbered List', null, { context: true }],
+                      sep:                 '-'
+                      },
+                    indent:                {
+                      outdent:             ['Decrease Indentation'],
+                      indent:              ['Increase Indentation'],
+                      sep:                 '-'
+                      },        
+                    rules:                 {
+                      horizontalRule:      ['Horizontal Rule', 'Insert a horizontal rule'],
+                      sep1:                '-'
+                      },
+                    formatting:            {
+                      removeFormatting:    ['Remove Formatting', 'Remove formatting for the selection', { regions: ['full'] }],
+                      sep2:                ' '
+                      }
+                    },
+
+                  snippets: {
+                    _custom:               true,
+                    actions:               {
+                      editSnippet:         ['Edit Snippet Settings'],
+                      sep1:                ' ',
+                      removeSnippet:       ['Remove Snippet']
+                      }
+                    }
+                  },
+                regions: {
+                  attribute: 'data-mercury',
+                  identifier: 'id',
+                  dataAttributes: []
+                  // determineType: function(region){},
+                  },
+
+                snippets: {
+                  method: 'POST',
+                  optionsUrl: '<%= edit_snippet_path(':name') %>',
+                  previewUrl: '<%= snippet_path(':name') %>'
+                },
+                
+                uploading: {
+                  enabled: true,
+                  allowedMimeTypes: ['image/jpeg', 'image/gif', 'image/png'],
+                  maxFileSize: 1235242880,
+                  inputName: 'image[image]',
+                  url: '<%= medias_path %>',
+                  handler: false
+                  },
+
+               localization: {
+                  enabled: false,
+                  preferredLocale: 'swedish_chef-BORK'
+                  },
+
+               behaviors: {
+                  editForm: function(){ Transit.behaviors.editForm(); },
+                  htmlEditor: function() { Mercury.modal('<%= mercury_resource_path('modals', 'htmleditor.html') %>', { title: 'HTML Editor', fullHeight: true, handler: 'htmlEditor' }); }
+                },
+
+                globalBehaviors: {
+                  exit: function() { window.location.href = this.iframeSrc() },
+                  barrelRoll: function() { $('body').css({webkitTransform: 'rotate(360deg)'}) }
+                },
+
+                csrfSelector: 'meta[name="csrf-token"]',
+                csrfHeader: 'X-CSRF-Token',
+
+                editorUrlRegEx: /([http|https]:\/\/.[^\/]*)\/editor\/?(.*)/i,
+
+                nonHijackableClasses: [],
+
+                pasting: {
+                  sanitize: 'whitelist',
+                  whitelist: {
+                    h1:     [],
+                    h2:     [],
+                    h3:     [],
+                    h4:     [],
+                    h5:     [],
+                    h6:     [],
+                    table:  [],
+                    thead:  [],
+                    tbody:  [],
+                    tfoot:  [],
+                    tr:     [],
+                    th:     ['colspan', 'rowspan'],
+                    td:     ['colspan', 'rowspan'],
+                    div:    ['class'],
+                    span:   ['class'],
+                    ul:     [],
+                    ol:     [],
+                    li:     [],
+                    b:      [],
+                    strong: [],
+                    i:      [],
+                    em:     [],
+                    u:      [],
+                    strike: [],
+                    br:     [],
+                    p:      [],
+                    hr:     [],
+                    a:      ['href', 'target', 'title', 'name'],
+                    img:    ['src', 'title', 'alt']
+                    }
+                  },
+                injectedStyles: ''  
+              },
+              silent: true,
+              debug: false
+            };
+    //]]>
+    </script>
     <%= javascript_include_tag 'transit' %>
 </head>
 <body>
@@ -21,6 +173,7 @@
     <script type="text/javascript" charset="utf-8">    
     //<![CDATA[
         (function(){
+            Transit.configure('root', "<%= transit_root_path %>");
             Transit.editURL = "<%= transit.edit_page_path(resource) %>";
             Transit.editor = new Transit.Editor("<%= transit.page_path(resource) %>");
             Transit.editor.loadIframeSrc("<%= resource.absolute_path %>");

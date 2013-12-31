@@ -19,13 +19,32 @@ ActiveRecord::Schema.define(:version => 20130801203604) do
     t.text    "content"
   end
 
+  create_table "transit_media_folders", :force => true do |t|
+    t.string   "name"
+    t.string   "ancestry"
+    t.integer  "ancestry_depth"
+    t.text     "full_path"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  create_table "transit_medias", :force => true do |t|
+    t.string   "name"
+    t.integer  "folder_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "transit_menu_items", :force => true do |t|
     t.string   "title"
     t.string   "url"
     t.string   "target"
     t.string   "ancestry"
-    t.integer  "menu_id"
     t.integer  "ancestry_depth"
+    t.integer  "menu_id"
+    t.integer  "page_id"
+    t.integer  "position"
+    t.string   "uid"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
   end
@@ -46,6 +65,8 @@ ActiveRecord::Schema.define(:version => 20130801203604) do
     t.text     "keywords"
     t.string   "slug"
     t.string   "identifier"
+    t.text     "region_data"
+    t.string   "draft_state",    :default => "draft"
     t.string   "template",       :default => "default"
     t.string   "ancestry"
     t.integer  "ancestry_depth"
@@ -58,14 +79,5 @@ ActiveRecord::Schema.define(:version => 20130801203604) do
   end
 
   add_index "transit_pages", ["identifier"], :name => "index_transit_pages_on_identifier", :unique => true
-
-  create_table "transit_regions", :force => true do |t|
-    t.integer "page_id"
-    t.string  "dom_id"
-    t.text    "content"
-    t.string  "type"
-    t.text    "data"
-    t.text    "snippet_data"
-  end
 
 end

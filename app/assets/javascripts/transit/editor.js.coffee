@@ -1,4 +1,4 @@
-#= require ./mercury
+#= require mercury/mercury
 #= require_self
 #= require ./ext
 #= require ./ui/flash
@@ -10,6 +10,11 @@
   snippets: @snippets()
 
 class @Transit.Editor extends @Mercury.PageEditor
+  constructor:->
+    super
+    if Transit.config.snippets && Transit.config.snippets.optionsUrl
+      $.extend Mercury.config.snippets, Transit.config.snippets
+
   editURL: null
     
   save: (callback) ->

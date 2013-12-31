@@ -1,9 +1,10 @@
 module Transit
   class PagesController < TransitController
+    before_filter :perform_authentication_method
     helper_method :resource, :collection, :current_page, :parent_page
     layout :transit_layout, only: [:show]
     respond_to :html, :js, :json
-    
+
     
     def index
       if params[:parent_id].present?

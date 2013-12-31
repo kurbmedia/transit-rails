@@ -2,6 +2,7 @@ module Transit
   class TransitController < ::ApplicationController
     before_filter :perform_authentication_method
     after_filter :set_xhr_flash
+    helper Transit::ApplicationHelper
     
     protected
     

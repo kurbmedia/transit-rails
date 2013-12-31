@@ -7,7 +7,7 @@
   @toolbar = new Mercury.Toolbar(jQuery.extend(true, {}, @options, @options.toolbarOptions))
   @statusbar = new Mercury.Statusbar(jQuery.extend(true, {}, @options, @options.statusbarOptions))
   @resize()
-
+  
   @iframe.one 'load', => @bindEvents()
   @iframe.on 'load', => @initializeFrame()
 
