@@ -108,7 +108,9 @@ div.transit-editor{ margin-top:rhythm(0.5); padding:border-rhythm(1px, .3) .5em;
   
   div.proper-commands{ display:block; background:$transit-edit-bar-color; padding:rhythm(.25) .5em; margin-bottom:rhythm(.5);
     a{ @include inline-block; font-size:16px; line-height:24px; color:$transit-edit-bar-button-color; background:rgba(white, .5); 
-      border:1px solid lighten($transit-edit-bar-color, 5%); border-radius:4px; margin-right:2px;
+      border:1px solid lighten($transit-edit-bar-color, 5%); border-radius:4px; margin-right:2px; text-align:center; 
+      div{ display:none; }
+      &:before{ width:100%; text-align:center; display:block; }
       &.selected{ color:$transit-primary-color; }
     }
   }

@@ -12,12 +12,12 @@ editInstance = null
     return true if field.hasClass('transit-editor')
     
     field.wrap('<div class="transit-editor"></div>')
-      .addClass('transit-editor')
     editor = field.parent('div.transit-editor')
     editor.prepend("<div class='editor-content'></div>")
     content = editor.find("> div.editor-content")
     content.html( field.val() )
       .height( field.height() )
+    field.addClass('transit-editor')
     field.closest('form').on 'submit', (event)->
       $('div.transit-editor div.editor-content').trigger('blur')
     true  
@@ -32,7 +32,7 @@ $(document).on 'click', 'div.transit-editor div.editor-content', (event)->
   return true if editor == editInstance
   Transit.basicEditor.activate(editor, 
     placeholder: "<p>Enter your text</p>",
-    controlsTarget: editor.parent('div.richtext-editor')
+    controlsTarget: editor.parent('div.transit-editor')
   )
   editInstance = editor
 

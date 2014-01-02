@@ -524,7 +524,9 @@
       if ($.trim($(activeElement).text()).length === 0) {
         $(activeElement).addClass('empty');
         if (options.markup) {
+          $(activeElement).find("p:empty").remove();
           $(activeElement).html('<p>'+options.placeholder+'</p>');
+          $(activeElement).find("p:empty").remove();
         } else {
           $(activeElement).html(options.placeholder);
         }
