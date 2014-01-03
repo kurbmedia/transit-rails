@@ -17,7 +17,7 @@
         <%= i.hidden_field :uid %>
         <a href="#" class="remove-item-link">&times;</a>
     </div>
-    <% if item.persisted? && item.children.any? %>
+    <% if item.persisted? %>
     <ul class="sub">
         <% item.children.each do |sub| %>
         <%= f.fields_for :items, sub do |ii| %>
