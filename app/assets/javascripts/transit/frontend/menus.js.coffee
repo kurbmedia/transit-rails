@@ -11,6 +11,7 @@ class Menu
     $('#add_custom_item').on 'click', 'button.action-button', @addCustom
     
     @list.on 'items:update', ()=>
+      @list.sortable('destroy')
       @list.sortable(handle: 'div.handle', onDrop: @sort, group: 'nested')
   
   ##
@@ -69,11 +70,19 @@ class Menu
     position = (pos, item)->
       li = $(item)
       li.find('input[rel="position"]').val( pos + 1 )
+      
       if li.find('ul.sub').length isnt 0
-        $('ul.sub > li', li).each( position )
-          .find('> div.item input.parent').val( li.data('item-key') )
+        base = $('ul.sub > li', li)
+        base.each( position )
+        
+        if li.data('item-id') is undefined
+          base.find('> div.item input.temp-parent').val( li.data('item-key') )
+        else 
+          base.find('> div.item input.parent').val( li.data('item-id') )
+          base.find('> div.item input.temp-parent').val('')
       
     @list.find('> li').each(position)
+    @list.find('> li > div.item input.temp-parent, > li > div.item input.parent').val('')
       
     
     
