@@ -7,6 +7,7 @@ module Transit
 
     
     def index
+      @page_title = I18n.t('transit.titles.pages.index')
       if params[:parent_id].present?
         @page  = Transit::Page.find(params[:parent_id])
         @pages = resource.children
@@ -21,6 +22,7 @@ module Transit
         append_view_path(Rails.root + '/app/views/transit/templates')
         render template: resource.template and return
       end
+      @page_title = I18n.t('transit.titles.pages.edit', name: resource.name)
       respond_with(resource)
     end
     
@@ -28,6 +30,7 @@ module Transit
     # Create a new page
     # 
     def new
+      @page_title = I18n.t('transit.titles.pages.new')
       @page = Transit::Page.new
     end
     
@@ -39,10 +42,12 @@ module Transit
       @page = Transit::Page.new(permitted_params)
       unless resource.save
         set_flash_message(:alert, I18n.t("transit.flash.pages.create.alert"))
+        @page_title = I18n.t('transit.titles.pages.new')
         respond_with(resource) and return
       end
       set_flash_message(:notice, I18n.t("transit.flash.pages.create.notice"))
-      respond_with(resource, location: transit.page_path(resource))
+      loc = params[:edit_after].present? ? transit.page_path(resource) : transit.pages_path
+      respond_with(resource, location: loc)
     end
     
     
@@ -51,6 +56,7 @@ module Transit
         render action: :edit, layout: false
         return
       end
+      @page_title = I18n.t('transit.titles.pages.edit', name: resource.name)
       respond_with(resource)
     end
     

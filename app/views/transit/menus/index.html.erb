@@ -6,7 +6,7 @@
     <div id="transit_menu_editor">
         <div id="transit_menu_sidebar">
             <div id="transit_menu_select">
-                <label> Edit Menu: </label> <%= select_tag "menu_select", options_for_select( collection.collect{ |m| [m.name, m.id] }) %>
+                <label> Menu: </label> <%= select_tag "menu_select", options_for_select( collection.collect{ |m| [m.name, m.id] }) %>
             </div>
             <div class="menu-options" id="add_page_item">
                 <h4>Pages</h4>

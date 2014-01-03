@@ -49,8 +49,9 @@ form.transit-form{
 #transit_menu_editor{ @include clearfix; }
 #transit_menu_sidebar{ float:left; width:28%; 
   #transit_menu_select{ background:$transit-form-tint-color; border:solid darken($transit-form-tint-color, 5%); border-width:1px 1px 0 1px;
+    white-space:nowrap;
     label, select{ display:inline-block; margin:0; }
-    label{ margin:0 1em; }
+    label{ margin:0 .5em 0 1em; }
   }
   div.menu-options{ padding:1em; border:1px solid darken($transit-form-tint-color, 5%); @include clearfix;
     h4{ margin-top:0; font-size:1.1em; }

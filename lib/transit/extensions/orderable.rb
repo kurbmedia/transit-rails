@@ -9,7 +9,7 @@ module Transit
       
       included do
         before_create :set_default_position
-        default_scope order_by("position ASC")
+        default_scope lambda{ order_by("position ASC") }
       end
       
       ##

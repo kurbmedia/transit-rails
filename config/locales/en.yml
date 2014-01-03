@@ -34,7 +34,17 @@ en:
           
     help: 
       menu_items: "Drag & drop menu items to set their order. Click a title to change it."
-
+    
+    titles:
+      pages:
+        index: "Manage Pages"
+        edit: "Edit Page: %{name}"
+        new: "Create a New Page"
+      menus:
+        index: "Manage Menus"
+        edit: "Edit Menu: %{name}"
+        new: "Create a New Menu"
+      
     ui:
       buttons:
         save_page: "Save Page"
