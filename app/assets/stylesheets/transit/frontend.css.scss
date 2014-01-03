@@ -84,7 +84,15 @@ form.transit-form{
 #transit_menu_items{ border:1px solid darken($transit-form-tint-color, 5%); padding:1em; position:relative;
   ul{ list-style:none; margin:0 0 1em 0; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; position:relative;
     li{ display:block; 
-      div.item{ padding:.25em 1em; position:relative; background:$transit-form-tint-color; padding-right:30px; margin-bottom:.25em; }
+      div.item{ padding:.25em 1em .25em 2em; position:relative; background:$transit-form-tint-color; padding-right:30px; margin-bottom:.25em; }
+      div.handle{ position:absolute; top:0px; left:0px; bottom:0px; width:1.5em; background:darken($transit-form-tint-color, 10%); cursor:move; 
+        i{ position:absolute; left:0px; right:0px; display:block; text-align:center; font-size:9px; color:darken($transit-form-tint-color, 25%);
+          height:1.25em; 
+          &:before{ margin:0; }
+        }
+        i.up{ bottom:65%; }
+        i.dn{ top:52%; }
+      }
       h5, span.url{ display:inline-block; }
       span.url{ padding:0 1em; }
       h5{ width:50%; }

@@ -11,7 +11,7 @@ class Menu
     $('#add_custom_item').on 'click', 'button.action-button', @addCustom
     
     @list.on 'items:update', ()=>
-      @list.sortable(onDrop: @sort, group: 'nested')
+      @list.sortable(handle: 'div.handle', onDrop: @sort, group: 'nested')
   
   ##
   # Add a menu item from a specific url
