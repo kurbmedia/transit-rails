@@ -12,5 +12,9 @@ div.mercury-statusbar{ background:black; height:1px; overflow:hidden; }
 .mercury-focusable{ position:absolute; opacity:0; }
 .filter{ margin:0; padding:0; }
 
+button:focus, button:active{ outline:0; }
+button.button, button.btn{ border-width:1px; }
+
 @import 'transit/toolbar';
 @import 'transit/dialogs';
+@import 'transit/media';

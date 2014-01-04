@@ -1,0 +1,19 @@
+<div id="transit_media_library" class="mercury-display-pane-container">
+    <div id="transit_media_dirs">
+        <ul class="tree list-unstyled">
+            <% Transit::MediaFolder.roots.each do |dir| %>
+            <li id="tm_dir_<%= dir.id %>">
+                <span class="item">
+                    <i class="icon-caret-right"></i>
+                    <%= dir.name %>
+                </span>
+                <ul class="sub" id="tm_dir_children_<%= dir.id %>"></ul>
+            </li>
+            <% end %>
+        </ul>
+    </div>
+    <div id="transit_media_view" class="col">
+        <div id="tm_uploader">
+        </div>
+    </div>
+</div>

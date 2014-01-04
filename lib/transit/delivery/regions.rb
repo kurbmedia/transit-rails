@@ -12,8 +12,14 @@ module Transit
         tag     = options.delete(:tag) || :div
         content = region_content(id)
         content ||= capture(&block) if block_given?
-        content_tag(tag, { id: id.to_s, data: { mercury: type.to_s }}.merge(options)) do
-          content.to_s.strip.html_safe
+        content = content.to_s.strip.html_safe
+        case type
+        when :image
+          return image_tag(content, data: { mercury: 'image' })
+        else
+          content_tag(tag, { id: id.to_s, data: { mercury: type.to_s }}.merge(options)) do
+            content
+          end
         end
       end
     

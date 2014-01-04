@@ -82,6 +82,9 @@
       text-align:center;
     }
   }
+  
+  .mercury-table-group.disabled{ display:none; }
+  
   .mercury-button em{ display:none; }
   .mercury-button-palette{ width:23px; background-position: 0 -36px; }
   
@@ -102,6 +105,8 @@
   .mercury-indent-button:before{ content:$fa-indent; }
   .mercury-removeFormatting-button:before{ content:$fa-times; }
   .mercury-horizontalRule-button:before{ content:"\2014"; font-family:'Helvetica', 'Arial', sans-serif; font-weight:bold; }
+  
+  .mercury-insertRowBefore-button:before{ content:$fa-list; }
   
   // Selects
   .mercury-button-select{ width:auto !important; overflow:hidden; padding-left:1em; 

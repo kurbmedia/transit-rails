@@ -21,15 +21,3 @@
   Mercury.trigger('resize')
   
 @Transit.behaviors = {}
-
-@Transit.behaviors.editForm = ()->
-  Mercury.modal(Transit.editURL + "?mercury=true", { title: "Page Details", fullHeight: false, minWidth:600, minHeight:385, handler: 'editForm' });
-
-@Transit.behaviors.mediaLibrary = (selection)->
-  Mercury.modal("/admin/modals/assets.html?resource_type=#{Transit.Deliverable.type}&resource_id=#{Transit.Deliverable.id}", 
-    { title: 'Files and Images', fullHeight: false, minWidth:600, handler: 'manageAssets'  })
-    
-@Mercury.modalHandlers.editForm = {
-  initialize:->
-  initializeForm:->
-}

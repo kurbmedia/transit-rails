@@ -2,6 +2,7 @@ module Transit
   class PagesController < TransitController
     before_filter :perform_authentication_method
     helper_method :resource, :collection, :current_page, :parent_page
+    layout "transit/modals", only: [:update]
     layout :transit_layout, only: [:show]
     respond_to :html, :js, :json
 
@@ -53,7 +54,7 @@ module Transit
     
     def edit
       if params[:mercury].present?
-        render action: :edit, layout: false
+        render action: :edit, layout: 'transit/modals'
         return
       end
       @page_title = I18n.t('transit.titles.pages.edit', name: resource.name)

@@ -1,5 +1,6 @@
 #= require_self
 #= require transit/editor
+#= require jquery_ujs
 
 @Transit ||= 
   config: 

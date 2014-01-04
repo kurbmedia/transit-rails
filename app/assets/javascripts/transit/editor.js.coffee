@@ -2,6 +2,8 @@
 #= require_self
 #= require ./ext
 #= require ./ui/flash
+#= require ./ui/details
+#= require ./ui/media_library
 
 @Mercury.Region::serialize = ->
   type: @type()
