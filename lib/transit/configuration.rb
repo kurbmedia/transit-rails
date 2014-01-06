@@ -27,7 +27,13 @@ Transit.setup do |config|
   
   
   ##
-  # When generating post slugs, use this interpolation
+  # Set a restriction on how deep menus can go.
+  # 
+  config.menu_depth = 3
+  
+  
+  ##
+  # When generating slugs, use this as the default interpolation
   # 
   config.sluggable_via = ":name"
   

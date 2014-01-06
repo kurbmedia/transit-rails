@@ -16,7 +16,7 @@
         <%= i.hidden_field :page_id %>
         <%= i.hidden_field :temp_parent, rel: "parent", class: "temp-parent" %>
         <%= i.hidden_field :uid %>
-        <a href="#" class="remove-item-link">&times;</a>
+        <a href="#" class="remove-item-link" title="<%= t('transit.ui.links.menu_items.delete') %>" data-toggle="tooltip">&times;</a>
     </div>
     <% if item.persisted? %>
     <ul class="sub">

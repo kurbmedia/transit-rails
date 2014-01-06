@@ -57,6 +57,10 @@ en:
           edit: 'Edit Page'
           children: 'View Sub-Pages'
           delete: 'Delete Page'
+        menu_items:
+          delete: "Delete Item"
+      menu_items:
+        handle: "Drag to re-order"
 
     menus:
       name: "Menu Name"
