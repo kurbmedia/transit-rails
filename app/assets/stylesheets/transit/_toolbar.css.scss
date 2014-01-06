@@ -115,6 +115,16 @@
   .mercury-button-select{ width:auto !important; overflow:hidden; padding-left:1em; 
     em{ display:block; padding-right:2em; cursor:pointer; white-space:nowrap; font-style:normal; font-size:.85em; line-height:24px; color:$transit-edit-bar-button-color; }
   }
+  
+}
+
+.mercury-select-options{ font-family:$transit-font-family; 
+  h1, h2, h3, h4, h5, h6, div{ font-family:$transit-font-family; }
+  h1{ font-size:22px; }
+  h2{ font-size:18px; }
+  h3{ font-size:16px; }
+  h4{ font-size:14px; }
+  h5, h6{ font-size:12px; }
 }
 
 /*------------------------------------------------------

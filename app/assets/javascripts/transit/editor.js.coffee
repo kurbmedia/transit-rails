@@ -4,6 +4,7 @@
 #= require ./ui/flash
 #= require ./ui/details
 #= require ./ui/media_library
+#= require ./regions/full
 
 @Mercury.Region::serialize = ->
   type: @type()

@@ -44,7 +44,9 @@
 
                   editable: {
                     _regions:              ['full', 'markdown'],
-                    predefined:            {},
+                    predefined:            {
+                      formatblock:         ['Block Format', null, { select: '<%= mercury_resource_path('selects', 'formatblock.html') %>', preload: true }],
+                    },
                     decoration:            {
                       bold:                ['Bold', null, { context: true }],
                       italic:              ['Italicize', null, { context: true }],
