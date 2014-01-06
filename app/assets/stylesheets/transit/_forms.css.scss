@@ -86,6 +86,7 @@ textarea {
   width: 210px;
 }
 
+input[type="checkbox"], input[type="radio"]{ width:auto; }
 textarea {
   height: auto;
 }
@@ -1172,6 +1173,7 @@ label input[type=radio] {
 }
 
 form.transit-form{
+  label abbr{ color:red; }
   label{ font-size:12px; margin-bottom:0; }
   ul.fields{ list-style:none; margin:0 0 1em 0; padding:0; 
     li{ 
@@ -1181,7 +1183,7 @@ form.transit-form{
     }
   }
   ul.cols{
-    li{ display:inline-block; box-sizing:border-box; -webkit-box-sizing:border-box; -moz-box-sizing:border-box; -ms-box-sizing:border-box; }
+    li{ display:inline-block; vertical-align:top; box-sizing:border-box; -webkit-box-sizing:border-box; -moz-box-sizing:border-box; -ms-box-sizing:border-box; }
     &.two-col{
       li{ width:49%; padding:0 1em 0 0; }
     }
@@ -1200,5 +1202,8 @@ form.transit-form{
     li.full{ width:100%; padding:0; }
     li.half{ width:49%; }
   }  
-
+  
+  ul.fields{
+    li.boolean{ padding-top:1.5em; }
+  }
 }

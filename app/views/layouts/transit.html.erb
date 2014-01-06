@@ -125,7 +125,7 @@
                   },
 
                behaviors: {
-                  editForm: function(){ Mercury.modal("<%= transit.edit_page_path(resource, mercury: true) %>", { title: "Page Details", fullHeight: false, minWidth:600, minHeight:385, handler: 'pageDetails' }); },
+                  editForm: function(){ Mercury.modal("<%= transit.edit_page_path(resource, mercury: true) %>", { title: "Page Details", fullHeight: false, minWidth:650, minHeight:385, handler: 'pageDetails' }); },
                   htmlEditor: function() { Mercury.modal('<%= mercury_resource_path('modals', 'htmleditor.html') %>', { title: 'HTML Editor', fullHeight: true, handler: 'htmlEditor' }); },
                   mediaLibrary: function(){ Mercury.modal("<%= mercury_resource_path('modals', 'library.html') %>", { title: "Media Library", minWidth: ( $(window).width() < 900 ? $(window).width() : 900 ), handler: 'mediaLibrary' }); }
                 },

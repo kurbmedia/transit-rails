@@ -10,6 +10,7 @@
   
   @iframe.one 'load', => @bindEvents()
   @iframe.on 'load', => @initializeFrame()
+  $('div.mercury-editForm-button').on 'click', (-> Mercury.config.behaviors.editForm() )
 
 @Transit.Editor::resize = ->
   width  = jQuery(window).width()
