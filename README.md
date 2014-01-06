@@ -18,4 +18,17 @@ Then run the install generator.
 ```text
 bundle exec rails g transit:install
 ```
+Once installed, mount the engine in your routes file.
+```ruby
+mount Transit::Engine => "/transit"
+```
 
+#### Assets
+To get all of the CSS and javascripts for things like the menu and page editor, require them in your SCSS and JS files. A transit.js will be created for you which will allow you to set configuration options.
+
+```javascript
+//= require transit/frontend
+```
+```scss
+@import 'transit/frontend'
+```
