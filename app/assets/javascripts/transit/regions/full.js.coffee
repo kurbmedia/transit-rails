@@ -1,7 +1,13 @@
 @Mercury.Regions.Full::serialize = ->
   content = @content(null, true)
   holds = $(document.createElement('div'))
-  holds.html(content).htmlClean()
+  content = $.htmlClean(content, {
+    removeAttrs: ['style', 'class'],
+    replace: [['b', 'strong'], ['i', 'em'], ['div', 'p']],
+    removeTags: ['script']
+  })
+  
+  holds.html(content)
   
   holds.find('div').each (i, el)->
     div  = $(el)
