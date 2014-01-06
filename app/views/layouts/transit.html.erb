@@ -24,8 +24,10 @@
                       close:               ['Back', 'Go Back'],
                       mediaLibrary:        ['Library', 'Media Library'],
                     },
-                    save:                  ['Save', 'Save this page'],
-                    publish:               ['Publish', 'Publish Changes'],
+                    persistance: {
+                        save:                  ['Save', 'Save this page'],
+                        publish:               ['Publish', 'Publish Changes'],
+                    },
                     sep:                   '-',
                     editForm:              ['Details', 'Page Details'],
                     preview:               ['Preview', 'Preview this page', { toggle: true, mode: true }],
@@ -201,6 +203,9 @@
             $(document).on('click', '.mercury-primary-toolbar div.mercury-close-button', function(event){
                window.location.href = "<%= transit.pages_path %>";
             });
+            <% unless resource.published? %>
+            $('div.mercury-publish-button').show();
+            <% end %>
         })();
     //]]>
     </script>

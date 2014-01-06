@@ -62,6 +62,8 @@
   .mercury-snippetPanel-button em:before{ content:$fa-file-text-o; }
   .mercury-editForm-button em:before{ content:$fa-file-text; }
   .mercury-mediaLibrary-button em:before{ content:$fa-archive; }
+  
+  div.mercury-persistance-group + hr{ margin-left:0; }
 }
 
 /*------------------------------------------------------
