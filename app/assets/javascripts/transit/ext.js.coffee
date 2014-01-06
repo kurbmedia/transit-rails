@@ -11,6 +11,7 @@
   @iframe.one 'load', => @bindEvents()
   @iframe.on 'load', => @initializeFrame()
   $('div.mercury-editForm-button').on 'click', (-> Mercury.config.behaviors.editForm() )
+  $('div.mercury-publish-button').hide()
 
 @Transit.Editor::resize = ->
   width  = jQuery(window).width()

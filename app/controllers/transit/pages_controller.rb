@@ -17,6 +17,19 @@ module Transit
     end
     
     
+    ##
+    # Publish all changes, making them live.
+    # 
+    def deploy
+      unless resource.deploy!
+        set_flash_message(:alert, I18n.t("transit.flash.pages.deploy.alert"))
+        render json: {}, status: 401 and return
+      end
+      set_flash_message(:notice, I18n.t("transit.flash.pages.deploy.notice"))
+      respond_with(resource)
+    end
+    
+    
     def show
       if params[:mercury_frame].present?
         flash.discard

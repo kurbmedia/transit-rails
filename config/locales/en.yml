@@ -28,6 +28,9 @@ en:
         update:
           notice: "Page has been successfully updated."
           alert: "There was a problem saving this page. Please check the errors below."
+        deploy:
+          notice: "Your changes have been made live."
+          alert: "There was a problem publishing your changes. Please check the errors below."
         destroy:
           notice: "Page was successfully removed."
           alert: "There was a problem deleting this page."

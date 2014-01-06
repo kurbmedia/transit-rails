@@ -46,6 +46,7 @@
     &:hover{ opacity:1; }
     em:before{ content:$fa-chevron-circle-left; }
   }
+  .mercury-publish-button em:before{ content:$fa-check; }
   .mercury-save-button em:before{ content:$fa-floppy-o; }
   .mercury-preview-button{
     &.pressed{ background:$transit-toolbar-pressed; border-color:darken($transit-toolbar-pressed, 3%);

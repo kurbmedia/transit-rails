@@ -11,6 +11,13 @@
   content: @content(null, true)
   snippets: @snippets()
 
+doFlash = (xhr)->
+  flash = xhr.getResponseHeader('X-Flash-Messages')
+  return false unless flash
+  list = $.parseJSON(flash)
+  for item in list
+    Transit.showFlash(type, msg) for type, msg of item
+
 class @Transit.Editor extends @Mercury.PageEditor
   constructor:->
     super
@@ -18,6 +25,25 @@ class @Transit.Editor extends @Mercury.PageEditor
       $.extend Mercury.config.snippets, Transit.config.snippets
 
   editURL: null
+  
+  publish:(callback)->
+    url = @publishURL || Transit.publishURL
+    if url is undefined
+      Mercury.notify('Please assign the publish url.')
+    return false unless url
+    options = 
+      type: 'POST'
+      contentType: 'application/json'
+      dataType: 'json'
+      success: (response, type, xhr)=>
+        $('div.mercury-publish-button').hide()
+        doFlash(xhr)
+
+      error: (response)=>
+        $('div.mercury-publish-button').show()
+        
+    jQuery.ajax url, options
+      
     
   save: (callback) ->
     url = @saveUrl ? Mercury.saveUrl ? @iframeSrc()
@@ -31,13 +57,6 @@ class @Transit.Editor extends @Mercury.PageEditor
       data['_method'] = method
 
     Mercury.log('saving', data)
-    
-    doFlash = (xhr)->
-      flash = xhr.getResponseHeader('X-Flash-Messages')
-      return false unless flash
-      list = $.parseJSON(flash)
-      for item in list
-        Transit.showFlash(type, msg) for type, msg of item
 
     options = 
       headers: Mercury.ajaxHeaders()
@@ -49,9 +68,13 @@ class @Transit.Editor extends @Mercury.PageEditor
         Mercury.changes = false
         Mercury.trigger('saved', response)
         callback() if typeof(callback) == 'function'
+        if response && response.published isnt undefined && response.published is false
+          $('div.mercury-publish-button').show()
+        else $('div.mercury-publish-button').hide()
+
       error: (response) =>
         Mercury.trigger('save_failed', response)
-        Mercury.notify('Mercury was unable to save to the url: %s', url)
+        Mercury.notify('Unable to save to the url: %s', url)
 
     if @options.saveStyle != 'form'
       options['data'] = jQuery.toJSON(data)

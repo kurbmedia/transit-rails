@@ -1,0 +1,6 @@
+<%= {
+    :id => resource.id,
+    :published => resource.published?,
+    :name      => resource.name
+}.to_json.html_safe
+%>
