@@ -84,6 +84,7 @@
       line-height:$transit-edit-bar-button-size; text-align:center; -webkit-font-smoothing:antialiased; text-shadow:rgba(black, .2) -1px -1px 0px; font-size:$transit-edit-bar-button-size - 6px;
       text-align:center;
     }
+    &.active{ background:$transit-toolbar-active; color:$transit-toolbar-active-color; }
   }
   
   .mercury-table-group.disabled{ display:none; }

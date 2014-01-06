@@ -2,6 +2,13 @@
  Variables
 //------------------------------------------------------*/
 
+$transit-primary-color:#0055cc !default;
+$transit-warning-color:#f89406 !default;
+$transit-danger-color:#bd362f !default;
+$transit-success-color:#51a351 !default;
+$transit-info-color:#2f96b4 !default;
+$transit-inverse-color:#222222 !default;
+
 $transit-font-color:#333 !default;
 $transit-font-family:Helvetica, Tahoma, Arial, sans-serif !default;
 
@@ -9,6 +16,8 @@ $transit-toolbar-font-family:$transit-font-family !default;
 
 $transit-toolbar-background:#222 !default;
 $transit-toolbar-color:white !default;
+$transit-toolbar-active:$transit-inverse-color !default;
+$transit-toolbar-active-color:white !default;
 $transit-toolbar-hover:lighten($transit-toolbar-background, 5%) !default;
 $transit-toolbar-hover-color:$transit-toolbar-color !default;
 $transit-toolbar-pressed:darken($transit-toolbar-background, 5%) !default;
@@ -17,13 +26,6 @@ $transit-toolbar-pressed-color:$transit-toolbar-color !default;
 $transit-edit-bar-color:#444 !default;
 $transit-edit-bar-button-color:white !default;
 $transit-form-tint-color:#e8e8e8 !default;
-
-$transit-primary-color:#0055cc !default;
-$transit-warning-color:#f89406 !default;
-$transit-danger-color:#bd362f !default;
-$transit-success-color:#51a351 !default;
-$transit-info-color:#2f96b4 !default;
-$transit-inverse-color:#222222 !default;
 
 $transit-edit-bar-button-size:20px !default;
 $transit-panel-color:#333 !default;
