@@ -6,6 +6,14 @@ GIT
       machinist (>= 2.0.0)
       rake
 
+GIT
+  remote: git://github.com/jejacks0n/mercury.git
+  revision: 1cc637b0bccea19085f824d2881c6513ed5ee8ae
+  specs:
+    mercury-rails (0.9.0)
+      coffee-rails (>= 3.2.2)
+      railties (>= 3.0)
+
 PATH
   remote: .
   specs:
@@ -47,8 +55,16 @@ GEM
     arel (3.0.3)
     builder (3.0.4)
     coderay (1.0.9)
+    coffee-rails (3.2.2)
+      coffee-script (>= 2.2.0)
+      railties (~> 3.2.0)
+    coffee-script (2.2.0)
+      coffee-script-source
+      execjs
+    coffee-script-source (1.6.3)
     diff-lcs (1.2.4)
     erubis (2.7.0)
+    execjs (2.0.2)
     ffi (1.9.0)
     formatador (0.2.4)
     guard (1.8.2)
@@ -170,6 +186,7 @@ DEPENDENCIES
   listen
   machinist (~> 2.0)
   machinist_mongo!
+  mercury-rails!
   mongoid (>= 3.1)
   mongoid-ancestry (~> 0.3.1, < 4.1)
   mongoid-rspec (~> 1.8)

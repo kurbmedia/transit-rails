@@ -19,6 +19,18 @@ Transit.setup do |config|
   # 
   config.enable_validations = true
   
+  
+  ##
+  # Enable the media browser
+  # 
+  config.enable_media = true
+  
+  
+  ##
+  # Enable snippet support
+  # 
+  config.enable_snippets = true
+  
 
   ##
   # When using the active extension, should a active_date be used?

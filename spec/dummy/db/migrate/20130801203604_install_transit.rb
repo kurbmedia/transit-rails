@@ -1,5 +1,14 @@
 class InstallTransit < ActiveRecord::Migration
   def change
+    
+    create_table(:transit_settings) do |t|
+      t.string :key
+      t.text   :value
+      t.string :value_type
+      t.text   :options
+      t.timestamps
+    end
+    
     create_table(:transit_pages) do |t|
       t.string   :name
       t.string   :title

@@ -20,6 +20,9 @@ Transit::Media.blueprint do
   name { "Media #{sn}" }
 end
 
+Transit::Setting.blueprint do
+end
+
 # 
 # Transit::Region.blueprint do
 #   content { "Sample content" }

@@ -1,8 +1,11 @@
+require 'mercury-rails'
+
 Transit::Engine.routes.draw do
   resources :pages do
     post 'deploy', on: :member
   end
   
+  resources :settings, except: [:destroy]
   resources :menus, :medias, :media_folders
   resources :menu_items, only: [:create, :new]
   

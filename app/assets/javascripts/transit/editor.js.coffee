@@ -5,6 +5,7 @@
 #= require ./ui/details
 #= require ./ui/media_library
 #= require ./regions/full
+#= require ./regions/basic
 
 @Mercury.Region::serialize = ->
   type: @type()

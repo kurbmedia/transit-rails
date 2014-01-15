@@ -22,6 +22,25 @@ module Transit
     Transit::Interpolations[key] = block
   end
   
+  
+  ##
+  # Access a setting by key
+  # 
+  def setting(key)
+    settings[key.to_s] ||= Transit::Setting.where(key: key.to_s).first.try(:value)
+  end
+  
+  
+  ##
+  # Collects all settings into a hash
+  # 
+  def settings
+    @setting_data ||= Transit::Setting.all.inject({}) do |hash, st|
+      hash.merge!(st.key.to_s => st.value)
+    end
+  end
+  
+  
   ##
   # Configure options using a block
   # 

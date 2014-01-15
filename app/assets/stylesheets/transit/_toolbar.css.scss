@@ -40,6 +40,7 @@
   }
   
   // Buttons
+  .mercury-button.disabled{ display:none; }
   .mercury-rightSide-group{ float:right; }
   .mercury-save-button{ background:lighten($transit-toolbar-background, 5%); border-left:1px solid darken($transit-toolbar-background, 3%); }
   .mercury-close-button{ float:right; margin-left:1em; opacity:0.5;
@@ -88,7 +89,6 @@
   }
   
   .mercury-table-group.disabled{ display:none; }
-  
   .mercury-button em{ display:none; }
   .mercury-button-palette{ width:23px; background-position: 0 -36px; }
   

@@ -13,6 +13,15 @@
 
 ActiveRecord::Schema.define(:version => 20130801203604) do
 
+  create_table "transit_settings", :force => true do |t|
+    t.string "key"
+    t.text   "value"
+    t.string "value_type"
+    t.text   "options"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
   create_table "transit_drafts", :force => true do |t|
     t.integer "draftable_id"
     t.string  "draftable_type"

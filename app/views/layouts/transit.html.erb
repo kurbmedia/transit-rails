@@ -22,7 +22,9 @@
                   primary: {
                     rightSide: {
                       close:               ['Back', 'Go Back'],
-                      mediaLibrary:        ['Library', 'Media Library'],
+                      <% if Transit.config.enable_media -%>
+                      mediaLibrary:        ['Library', 'Media Library']
+                      <% end -%>
                     },
                     persistance: {
                         save:                  ['Save', 'Save this page'],
@@ -39,20 +41,22 @@
                       redo:                ['Redo', 'Redo your last action'],
                       sep:                 ' '
                     },
-                    insertLink:            ['Link', 'Insert Link', { modal: "<%= mercury_resource_path('modals', 'link.html') %>", regions: ['full', 'markdown'] }],
-                    insertMedia:           ['Media', 'Insert Media (images and videos)', { modal: "<%= mercury_resource_path('modals','media.html') %>", regions: ['full', 'markdown'] }],
+                    insertLink:            ['Link', 'Insert Link', { modal: "<%= mercury_resource_path('modals', 'link.html') %>", regions: ['basic', 'full', 'markdown'] }],
+                    insertMedia:           ['Media', 'Insert Media (images and videos)', { modal: "<%= mercury_resource_path('modals','media.html') %>", regions: ['basic', 'full', 'markdown'] }],
+                    <% if Transit.config.enable_snippets -%>
                     snippetPanel:          ['Snippet', 'Snippet Panel', { panel: "<%= snippets_path %>", regions: ['full'] }]
+                    <% end -%>
                   },
 
                   editable: {
-                    _regions:              ['full', 'markdown'],
+                    _regions:              ['basic', 'full', 'markdown'],
                     predefined:            {
-                      formatblock:         ['Block Format', null, { select: '<%= mercury_resource_path('selects', 'formatblock.html') %>', preload: true }],
+                      formatblock:         ['Block Format', null, { select: '<%= mercury_resource_path('selects', 'formatblock.html') %>', preload: true, regions: ['full', 'markdown'] }],
                     },
                     decoration:            {
                       bold:                ['Bold', null, { context: true }],
                       italic:              ['Italicize', null, { context: true }],
-                      strikethrough:       ['Strikethrough', null, { context: true, regions: ['full'] }],
+                      strikethrough:       ['Strikethrough', null, { context: true, regions: ['basic', 'full'] }],
                       sep:                 '-'
                       },
                     script:                {
@@ -61,11 +65,13 @@
                       sep: '-'
                       },
                     list:                  {
+                      _regions:            ["full", "markdown"],
                       insertUnorderedList: ['Unordered List', null, { context: true }],
                       insertOrderedList:   ['Numbered List', null, { context: true }],
                       sep:                 '-'
                       },
                     indent:                {
+                      _regions:            ["full", "markdown"],
                       outdent:             ['Decrease Indentation'],
                       indent:              ['Increase Indentation'],
                       sep:                 '-'
@@ -87,7 +93,7 @@
                         sep2:                '-'
                     },
                     rules:                 {
-                      horizontalRule:      ['Horizontal Rule', 'Insert a horizontal rule'],
+                      horizontalRule:      ['Horizontal Rule', 'Insert a horizontal rule', { regions: ['full', 'markdown'] }],
                       sep1:                '-'
                       },
                     formatting:            {
