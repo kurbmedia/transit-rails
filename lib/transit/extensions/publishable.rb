@@ -56,7 +56,7 @@ module Transit
       
       
       ##
-      # If a resource has "available" set to true, but no 
+      # If a resource has "published" set to true, but no 
       # date has been set, auto-set it to today.
       # 
       def check_for_availability_and_auto_set_date

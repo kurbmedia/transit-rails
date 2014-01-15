@@ -26,7 +26,9 @@
                     },
                     persistance: {
                         save:                  ['Save', 'Save this page'],
-                        publish:               ['Publish', 'Publish Changes'],
+                        <% if resource.respond_to?(:deploy!) -%>
+                        publish:               ['Publish', 'Publish Changes']
+                        <% end -%>
                     },
                     sep:                   '-',
                     editForm:              ['Details', 'Page Details'],
@@ -131,7 +133,7 @@
                   },
 
                behaviors: {
-                  editForm: function(){ Mercury.modal("<%= transit.edit_page_path(resource, mercury: true) %>", { title: "Page Details", fullHeight: false, minWidth:650, minHeight:385, handler: 'pageDetails' }); },
+                  editForm: function(){ Mercury.modal("<%= edit_resource_url(mercury: true) %>", { title: "Page Details", fullHeight: false, minWidth:650, minHeight:385, handler: 'pageDetails' }); },
                   htmlEditor: function() { Mercury.modal('<%= mercury_resource_path('modals', 'htmleditor.html') %>', { title: 'HTML Editor', fullHeight: true, handler: 'htmlEditor' }); },
                   mediaLibrary: function(){ Mercury.modal("<%= mercury_resource_path('modals', 'library.html') %>", { title: "Media Library", minWidth: ( $(window).width() < 900 ? $(window).width() : 900 ), handler: 'mediaLibrary' }); },
                   publish: function(){ Transit.publish(); }
@@ -198,16 +200,19 @@
     //<![CDATA[
         (function(){
             Transit.configure('root', "<%= transit_root_path %>");
-            Transit.editURL = "<%= transit.edit_page_path(resource) %>";
-            Transit.editor = new Transit.Editor("<%= transit.page_path(resource) %>");
-            Transit.editor.loadIframeSrc("<%= resource.absolute_path %>");
+            Transit.editURL = "<%= edit_resource_url %>";
+            Transit.editor = new Transit.Editor();
+            Transit.editor.loadIframeSrc("<%= resource_url %>");
+            Transit.editor.paramName = <%= resource_instance_name.to_s.inspect.html_safe %>;
+            <% if resource.respond_to?(:deploy!) %>
             Transit.editor.publishURL = "<%= deploy_page_path(resource) %>";
-            $(document).on('click', '.mercury-primary-toolbar div.mercury-close-button', function(event){
-               window.location.href = "<%= transit.pages_path %>";
-            });
             <% unless resource.published? %>
             $('div.mercury-publish-button').show();
             <% end %>
+            <% end %>
+            $(document).on('click', '.mercury-primary-toolbar div.mercury-close-button', function(event){
+               window.location.href = "<%= collection_url %>";
+            });
         })();
     //]]>
     </script>

@@ -26,6 +26,7 @@ class @Transit.Editor extends @Mercury.PageEditor
       $.extend Mercury.config.snippets, Transit.config.snippets
 
   editURL: null
+  paramName: "page"
   
   publish:(callback)->
     url = @publishURL || Transit.publishURL
@@ -47,9 +48,9 @@ class @Transit.Editor extends @Mercury.PageEditor
       
     
   save: (callback) ->
-    url = @saveUrl ? Mercury.saveUrl ? @iframeSrc()
-    data = @serialize()
-    data = { page: { region_data: data } }
+    url  = @saveUrl ? Mercury.saveUrl ? @iframeSrc()
+    data = {}
+    data[@paramName] = { region_data: @serialize() }
 
     if @options.saveMethod == 'POST'
       method = 'POST'

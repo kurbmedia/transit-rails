@@ -1,7 +1,8 @@
 module Transit
   class PagesController < TransitController
     before_filter :perform_authentication_method
-    helper_method :resource, :collection, :current_page, :parent_page
+    helper_method :resource, :collection, :current_page, :parent_page 
+    helper_method :collection_url, :resource_url, :edit_resource_url, :resource_instance_name
     layout "transit/modals", only: [:update]
     layout :transit_layout, only: [:show]
     respond_to :html, :js, :json
@@ -100,6 +101,24 @@ module Transit
     
     
     ##
+    # URL to access the 'index' view for the resource being edited.
+    # 
+    def collection_url
+      transit.pages_path
+    end
+    
+    
+    ##
+    # The url to access the 'edit' action for this resource. Allows other controllers to 
+    # utilize the editor. When using this method, make sure the "mercury" param is provided 
+    # when you wish to use the editor rather than the default 'edit' view.
+    # 
+    def edit_resource_url(parm = {})
+      transit.edit_page_path(resource, parm)
+    end
+    
+    
+    ##
     # If a parent param is present, this is the 'parent' page 
     # we should load children for.
     # 
@@ -131,6 +150,23 @@ module Transit
     end
     
     alias :current_page :resource
+    
+    
+    ##
+    # Create a resource_url helper to be compatable with IR, and allow other 
+    # controllers to utilize the editor by providing a save_url
+    # 
+    def resource_url
+      resource.absolute_path
+    end
+    
+    
+    ##
+    # Provides a param key so the editor knows how to submit data to update actions.
+    # 
+    def resource_instance_name
+      :page
+    end
     
     
     ##
