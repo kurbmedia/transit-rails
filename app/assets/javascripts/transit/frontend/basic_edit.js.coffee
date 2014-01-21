@@ -16,7 +16,7 @@ editInstance = null
     editor.prepend("<div class='editor-content'></div>")
     content = editor.find("> div.editor-content")
     content.html( field.val() )
-      .height( field.height() )
+      .css( 'min-height', field.height() )
     field.addClass('transit-editor')
     field.closest('form').on 'submit', (event)->
       $('div.transit-editor div.editor-content').trigger('blur')
