@@ -6,7 +6,8 @@ Transit::Engine.routes.draw do
   end
   
   resources :settings, except: [:destroy]
-  resources :menus, :medias
+  resources :menus
+  resources :medias
   resources :menu_items, only: [:create, :new]
   
   scope "/transit" do

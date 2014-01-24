@@ -13,6 +13,8 @@ module Transit
     
     before_validation :set_default_name
     
+    attr_accessor :file
+    
     ##
     # Returns whether or not this asset is an audio file based on mime type
     # 

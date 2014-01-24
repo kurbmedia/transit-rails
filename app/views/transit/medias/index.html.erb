@@ -1,11 +1,23 @@
 <div id="transit_media_library" class="transit-medias">
     <h1>Media Library</h1>
-    <div id="transit_media_form">
-
+    <div id="transit_media_uploader">
+        <%= render partial: "form", locals: { resource: Transit::Media.new } %>
     </div>
-    <ul id="transit_media_list">
-        <% collection.each do |file| %>
-        <%= render file %>
-        <% end %>
-    </ul>
+    <table border="0" class="listing">
+        <thead>
+            <tr>
+                <th width="40%"></th>
+                <th width="30%">Name</th>
+                <th width="15%">Type</th>
+                <th width="15%">Size</th>
+                <th class="link">&nbsp;</th>
+                <th class="link">&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% collection.each do |file| %>
+                <%= render file %>
+            <% end %>
+        </tbody>
+    </table>
 </div>

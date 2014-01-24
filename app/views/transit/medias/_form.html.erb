@@ -1,0 +1,15 @@
+<%= form_for [transit, resource], url: ( resource.persisted? ? transit.media_path(resource) : transit.medias_path ), html: { class: "transit-form", id: "transit_media_form" } do |f| %>
+<ul class='fields'>
+    <li class="string">
+        <%= f.label :name %>
+        <%= f.text_field :name, autofocus: true %>
+    </li>
+    <li class="file">
+        <%= f.label :file %>
+        <%= f.text_field :file %>
+    </li>
+    <li class="actions">
+        <button type="submit" class="button large btn-large"><i class="icon-check"></i> <%= t('transit.ui.buttons.save_media') %></button>
+    </li>
+</ul>
+<% end %>

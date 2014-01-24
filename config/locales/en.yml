@@ -58,9 +58,12 @@ en:
       buttons:
         save_page: "Save Page"
         save_menu: "Save Menu"
+        save_media: "Save Media"
       confirmations:
         pages:
           delete: "Are you sure you want to delete this page?"
+        medias:
+          delete: "Are you sure you want to delete this file?"
       links:
         pages:
           edit: 'Edit Page'
@@ -68,6 +71,10 @@ en:
           delete: 'Delete Page'
         menu_items:
           delete: "Delete Item"
+        medias:
+          edit: "Edit/Replace"
+          delete: "Delete"
+
       menu_items:
         handle: "Drag to re-order"
 
