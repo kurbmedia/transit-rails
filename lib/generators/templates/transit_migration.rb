@@ -58,18 +58,9 @@ class InstallTransit < ActiveRecord::Migration
     
     create_table(:transit_medias) do |t|
       t.string     :name
-      t.belongs_to :folder
       t.timestamps
     end
-    
-    create_table(:transit_media_folders) do |t|
-      t.string  :name
-      t.string  :ancestry
-      t.integer :ancestry_depth, :default => nil
-      t.text    :full_path
-      t.timestamps
-    end
-    
+
     
     add_index :transit_pages, :identifier, :unique => true
     add_index :transit_menus, :identifier, :unique => true

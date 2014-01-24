@@ -1,15 +1,10 @@
 <div id="transit_media_library" class="transit-medias">
     <h1>Media Library</h1>
-    <div id="transit_media_folders" data-source="<%= transit.media_folders_path %>">
-        <ul class="roots tree">
-            <% folder_list.each do |dir| %>
-            <%= render partial: 'transit/media_folders/folder', locals: { dir: dir } %>
-            <% end %>
-            <% collection.each do |file| %>
-            <%= render file %>
-            <% end %>
-        </ul>
-    </div>
+    <ul id="transit_media_list">
+        <% collection.each do |file| %>
+        <%= render file %>
+        <% end %>
+    </ul>
     <div id="transit_media_form">
         
     </div>

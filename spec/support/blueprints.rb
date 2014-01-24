@@ -12,10 +12,6 @@ Transit::Page.blueprint(:region) do
   regions(1)
 end
 
-Transit::MediaFolder.blueprint do
-  name { "Folder #{sn}" }
-end
-
 Transit::Media.blueprint do
   name { "Media #{sn}" }
 end

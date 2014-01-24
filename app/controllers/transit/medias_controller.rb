@@ -60,15 +60,7 @@ module Transit
     # All available uploads
     # 
     def collection
-      @menus ||= Transit::Media.roots.order('name ASC').all
-    end
-    
-    
-    ##
-    # All top level folders.
-    # 
-    def folder_list
-      @folders ||= Transit::MediaFolder.roots.order('name ASC').all
+      @menus ||= Transit::Media.order('created_at ASC').all
     end
     
     

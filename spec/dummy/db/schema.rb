@@ -28,18 +28,8 @@ ActiveRecord::Schema.define(:version => 20130801203604) do
     t.text    "content"
   end
 
-  create_table "transit_media_folders", :force => true do |t|
-    t.string   "name"
-    t.string   "ancestry"
-    t.integer  "ancestry_depth"
-    t.text     "full_path"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
-  end
-
   create_table "transit_medias", :force => true do |t|
     t.string   "name"
-    t.integer  "folder_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
