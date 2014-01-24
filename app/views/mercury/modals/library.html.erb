@@ -1,10 +1,8 @@
 <div id="transit_media_library" class="mercury-display-pane-container">
-    <div id="transit_media_dirs">
-        <ul class="tree list-unstyled">
-            <% Transit::MediaFolder.roots.each do |dir| %>
-            <li id="tm_dir_<%= dir.id %>">
-                <span class="item">
-                    <i class="icon-caret-right"></i>
+    <ul class="list-unstyled" id="transit_media_list">
+        <% collection.each do |media| %>
+        <li id="transit_media_<%= media.id %>">
+            <%= media.url %>
                     <%= dir.name %>
                 </span>
                 <ul class="sub" id="tm_dir_children_<%= dir.id %>"></ul>
@@ -16,4 +14,16 @@
         <div id="tm_uploader">
         </div>
     </div>
+</div>
+
+<div id="transit_media_library" class="transit-medias">
+    <h1>Media Library</h1>
+    <div id="transit_media_form">
+
+    </div>
+    <ul id="transit_media_list">
+        <% collection.each do |file| %>
+        <%= render file %>
+        <% end %>
+    </ul>
 </div>

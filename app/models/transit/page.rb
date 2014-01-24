@@ -15,6 +15,8 @@ module Transit
     
     before_validation :sanitize_slug
     before_validation :generate_identifier
+    
+    has_many :attachments, class_name: "Transit::Media", as: :attachable
 
     scope :top_level, -> { roots }
     

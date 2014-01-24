@@ -2,6 +2,15 @@ require 'spec_helper'
 
 describe Transit::Page do
   
+  describe 'associations' do
+    
+    
+    it 'has many attachments' do
+      should have_many(
+        :attachments)
+    end
+  end
+  
   describe 'applied attributes' do
     
     let!(:page) do

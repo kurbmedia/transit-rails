@@ -31,6 +31,23 @@ Transit.setup do |config|
   # 
   config.enable_snippets = true
   
+  
+  ##
+  # Regular expression for finding audio files based on mimie type
+  # 
+  config.audio_regexp = %r{^(audio)/.*$}
+  
+  
+  ##
+  # Regular expression for finding images based on mime type
+  #   
+  config.image_regexp = %r{^(image|(x-)?application)/(x-png|pjpeg|jpeg|jpg|png|gif)$}
+  
+  
+  ##
+  # Regular expression for finding videos based on mime type
+  # 
+  config.video_regexp = %r{^(video)/.*$}
 
   ##
   # When using the active extension, should a active_date be used?

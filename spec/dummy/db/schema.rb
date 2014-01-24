@@ -13,15 +13,6 @@
 
 ActiveRecord::Schema.define(:version => 20130801203604) do
 
-  create_table "transit_settings", :force => true do |t|
-    t.string "key"
-    t.text   "value"
-    t.string "value_type"
-    t.text   "options"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
-  end
-
   create_table "transit_drafts", :force => true do |t|
     t.integer "draftable_id"
     t.string  "draftable_type"
@@ -30,8 +21,14 @@ ActiveRecord::Schema.define(:version => 20130801203604) do
 
   create_table "transit_medias", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string   "file_name"
+    t.string   "content_type",    :default => ""
+    t.integer  "file_size",       :default => 0
+    t.string   "fingerprint"
+    t.integer  "attachable_id"
+    t.string   "attachable_type"
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
   end
 
   create_table "transit_menu_items", :force => true do |t|
@@ -78,5 +75,14 @@ ActiveRecord::Schema.define(:version => 20130801203604) do
   end
 
   add_index "transit_pages", ["identifier"], :name => "index_transit_pages_on_identifier", :unique => true
+
+  create_table "transit_settings", :force => true do |t|
+    t.string   "key"
+    t.text     "value"
+    t.string   "value_type"
+    t.text     "options"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
 end

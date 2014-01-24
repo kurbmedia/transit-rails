@@ -58,6 +58,12 @@ class InstallTransit < ActiveRecord::Migration
     
     create_table(:transit_medias) do |t|
       t.string     :name
+      t.string     :file_name
+      t.string     :content_type, default: ""
+      t.integer    :file_size, default: 0
+      t.string     :fingerprint
+      t.string     :media_type
+      t.belongs_to :attachable, polymorphic: true
       t.timestamps
     end
 

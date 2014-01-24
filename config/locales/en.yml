@@ -47,6 +47,12 @@ en:
         index: "Manage Menus"
         edit: "Edit Menu: %{name}"
         new: "Create a New Menu"
+      medias: 
+        index: "Media Library"
+        edit: "Edit Media: %{name}"
+        new: "Upload Media"
+        show: "Media Detail: %{name}"
+      
       
     ui:
       buttons:
