@@ -746,7 +746,7 @@ select:focus:required:invalid:focus {
 }
 
 .control-group {
-  margin-bottom: 9px;
+  margin-bottom:1em;
 }
 
 legend + .control-group {
@@ -1147,15 +1147,13 @@ select {
   margin-bottom: 0;
   background-color: transparent;
 }
-.control-group {
-  margin-bottom: 0;
-}
+
 legend + .control-group {
   margin-top: 0;
   -webkit-margin-top-collapse: separate;
 }
 .form-horizontal .control-group {
-  margin-bottom: 0;
+  margin-bottom:.5em;
 }
 .form-horizontal .controls {
   margin-left: 150px;
@@ -1179,6 +1177,9 @@ form.transit-form{
     li{ 
       textarea, select, input[type=text], input[type=email], input[type=tel], input[type=url]{ width:100%; 
         box-sizing:border-box; -webkit-box-sizing:border-box; -moz-box-sizing:border-box; -ms-box-sizing:border-box;
+      }
+      .control-group {
+        margin-bottom: 0;
       }
     }
   }

@@ -22,9 +22,6 @@
                   primary: {
                     rightSide: {
                       close:               ['Back', 'Go Back'],
-                      <% if Transit.config.enable_media -%>
-                      mediaLibrary:        ['Library', 'Media Library']
-                      <% end -%>
                     },
                     persistance: {
                         save:                  ['Save', 'Save this page'],
@@ -42,7 +39,9 @@
                       sep:                 ' '
                     },
                     insertLink:            ['Link', 'Insert Link', { modal: "<%= mercury_resource_path('modals', 'link.html') %>", regions: ['basic', 'full', 'markdown'] }],
-                    insertMedia:           ['Media', 'Insert Media (images and videos)', { modal: "<%= mercury_resource_path('modals','media.html') %>", regions: ['basic', 'full', 'markdown'] }],
+                    <% if Transit.config.enable_media -%>
+                    insertMedia:           ['Media', 'Insert Media (images and videos)', { regions: ['basic', 'full', 'markdown'] }],
+                    <% end %>
                     <% if Transit.config.enable_snippets -%>
                     snippetPanel:          ['Snippet', 'Snippet Panel', { panel: "<%= snippets_path %>", regions: ['full'] }]
                     <% end -%>
@@ -141,7 +140,13 @@
                behaviors: {
                   editForm: function(){ Mercury.modal("<%= edit_resource_url(mercury: true) %>", { title: "Page Details", fullHeight: false, minWidth:650, minHeight:385, handler: 'pageDetails' }); },
                   htmlEditor: function() { Mercury.modal('<%= mercury_resource_path('modals', 'htmleditor.html') %>', { title: 'HTML Editor', fullHeight: true, handler: 'htmlEditor' }); },
-                  mediaLibrary: function(){ Mercury.modal("<%= mercury_resource_path('modals', 'library.html') %>", { title: "Media Library", minWidth: ( $(window).width() < 900 ? $(window).width() : 900 ), handler: 'mediaLibrary' }); },
+                  insertMedia: function(){  
+                      Mercury.modal("<%= mercury_resource_path('modals','media.html') %>", {
+                          title: 'Insert Media',
+                          minWidth: ( $(window).width() < 1000 ? $(window).width() : 1000 ),
+                          fullHeight: true
+                      });
+                  },
                   publish: function(){ Transit.publish(); }
                 },
 
@@ -218,6 +223,17 @@
             <% end %>
             $(document).on('click', '.mercury-primary-toolbar div.mercury-close-button', function(event){
                window.location.href = "<%= collection_url %>";
+            });
+            
+            $(document).on('click', 'ul.tab-nav a', function(event){
+                event.preventDefault();
+                var link = $(this),
+                    tgt  = $(link.attr('href')),
+                    pt   = link.parents(".tabbed").eq(0);
+                $('ul.tab-nav li.active', pt).removeClass('active');
+                link.parent('li').addClass('active');
+                $('> .tab', pt).removeClass('active');
+                tgt.addClass('active');
             });
         })();
     //]]>

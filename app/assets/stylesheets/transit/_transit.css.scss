@@ -18,3 +18,18 @@ button.button, button.btn{ border-width:1px; }
 @import 'transit/toolbar';
 @import 'transit/dialogs';
 @import 'transit/media';
+
+.mercury-modal{
+  div.tabbed{ position:relative; padding-top:5em;
+    ul.tab-nav{ margin:0; list-style:none; border-bottom:1px solid #ccc; position:absolute; top:0; left:0; right:0;
+      background:lighten($transit-modal-background, 5%); padding:0;
+      li{ display:inline-block; vertical-align:bottom; margin-bottom:-1px;
+        a{ display:block; padding:1em; color:$transit-font-color; text-decoration:none; }
+        &.active{ background:$transit-modal-background; }
+      }
+    }
+    & > .tab{ display:none; 
+      &.active{ display:block; }
+    }
+  }
+}

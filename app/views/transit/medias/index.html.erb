@@ -16,7 +16,7 @@
         </thead>
         <tbody>
             <% collection.each do |file| %>
-                <%= render file %>
+                <%= render partial: 'transit/medias/media', locals: { media: file } %>
             <% end %>
         </tbody>
     </table>

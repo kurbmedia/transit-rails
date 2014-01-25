@@ -2,8 +2,9 @@
 #= require_self
 #= require ./ext
 #= require ./ui/flash
-#= require ./ui/details
-#= require ./ui/media_library
+#= require ./modals/details
+#= require ./modals/media
+#= require ./modals/insertlink
 #= require ./regions/full
 #= require ./regions/basic
 
