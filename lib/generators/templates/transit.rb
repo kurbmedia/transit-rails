@@ -3,27 +3,64 @@ Transit.setup do |config|
   require 'transit/adapters/<%= options[:orm] %>'
   
   ##
-  # Enable translations globally for all transit models.
+  # Method used for authentication in controllers. Before any 
+  # actions are called within the Pages/Posts controller, this 
+  # method will be run. It is best to define this method in 
+  # your ApplicationController. By default it uses devises' convention 
+  # of user_signed_in?
   # 
-  #config.translate = false
+  # 
+  #config.authentication_method = :authenticate_user!
+  
 
   ##
-  # When generating page slugs, use this interpolation
+  # Allow for disabling built-in model validations
+  # 
+  #config.enable_validations = true
+  
+  
+  ##
+  # Enable the media browser
+  # 
+  #config.enable_media = true
+  
+  
+  ##
+  # Enable snippet support
+  # 
+  #config.enable_snippets = true
+  
+  
+  ##
+  # When true, sub-pages will inherit their parent slug/url.
+  # 
+  #config.inherit_parent_slugs = true
+  
+  
+  ##
+  # When using the active extension, should a active_date be used?
+  # 
+  #config.publish_with_date = true
+  
+  
+  ##
+  # Set a restriction on how deep menus can go.
+  # 
+  #config.menu_depth = 3
+  
+  
+  ##
+  # When generating slugs, use this as the default interpolation
   # 
   #config.sluggable_via = ":name"
   
   
-  ##
-  # When using the available extension, by default available state 
-  # is determined by checking the value of the 'available' attribute 
-  # as well as 'available_on'. Items are considered available if true, and the
-  # available_on date is on or before the current date. Set this to false to only 
-  # utilize the 'available' attribute.
-  # 
-  #config.publish_with_date = true
+  # Enable translations globally
+  #config.translate = false
+  
   
   ##
-  # Set the template directory in which to look for templates.
+  # Contains a list of template names that are available
   # 
-  config.template_dir = 'transit/pages'
+  #config.templates = []
 end

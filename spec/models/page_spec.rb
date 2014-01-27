@@ -46,7 +46,7 @@ describe Transit::Page do
     end
   end
   
-  describe 'generated_slugs' do
+  describe 'sanitizing_slugs' do
     
     let(:page) do
       Transit::Page.make!(
@@ -66,6 +66,7 @@ describe Transit::Page do
           .should eq "the-path"
       end
     end
+    
     
     context 'when the slug contains leading slashes' do
       
@@ -139,7 +140,6 @@ describe Transit::Page do
           page.children.count
             .should eq 1
         end
-
       end
       
       context 'and it does not have sub-pages' do
@@ -210,6 +210,131 @@ describe Transit::Page do
       it 'generates a region for each item in the hash' do
         page.regions.count
           .should eq 1
+      end
+    end
+  end
+  
+  describe 'absolute paths' do
+    
+    context 'when inheriting parent slugs' do
+      
+      before do
+        Transit.config.inherit_parent_slugs = true
+      end
+      
+      let!(:parent_page) do
+        Transit::Page.make!(
+          title: "Un-Published Page",
+          slug: "parent"
+        )
+      end
+    
+      let!(:sub_page) do
+        Transit::Page.make!(
+          title: 'Published Page', 
+          slug: 'child',
+          parent: parent_page)
+      end
+      
+      
+      let!(:tertiary) do
+        Transit::Page.make!(
+          title: "Tertiary Page", 
+          slug: 'tertiary',
+          parent: sub_page)
+      end
+    
+      context 'and the page is top level' do
+      
+        it 'creates an absolute_path using only its slug' do
+          parent_page.absolute_path
+            .should eq '/parent'
+        end
+      end
+    
+      context 'and the page is secondary' do
+      
+        it 'creates an absolute_path using the slug from its parent' do
+          sub_page.absolute_path
+            .should eq '/parent/child'
+        end
+      end
+      
+      context 'and the page is tertiary' do
+        
+        it 'creates an absolute_path using its heirarchy' do
+          tertiary.absolute_path
+            .should eq '/parent/child/tertiary'
+        end
+      end
+            
+      context 'and the slug includes a parent slug' do
+        
+        let!(:tertiary2) do
+          Transit::Page.make!(
+            title: "Tertiary Page", 
+            slug: 'child/tertiary2',
+            parent: sub_page)
+        end
+        
+        it 'removes the duplicate slug portions' do
+          tertiary2.absolute_path
+            .should eq '/parent/child/tertiary2'
+        end
+      end
+    end
+    
+    
+    context 'when not inheriting parent slugs' do
+      
+      before do
+        Transit.config.inherit_parent_slugs = false
+      end
+      
+      let!(:parent_page) do
+        Transit::Page.make!(
+          title: "Un-Published Page",
+          slug: "parent"
+        )
+      end
+    
+      let!(:sub_page) do
+        Transit::Page.make!(
+          title: 'Published Page', 
+          slug: 'child',
+          parent: parent_page)
+      end
+      
+      
+      let!(:tertiary) do
+        Transit::Page.make!(
+          title: "Tertiary Page", 
+          slug: 'tertiary',
+          parent: sub_page)
+      end
+      
+      context 'and the page is top level' do
+      
+        it 'creates an absolute_path using only its slug' do
+          parent_page.absolute_path
+            .should eq '/parent'
+        end
+      end
+    
+      context 'and the page is secondary' do
+      
+        it 'creates an absolute_path using only its slug' do
+          sub_page.absolute_path
+            .should eq '/child'
+        end
+      end
+      
+      context 'and the page is tertiary' do
+        
+        it 'creates an absolute_path using only its slug' do
+          tertiary.absolute_path
+            .should eq '/tertiary'
+        end
       end
     end
   end

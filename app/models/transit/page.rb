@@ -24,7 +24,7 @@ module Transit
     # The absolute path to this page
     # 
     def absolute_path
-      File.join('/', self.slug.to_s)
+      File.join('/', Transit.config.inherit_parent_slugs ? absolute_path_with_ancestry : self.slug.to_s)
     end
     
     
@@ -71,6 +71,16 @@ module Transit
     
     
     private
+    
+    ##
+    # When inherit_parent_slugs is enabled, the absolute_path for 
+    # this page should include slugs from its parents.
+    # 
+    def absolute_path_with_ancestry
+      [self.ancestors(:to_depth => self.depth).pluck(:slug), self.slug].flatten.compact.map do |part|
+        _sanitize_uri_fragment(part)
+      end.reject(&:blank?)
+    end
 
     ##
     # If an identifier hasn't been set, auto-generate 
@@ -85,8 +95,16 @@ module Transit
     # In the event slugs are entered by end-users, this ensures they are 
     # always truncated to non-absolute paths. 
     # 
+    # If inherit_parent_slugs is enabled, it also ensures that the parent slug 
+    # isnt stored as part of the slug
+    # 
     def sanitize_slug
       return true unless self.slug.present?
+      if Transit.config.inherit_parent_slugs && self.parent.present?
+        slug_parts   = self.slug.to_s.split("/").compact
+        parent_parts = self.ancestors(:to_depth => self.depth).pluck(:slug).reverse
+        self.slug    = slug_parts.drop_while{ |part| part == parent_parts.shift }.join("/")
+      end
       self.slug = _sanitize_uri_fragment(self.slug)
     end
     

@@ -39,6 +39,12 @@ Transit.setup do |config|
   
   
   ##
+  # When true, sub-pages will inherit their parent slug/url.
+  # 
+  config.inherit_parent_slugs = true
+  
+  
+  ##
   # Regular expression for finding images based on mime type
   #   
   config.image_regexp = %r{^(image|(x-)?application)/(x-png|pjpeg|jpeg|jpg|png|gif)$}
@@ -48,6 +54,7 @@ Transit.setup do |config|
   # Regular expression for finding videos based on mime type
   # 
   config.video_regexp = %r{^(video)/.*$}
+  
 
   ##
   # When using the active extension, should a active_date be used?

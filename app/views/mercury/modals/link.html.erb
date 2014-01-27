@@ -51,10 +51,10 @@
                 <div class="controls">
                     <select id="link_page" class="select span4" name="link[page]">
                         <% Transit::Page.all.each do |page| %>
-                        <option value="<%= page.absolute_path %>"><%= page.name %></option>
+                        <option value="<%= page.absolute_path %>"><%= truncate(page.name, length: 50) %></option>
                         <% if page.children.any? %>
                         <% page.children.each do |sub| %>
-                        <option value="<%= sub.absolute_path %>"> - <%= sub.name %></option>
+                        <option value="<%= sub.absolute_path %>"> - <%= truncate(sub.name, length: 50) %></option>
                         <% end %>
                         <% end %>
                         <% end %>

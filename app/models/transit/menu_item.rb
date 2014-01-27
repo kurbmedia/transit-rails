@@ -8,6 +8,7 @@ module Transit
     alias :items :children
     attr_accessor :temp_parent
     before_create :set_uid
+    before_save :cleanup_urls
     
     
     ##
@@ -20,6 +21,13 @@ module Transit
     
     
     private
+    
+    ##
+    # Make sure urls are always downcased
+    # 
+    def cleanup_urls
+      self.url = self.url.to_s.downcase
+    end
     
     
     ##
