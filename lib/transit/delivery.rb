@@ -25,7 +25,7 @@ module Transit
     # The page currently being accessed.
     # 
     def current_page
-      @current_page ||= Transit::Page.where(slug: params[:slug]).first
+      @current_page ||= Transit::Page.where(full_path: params[:slug]).first
     end
     
     
