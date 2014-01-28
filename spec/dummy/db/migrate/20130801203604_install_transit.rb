@@ -15,6 +15,7 @@ class InstallTransit < ActiveRecord::Migration
       t.text     :description
       t.text     :keywords
       t.string   :slug
+      t.string   :full_path
       t.string   :identifier
       t.text     :region_data, :default => nil
       t.string   :draft_state, :default => 'draft'

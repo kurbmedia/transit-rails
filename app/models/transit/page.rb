@@ -96,7 +96,9 @@ module Transit
     # always truncated to non-absolute paths. 
     # 
     # If inherit_parent_slugs is enabled, it also ensures that the parent slug 
-    # isnt stored as part of the slug
+    # isnt stored as part of the slug.
+    # 
+    # Also generates the full path. 
     # 
     def sanitize_slug
       return true unless self.slug.present?
@@ -105,7 +107,8 @@ module Transit
         parent_parts = self.ancestors(:to_depth => self.depth).pluck(:slug).reverse
         self.slug    = slug_parts.drop_while{ |part| part == parent_parts.shift }.join("/")
       end
-      self.slug = _sanitize_uri_fragment(self.slug)
+      self.slug      = _sanitize_uri_fragment(self.slug)
+      self.full_path = self.absolute_path.sub(/^\//, '')
     end
     
     

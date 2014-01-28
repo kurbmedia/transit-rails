@@ -250,6 +250,11 @@ describe Transit::Page do
           parent_page.absolute_path
             .should eq '/parent'
         end
+        
+        it 'generates the full_path' do
+          parent_page.full_path
+            .should eq 'parent'
+        end
       end
     
       context 'and the page is secondary' do
@@ -258,6 +263,11 @@ describe Transit::Page do
           sub_page.absolute_path
             .should eq '/parent/child'
         end
+        
+        it 'generates the full path' do
+          sub_page.full_path
+            .should eq 'parent/child'
+        end
       end
       
       context 'and the page is tertiary' do
@@ -265,6 +275,11 @@ describe Transit::Page do
         it 'creates an absolute_path using its heirarchy' do
           tertiary.absolute_path
             .should eq '/parent/child/tertiary'
+        end
+        
+        it 'generates the full path' do
+          tertiary.full_path
+            .should eq 'parent/child/tertiary'
         end
       end
             
@@ -280,6 +295,11 @@ describe Transit::Page do
         it 'removes the duplicate slug portions' do
           tertiary2.absolute_path
             .should eq '/parent/child/tertiary2'
+        end
+        
+        it 'generates the full path' do
+          tertiary2.full_path
+            .should eq 'parent/child/tertiary2'
         end
       end
     end

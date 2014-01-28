@@ -12,6 +12,7 @@ module Transit
     field :description,       :type => String,  :localize => Transit.config.translate
     field :keywords,          :type => Array,   :default  => []
     field :slug,              :type => String
+    field :full_path,         :type => String
     field :identifier,        :type => String
     field :template,          :type => String,  :default => 'default'
     field :ancestry,          :type => String
