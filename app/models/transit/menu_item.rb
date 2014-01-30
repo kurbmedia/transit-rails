@@ -10,6 +10,13 @@ module Transit
     before_create :set_uid
     before_save :cleanup_urls
     
+    ##
+    # Is this menu item tied to a page.
+    # 
+    def page?
+      !!self.page_id
+    end
+    
     
     ##
     # Each menu item has a uid created from its initial object_id used for ordering/sorting when 

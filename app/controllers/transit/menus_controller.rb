@@ -5,6 +5,7 @@ module Transit
     respond_to :html, :js, :json
     
     def index
+      @page_title = I18n.t('transit.titles.menus.index')
       @menus = Transit::Menu.all
       respond_with(collection)
     end

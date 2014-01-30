@@ -3,8 +3,12 @@
         <div class="handle"><i class="icon-arrow-up up"></i><i class="icon-arrow-down dn"></i></div>
         <h5><%= i.text_field :title %></h5>
         <span class="url">
-            <%= item.url.to_s %>
+            <% if item.page? %>
+            <%= item.url %>
             <%= i.hidden_field :url %>
+            <% else %>
+            <%= i.text_field :url %>
+            <% end %>
         </span>
         <% if item.persisted? %>
         <%= i.hidden_field :id %>

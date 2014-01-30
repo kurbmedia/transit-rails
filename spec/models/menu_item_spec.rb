@@ -33,4 +33,37 @@ describe Transit::MenuItem do
       end
     end
   end
+  
+  
+  describe '.page?' do
+    
+    let!(:page) do
+      Transit::Page.make!
+    end
+    
+    context 'when the menu item is tied to a page' do
+      
+      let!(:item) do
+        Transit::MenuItem.new(page: page)
+      end
+      
+      it 'returns true' do
+        item.page?
+          .should be_true
+      end
+    end
+    
+    
+    context 'when the menu item is not tied to a page' do
+      
+      let!(:item) do
+        Transit::MenuItem.new
+      end
+      
+      it 'returns false' do
+        item.page?
+          .should be_false
+      end
+    end
+  end
 end
