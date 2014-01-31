@@ -20,6 +20,21 @@ describe Transit::Media do
   end
   
   
+  describe "#files" do
+    
+    before do
+      ['application', 'image', 'file'].each do |type|
+        Transit::Media.make!(media_type: type)
+      end
+    end
+    
+    it 'finds only files' do
+      Transit::Media.files.count
+        .should eq 2
+    end
+  end
+  
+  
   describe "identifying media types" do
     
     let!(:asset) do

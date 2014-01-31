@@ -7,7 +7,6 @@ module Transit
     validates :name, presence: true
     
     scope :images, lambda{ where(media_type: 'image') }
-    scope :files,  lambda{ where(media_type: 'file') }
     scope :videos, lambda{ where(media_type: 'video') }
     scope :audio,  lambda{ where(media_type: 'audio') }
     

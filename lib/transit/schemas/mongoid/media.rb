@@ -9,5 +9,7 @@ module Transit
     field :fingerprint,   :type => String
     field :file_size,     :type => Integer, :default  => 0
     field :media_type,    :type => String,  :default  => 'file'
+    
+    scope :files,  lambda{ where(:media_type.nin => ['image', 'audio', 'video']) }
   end
 end

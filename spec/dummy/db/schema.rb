@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(:version => 20130801203604) do
     t.string   "content_type",    :default => ""
     t.integer  "file_size",       :default => 0
     t.string   "fingerprint"
+    t.string   "media_type"
     t.integer  "attachable_id"
     t.string   "attachable_type"
     t.datetime "created_at",                      :null => false
@@ -60,6 +61,7 @@ ActiveRecord::Schema.define(:version => 20130801203604) do
     t.text     "description"
     t.text     "keywords"
     t.string   "slug"
+    t.string   "full_path"
     t.string   "identifier"
     t.text     "region_data"
     t.string   "draft_state",    :default => "draft"

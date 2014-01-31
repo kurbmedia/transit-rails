@@ -19,6 +19,7 @@ button.button, button.btn{ border-width:1px; }
 @import 'transit/dialogs';
 @import 'transit/media';
 
+ul.list-unstyled{ list-style:none; margin:0 0 1em 0; }
 .mercury-modal{
   div.tabbed{ position:relative; padding-top:5em;
     ul.tab-nav{ margin:0; list-style:none; border-bottom:1px solid #ccc; position:absolute; top:0; left:0; right:0;
