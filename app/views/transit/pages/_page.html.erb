@@ -3,7 +3,11 @@
         <%= page.name %> <small>[ <%= page.absolute_path %> ]</small>
     </span>
     <div class="links">
+        <% if page.editable? %>
         <%= link_to "Edit", transit.page_path(page), :class => 'edit-link', :title => t('transit.ui.links.pages.edit'), :data => { :toggle => "tooltip" } %>
+        <% else %>
+        <%= link_to "Edit", transit.edit_page_path(page), :class => 'edit-link', :title => t('transit.ui.links.pages.edit'), :data => { :toggle => "tooltip" } %>
+        <% end %>
         <% unless page.children.any? %>
         <%= link_to "Delete", transit.page_path(page), :class => 'delete-link', :method => "delete", :title => t('transit.ui.links.pages.delete'), :data => { :confirm => t('transit.ui.confirmations.pages.delete'), :toggle => "tooltip" } %>
         <% else %>
