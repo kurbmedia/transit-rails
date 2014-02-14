@@ -14,20 +14,27 @@ RDoc::Task.new(:rdoc) do |rdoc|
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
 
-APP_RAKEFILE = File.expand_path("../spec/dummy/Rakefile", __FILE__)
-load 'rails/tasks/engine.rake'
-
-
+# 
+# task :load_app do
+#   require 'action_controller/railtie'
+#   require 'konacha'
+#   puts "KONACHA!"
+#   module Konacha
+#     def self.spec_root
+#       ::Transit::Engine.config.root + config.spec_dir
+#     end
+#   end
+#   
+#   class Konacha::Engine
+#     initializer "konacha.engine.environment", after: "konacha.environment" do
+#       # Rails.application is the dummy app in test/dummy
+#       ::Rails.application.config.assets.paths << ::Transit::Engine.config.root + ::Konacha.config.spec_dir
+#     end
+#   end
+#   
+#   load 'tasks/konacha.rake'
+# end
 
 Bundler::GemHelper.install_tasks
-
-TRANSIT_ORM = (ENV["TRANSIT_ORM"] || "mongoid")
-
-require "rspec"
-require "rspec/core/rake_task"
-
-RSpec::Core::RakeTask.new("spec") do |spec|
-  spec.pattern = "spec/**/*_spec.rb"
-end
 
 task :default => :spec

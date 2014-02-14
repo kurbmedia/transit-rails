@@ -1,0 +1,11 @@
+/*------------------------------------------------------
+ General Styles
+//------------------------------------------------------*/
+
+#transit_iframe{ position:absolute; top:$navbar-height; left:0px; right:0px; bottom:0px; width: 100%; z-index:100;
+  border:0px;
+}
+
+body.resource{ background:$gray-lighter; 
+  #wrapper{ background:$body-bg; padding-top:1em; border:1px solid darken($gray-lighter, 5%); }
+}

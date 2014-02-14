@@ -1,0 +1,1 @@
+class @Transit.Plugins.Editor extends Transit.Plugin

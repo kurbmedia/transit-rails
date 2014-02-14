@@ -1,0 +1,1 @@
+class Transit.Plugins.Search extends Transit.Component

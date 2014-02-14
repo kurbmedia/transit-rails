@@ -1,36 +1,14 @@
-@import 'transit/config';
-@import 'transit/reset';
-@import 'transit/mixins';
-@import 'transit/forms';
+// Font awesome icons
+@import url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
 
-html { -webkit-text-size-adjust:none; margin:0; padding:0; height:100%; }
-html, body{ -webkit-transition:-webkit-transform 3s; margin:0; padding:0; }
-body{ min-height:100%; }
-#transit_editor{ position:fixed; top:0px; left:0px; width:100%; height:100%; }
-div.mercury-statusbar{ background:black; height:1px; overflow:hidden; } 
-.mercury-iframe{ visibility:visible; position:absolute; top:0; width:100%; }
-.mercury-focusable{ position:absolute; opacity:0; }
-.filter{ margin:0; padding:0; }
+// Load the bootstrap components we want/need.
+@import 'transit/bootstrap';
 
-button:focus, button:active{ outline:0; }
-button.button, button.btn{ border-width:1px; }
+// Base styles ( iframe etc )
+@import 'base';
 
-@import 'transit/toolbar';
-@import 'transit/dialogs';
-@import 'transit/media';
+// Components
+@import 'toolbar';
+@import 'modals';
 
-ul.list-unstyled{ list-style:none; margin:0 0 1em 0; }
-.mercury-modal{
-  div.tabbed{ position:relative; padding-top:5em;
-    ul.tab-nav{ margin:0; list-style:none; border-bottom:1px solid #ccc; position:absolute; top:0; left:0; right:0;
-      background:lighten($transit-modal-background, 5%); padding:0;
-      li{ display:inline-block; vertical-align:bottom; margin-bottom:-1px;
-        a{ display:block; padding:1em; color:$transit-font-color; text-decoration:none; }
-        &.active{ background:$transit-modal-background; }
-      }
-    }
-    & > .tab{ display:none; 
-      &.active{ display:block; }
-    }
-  }
-}
+

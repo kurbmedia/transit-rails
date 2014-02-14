@@ -21,14 +21,15 @@ Gem::Specification.new do |s|
   s.require_paths     = ["lib"]
 
   s.add_dependency("rails", ">= 3.2.6", "< 5")
+  s.add_dependency("bootstrap-sass", "~> 3.1")
   
   s.add_development_dependency("rspec", ">= 2.14.0")
   s.add_development_dependency("rspec-rails", ">= 2.14.0")
   s.add_development_dependency("machinist", "~> 2.0")
   
   s.add_development_dependency("mysql2", "~> 0.3.11")
-  s.add_development_dependency("ancestry", "~> 2.0.0")
+  #s.add_development_dependency("ancestry", "~> 2.0.0")
   s.add_development_dependency("mongoid", ">= 3.1")
-  s.add_development_dependency("mongoid-ancestry", "~> 0.3.1", "< 4.1")
+  #s.add_development_dependency("mongoid-ancestry", "~> 0.3.1", "< 4.1")
   s.add_development_dependency("mongoid-rspec", "~> 1.8")
 end

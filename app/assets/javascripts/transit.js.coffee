@@ -1,1 +1,2 @@
-#= require ./transit/transit
+#= require_self
+#= require transit/transit
