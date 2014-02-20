@@ -15,7 +15,6 @@ gem 'bootstrap-sass', "~> 3.1.0.2"
 gem 'konacha', '~> 3.1.0'
 
 group :test do
-  gem 'mercury-rails', github: 'jejacks0n/mercury'
   gem 'mongoid-rspec', '~> 1.8', :require => 'mongoid-rspec'
   gem 'simplecov', :require => false
   gem 'rake'
