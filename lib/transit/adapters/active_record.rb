@@ -1,11 +1,4 @@
 require 'active_record'
-begin
-  require 'ancestry'
-rescue Exception => e
-  puts "\n\nPlease add the ancestry gem to your Gemfile. "
-  puts "  gem 'ancestry'\n"
-end
-
 
 Transit.orm = :active_record
 

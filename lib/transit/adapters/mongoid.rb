@@ -1,12 +1,4 @@
 require 'mongoid'
-
-begin
-  require 'mongoid-ancestry'
-rescue Exception => e
-  puts "\n\nPlease add the mongoid-ancestry gem to your Gemfile. "
-  puts "  gem 'mongoid-ancestry'\n\n"
-end
-
 require 'mongoid/extensions/boolean'
 require 'transit/adapter'
 
