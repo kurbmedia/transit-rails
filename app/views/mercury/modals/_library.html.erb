@@ -1,9 +1,0 @@
-<div id="transit_media_library" class="tab">
-    <ul class="list-unstyled" id="transit_media_list">
-        <% Transit::Media.order('created_at DESC').each do |media| %>
-        <li id="transit_media_<%= media.id %>">
-            <%= media.url %>
-        </li>
-        <% end %>
-    </ul>
-</div>
