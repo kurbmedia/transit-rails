@@ -195,6 +195,7 @@ describe Transit::Page do
         page.update_attributes({
           region_data: { "test_node" => { "content" => "original" }}
         })
+        puts page.region_data.inspect
       end
       
       it 'generates a collection of regions' do

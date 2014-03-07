@@ -2,6 +2,14 @@ require 'spec_helper'
 
 describe "Draft Extension" do
   
+  Transit::Page.class_eval do
+    before_deploy :run_before_deploy
+    after_deploy  :run_after_deploy
+    
+    def run_before_deploy; end
+    def run_after_deploy; end
+  end
+
   let!(:region) do
     Transit::Region.new(
       id: "test_region",
@@ -118,6 +126,38 @@ describe "Draft Extension" do
         page.region_data
           .should eq rdata
       end
+    end
+  end
+  
+  
+  describe 'when deploying' do
+    
+    before do
+      page.deploy!
+      page.region_data = ndata
+    end
+    
+    it 'is updates all draftable attributes' do
+      expect{
+        page.deploy
+      }.to change(page, :region_data)
+      .to(ndata)
+    end
+    
+    
+    it 'runs the before_deploy callback' do
+      page.should_receive(
+        :run_before_deploy)
+      .once
+      page.deploy
+    end
+    
+    
+    it 'runs the after_deploy callback' do
+      page.should_receive(
+        :run_after_deploy)
+      .once
+      page.deploy
     end
   end
 end

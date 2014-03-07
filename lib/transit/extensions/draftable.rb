@@ -10,6 +10,9 @@ module Transit
       
       included do
         
+        # Allow callbacks for deployment
+        define_model_callbacks :deploy
+        
         # Create a Draft class for this model.
         const_set 'Draft', Class.new(::Transit::Draft) unless const_defined?('Draft')
         options = { :class_name => "#{self.name}::Draft", :as => :draftable, :dependent => :destroy, :autosave => true }
@@ -115,10 +118,12 @@ module Transit
       # Overwrite all draftable attributes for this model with the draft content.
       # 
       def deploy
-        draftable_attributes.each do |prop|
-          write_attribute(prop, draft.read_property(prop))
+        run_callbacks(:deploy) do
+          draftable_attributes.each do |prop|
+            write_attribute(prop, draft.read_property(prop))
+          end
+          write_attribute('draft_state', 'published') if respond_to?(:draft_state=)
         end
-        write_attribute('draft_state', 'published') if respond_to?(:draft_state=)
         self
       end
       
