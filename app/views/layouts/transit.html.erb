@@ -141,10 +141,14 @@
                   editForm: function(){ Mercury.modal("<%= edit_resource_url(mercury: true) %>", { title: "Page Details", fullHeight: false, minWidth:650, minHeight:385, handler: 'pageDetails' }); },
                   htmlEditor: function() { Mercury.modal('<%= mercury_resource_path('modals', 'htmleditor.html') %>', { title: 'HTML Editor', fullHeight: true, handler: 'htmlEditor' }); },
                   insertMedia: function(){  
-                      Mercury.modal("<%= mercury_resource_path('modals','media.html') %>", {
+                      var inst = Mercury.modal("<%= mercury_resource_path('modals','media.html') %>", {
                           title: 'Insert Media',
                           minWidth: ( $(window).width() < 1000 ? $(window).width() : 1000 ),
-                          fullHeight: true
+                          fullHeight: true,
+                          afterLoad:function(){ 
+                              jQuery.extend( this, Mercury.modalHandlers.insertMedia );
+                              this.initialize(); 
+                          },
                       });
                   },
                   publish: function(){ Transit.publish(); }

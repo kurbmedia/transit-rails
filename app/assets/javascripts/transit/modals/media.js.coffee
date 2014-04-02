@@ -13,9 +13,10 @@
       @validateForm()
       unless @valid
         @resize()
-        return
+        return false
       @submitForm()
       @hide()
+      return false
 
 
   initializeForm: ->
