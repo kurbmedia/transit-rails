@@ -1,12 +1,12 @@
 #= require mercury/mercury
 #= require_self
-#= require ./ext
-#= require ./ui/flash
-#= require ./modals/details
-#= require ./modals/media
-#= require ./modals/insertlink
-#= require ./regions/full
-#= require ./regions/basic
+#= require transit/ext
+#= require transit/ui/flash
+#= require transit/modals/details
+#= require transit/modals/media
+#= require transit/modals/insertlink
+#= require transit/regions/full
+#= require transit/regions/basic
 
 @Mercury.Region::serialize = ->
   type: @type()

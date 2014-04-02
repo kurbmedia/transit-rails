@@ -4,7 +4,8 @@
   content = $.htmlClean(content, {
     removeAttrs: ['style', 'class'],
     replace: [['b', 'strong'], ['i', 'em'], ['div', 'p']],
-    removeTags: ['script']
+    removeTags: ['script'],
+    tagAllowEmpty: ['iframe']
   })
   
   holds.html(content)

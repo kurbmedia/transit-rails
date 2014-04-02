@@ -221,7 +221,7 @@
             Transit.editor.paramName = <%= resource_instance_name.to_s.inspect.html_safe %>;
             <% if resource.respond_to?(:deploy!) %>
             Transit.editor.publishURL = "<%= deploy_page_path(resource) %>";
-            <% unless resource.published? %>
+            <% if resource.draft? %>
             $('div.mercury-publish-button').show();
             <% end %>
             <% end %>
