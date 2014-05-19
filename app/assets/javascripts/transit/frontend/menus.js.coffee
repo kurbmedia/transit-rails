@@ -11,6 +11,7 @@ class Menu
     $('#add_custom_item').on 'click', 'button.action-button', @addCustom
     
     @list.on 'items:update', ()=>
+      @list = $('#menu_item_list')
       @list.sortable('destroy')
       @list.sortable(handle: 'div.handle', onDrop: @sort, group: 'nested')
   
@@ -90,7 +91,7 @@ editMenu = ()->
   $('#transit_menu_select').on 'change', 'select', (event)->
     menuid = $(this).val()
     return true if $.trim(menuid) is ''
-    $('#transit_menu_items').sortable("disable")
+    $('#menu_item_list').sortable("destroy")
     $.getScript( [window.location.pathname.replace(/\/$/, ''), menuid].join("/") )
   
 
