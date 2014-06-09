@@ -1,8 +1,10 @@
 (function(){
   var content = ("<%= escape_javascript(render(partial: 'form')) %>");
   $('#transit_menu_form_area').slideUp('fast', function(){
-    $(this).html(content).slideDown('fast').trigger('reload');
-    $('#menu_item_list').trigger('items:update');
+    $(this).html(content).slideDown('fast', function(){
+      $('#transit_menu_form_area').trigger('reload');
+      $('#menu_item_list').trigger('items:update');
+    });
   });
   
 })();

@@ -22,13 +22,14 @@
         <%= i.hidden_field :uid %>
         <a href="#" class="remove-item-link" title="<%= t('transit.ui.links.menu_items.delete') %>" data-toggle="tooltip">&times;</a>
     </div>
-    <% if item.persisted? %>
     <ul class="sub">
+        <% if item.persisted? %>
         <% item.children.each do |sub| %>
         <%= f.fields_for :items, sub do |ii| %>
         <%= render partial: 'item', locals: { i: ii, f: f, item: sub } %>
         <% end %>
         <% end %>
+        <% end %>
     </ul>
-    <% end %>
+    
 </li>

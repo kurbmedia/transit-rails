@@ -10,10 +10,14 @@ class Menu
     $('body').on 'click', '#transit_menu_items li a.remove-item-link', @removeItem
     $('#add_custom_item').on 'click', 'button.action-button', @addCustom
     
-    @list.on 'items:update', ()=>
+    udate = ()=>
       @list = $('#menu_item_list')
       @list.sortable('destroy')
       @list.sortable(handle: 'div.handle', onDrop: @sort, group: 'nested')
+    
+    @list.on 'items:update', ()->
+      setTimeout(udate, 200)
+      
   
   ##
   # Add a menu item from a specific url
@@ -75,15 +79,15 @@ class Menu
       if li.find('ul.sub').length isnt 0
         base = $('ul.sub > li', li)
         base.each( position )
-        
+
         if li.data('item-id') is undefined
           base.find('> div.item input.temp-parent').val( li.data('item-key') )
         else 
           base.find('> div.item input.parent').val( li.data('item-id') )
           base.find('> div.item input.temp-parent').val('')
       
-    @list.find('> li').each(position)
-    @list.find('> li > div.item input.temp-parent, > li > div.item input.parent').val('')
+    $('#menu_item_list').find('> li').each(position)
+    $('#menu_item_list').find('> li > div.item input.temp-parent, > li > div.item input.parent').val('')
       
     
     
