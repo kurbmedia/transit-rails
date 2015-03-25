@@ -89,7 +89,7 @@ class Menu
 $('#transit_menu_select').one 'change', 'select', (event)->
   menuid = $(this).val()
   return true if $.trim(menuid) is ''
-  window.location.href = [window.location.pathname.replace(/\/$/, ''), menuid].join("/")
+  window.location.href = menuid
 
 $ ->
   editor = $('#transit_menu_items')
