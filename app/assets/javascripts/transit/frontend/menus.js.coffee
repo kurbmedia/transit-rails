@@ -10,14 +10,10 @@ class Menu
     $('body').on 'click', '#transit_menu_items li a.remove-item-link', @removeItem
     $('#add_custom_item').on 'click', 'button.action-button', @addCustom
     
-    udate = ()=>
-      @list = $('#menu_item_list')
-      @list.sortable('destroy')
-      @list.sortable(handle: 'div.handle', onDrop: @sort, group: 'nested')
+    that = @
     
-    @list.on 'items:update', ()->
-      setTimeout(udate, 200)
-      
+    @list = $('#menu_item_list')
+    @list.sortable(handle: 'div.handle', update: @sort, items: "li", axis: "y", cursorAt: { left: 5, top: 5 }, placeholder: "placeholder", toleranceElement: "> div.item")
   
   ##
   # Add a menu item from a specific url
@@ -71,7 +67,7 @@ class Menu
   # Set item positions
   #
   sort:(item, container, supa)=>
-    supa(item)
+    #supa(item)
     position = (pos, item)->
       li = $(item)
       li.find('input[rel="position"]').val( pos + 1 )
@@ -88,22 +84,13 @@ class Menu
       
     $('#menu_item_list').find('> li').each(position)
     $('#menu_item_list').find('> li > div.item input.temp-parent, > li > div.item input.parent').val('')
-      
-    
-    
-editMenu = ()->
-  $('#transit_menu_select').on 'change', 'select', (event)->
-    menuid = $(this).val()
-    return true if $.trim(menuid) is ''
-    $('#menu_item_list').sortable("destroy")
-    $.getScript( [window.location.pathname.replace(/\/$/, ''), menuid].join("/") )
-  
+
+
+$('#transit_menu_select').one 'change', 'select', (event)->
+  menuid = $(this).val()
+  return true if $.trim(menuid) is ''
+  window.location.href = [window.location.pathname.replace(/\/$/, ''), menuid].join("/")
 
 $ ->
-  editMenu()
-  $('#transit_menu_select select').trigger('change')
-  $('#transit_menu_form_area').on 'reload', ()->
-    editor = $('#transit_menu_items')
-    new Menu( editor ) if editor.length isnt 0
-
-  
+  editor = $('#transit_menu_items')
+  new Menu( editor ) if editor.length isnt 0

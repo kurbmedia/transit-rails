@@ -39,7 +39,7 @@
             </div>
         </div>
         <div id="transit_menu_form_area">
-            <%= render partial: 'form', locals: { resource: Transit::Menu.new } %>
+            <%= render partial: 'form', locals: { resource: (defined?(current_menu) ? current_menu : collection.first) } %>
         </div>
     </div>
 </div>

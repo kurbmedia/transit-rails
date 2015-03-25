@@ -855,7 +855,7 @@
       } catch (exc) {
         // This fails in Firefox.
       }
-      document.execCommand("styleWithCSS", false, false);
+      //document.execCommand("styleWithCSS", false, false);
       $('.proper-commands a.command').click(function(e) {
         var rng = saveSelection(), pnode;
         e.stopImmediatePropagation();
