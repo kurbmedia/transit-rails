@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Transit::Menu do
 
@@ -22,19 +22,9 @@ describe Transit::Menu do
   
   
   describe 'associations' do
-    
-    when_mongoid do
-      it 'should embed_many menu items' do
-        should embed_many(
-          :items)
-      end
-    end
-    
-    when_active_record do
-      it 'should have_many menu items' do
-        should have_many(
-          :items)
-      end
+    it 'should embed_many menu items' do
+      should have_many(
+        :items)
     end
   end
   
@@ -68,29 +58,23 @@ describe Transit::Menu do
       menu.items.where(title: 'Test2')
         .first
     end
+
+    it 'properly saves items and associates parents' do
     
-    before do
       props1 = item1.attributes
       props2 = item2.attributes
       [props1, props2].each{ |h| h.delete('_id') }
       
-      menu.update_attributes(
+      result = menu.update(
         items_attributes:{
           '0' => props1.merge('uid' => item1.uid),
           '1' => props2.merge('temp_parent' => item1.uid, 'uid' => item2.uid)
         }
       )
+      
       menu.reload
-    end
-    
-    it 'properly saves all items' do
-      menu.items.count
-        .should eq 2
-    end
-    
-    it 'associates parent items by temp_id' do
-      litem.reload.parent_id
-        .should eq fitem.id
+      menu.items.count.should eq 2
+      litem.reload.parent_id.should eq fitem.id
     end
   end
 end

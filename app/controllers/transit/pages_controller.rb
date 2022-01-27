@@ -3,8 +3,6 @@ module Transit
     before_filter :perform_authentication_method
     helper_method :resource, :collection, :current_page, :parent_page 
     helper_method :collection_url, :resource_url, :edit_resource_url, :resource_instance_name
-    layout "transit/modals", only: [:update]
-    layout :transit_layout, only: [:show]
     respond_to :html, :js, :json
 
     
@@ -134,11 +132,7 @@ module Transit
     # Optional strong params support
     # 
     def permitted_params
-      return params[:page] unless Rails.version.to_i >= 4
       params.require(:page).permit!
-      # params.permit(:page => [ 
-      #   :id, :name, :title, :description, :keywords, :slug, :template, :parent_id, :published, :publish_on, :regions_attributes => {}
-      # ])
     end
     
     
@@ -166,17 +160,6 @@ module Transit
     # 
     def resource_instance_name
       :page
-    end
-    
-    
-    ##
-    # When in 'edit' mode, we need to render the mercury layout to 
-    # configure the editor.
-    # 
-    def transit_layout
-      return send(:_layout) if params[:mercury_frame].present? && resource.persisted? && resource.editable?
-      params[:mercury_frame] = resource.absolute_path
-      'transit'
     end
     
   end

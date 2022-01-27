@@ -9,7 +9,7 @@ module Transit
       
       included do
         before_create :set_default_position
-        default_scope lambda{ order_by("position ASC") }
+        default_scope lambda{ order(position: :asc) }
       end
       
       ##
@@ -24,19 +24,19 @@ module Transit
         if index > target.count
           index      = target.count
           counting   = 0
-          collection = target.lte(:position => index)
+          collection = target.where("position <= ?", index)
         elsif index <= 0
           index = 1
           counting = 1
         end
         
-        collection = collection || target.gte(:position => index)
+        collection = collection || target.where("position >= ?", index)
         collection.each do |item|
           next if item.id == self.id
           counting = counting + 1
-          item.set(:position, counting)
+          item.update_column(:position, counting)
         end
-        self.set(:position, index)
+        self.update_column(:position, index)
       end
       
       private

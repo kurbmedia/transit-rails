@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe 'The Sluggable extension' do
   
@@ -9,7 +9,7 @@ describe 'The Sluggable extension' do
   end
   
   let(:page) do
-    Transit::Page.make!(
+    create(:page, 
       publish_on: Date.new(2013, 12, 1),
       title: "Post Slug Test",
       published: true,

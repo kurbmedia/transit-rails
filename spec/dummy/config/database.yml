@@ -1,19 +1,12 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
 development:
-  adapter: 'mysql2'
-  encoding: 'utf8'
-  reconnect: false
-  database: 'transit_dev'
-  pool: 5
-  username: 'root'
-  password: ''
-  socket: '/tmp/mysql.sock'
+  <<: *default
+  database: transit_dev
 
 test:
-  adapter: 'mysql2'
-  encoding: 'utf8'
-  reconnect: false
-  database: 'transit_dev_test'
-  pool: 5
-  username: 'root'
-  password: ''
-  socket: '/tmp/mysql.sock'
+  <<: *default
+  database: transit_test

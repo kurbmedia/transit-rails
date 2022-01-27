@@ -1,15 +1,13 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Transit do
 
   it 'has a version const' do
-    Transit::VERSION
-      .should_not be_nil
+    expect(Transit::VERSION).to_not be_nil
   end
   
   it 'has a configuration' do
-    Transit.config
-      .should_not be_nil
+    expect(Transit.config).to_not be_nil
   end
   
   describe 'updating configuration' do
@@ -23,8 +21,7 @@ describe Transit do
       end
       
       it 'updates config values' do
-        Transit.config.authentication_method
-          .should eq :check_it!
+        expect(Transit.config.authentication_method).to eq :check_it!
       end
     end
   end

@@ -1,9 +1,9 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Transit::Region do
   
   let!(:page) do
-    Transit::Page.make!
+    create(:page)
   end
   
   describe 'attributes' do

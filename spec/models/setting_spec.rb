@@ -1,29 +1,13 @@
-require 'spec_helper' 
+require 'rails_helper' 
 
 describe Transit::Setting do
   
-  describe 'validations' do
-    
-    it 'requires a key be set' do
-      should validate_presence_of(
-        :key)
-    end
-    
-    it 'requires a value be set' do
-      should validate_presence_of(
-        :value)
-    end
-    
-    it 'requires a value_type be set' do
-      should validate_presence_of(
-        :value_type)
-    end
-  end
   
   describe '.value' do
     
     let!(:pref) do
-      Transit::Setting.make(
+      create(:settings,
+        key: "pref",
         value: 'false',
         value_type: 'boolean'
       )
@@ -41,7 +25,7 @@ describe Transit::Setting do
     context 'when value_type is an object' do
       
       let!(:pref) do
-        Transit::Setting.make!(
+        create(:settings,
           key: 'fake_array',
           value: [1,2,3],
           value_type: 'object'
@@ -68,7 +52,7 @@ describe Transit::Setting do
   describe 'after save' do
     
     let!(:pref) do
-      Transit::Setting.make!(
+      create(:settings,
         key: 'update_test',
         value: "testing",
         value_type: "string"
@@ -103,7 +87,8 @@ describe Transit::Setting do
     context 'when a "conversion_method" option exists' do
       
       let!(:pref) do
-        Transit::Setting.make(
+        create(:settings,
+          key: "pref",
           value: 'false',
           value_type: 'boolean',
           options: { conversion_method: 'to_i' }
@@ -121,7 +106,7 @@ describe Transit::Setting do
   describe 'array value types' do
     
     let!(:pref) do
-      Transit::Setting.make(
+      create(:settings,
         key: 'str_array',
         value: "1,2,3",
         value_type: 'array',

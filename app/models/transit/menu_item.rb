@@ -1,12 +1,18 @@
-require_dependency "transit/schemas/#{Transit.orm.to_s}/menu_item"
+require 'ancestry'
 
 module Transit
-  class MenuItem
-    transit :orderable
+  class MenuItem < ApplicationRecord
+    
+    has_ancestry orphan_strategy: :rootify, cache_depth: true
+    
+    belongs_to :menu, class_name: "Transit::Menu"
+    belongs_to :page, class_name: "Transit::Page", optional: true
     
     validates :title, :url, presence: true
+    
     alias :items :children
     attr_accessor :temp_parent
+    
     before_create :set_uid
     before_save :cleanup_urls
     

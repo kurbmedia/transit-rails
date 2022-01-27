@@ -1,7 +1,5 @@
 # Use this file to configure any default / global options.
 Transit.setup do |config|
-  require 'transit/adapters/<%= options[:orm] %>'
-  
   ##
   # Method used for authentication in controllers. Before any 
   # actions are called within the Pages/Posts controller, this 
@@ -53,14 +51,5 @@ Transit.setup do |config|
   # When generating slugs, use this as the default interpolation
   # 
   #config.sluggable_via = ":name"
-  
-  
-  # Enable translations globally
-  #config.translate = false
-  
-  
-  ##
-  # Contains a list of template names that are available
-  # 
-  #config.templates = []
+
 end

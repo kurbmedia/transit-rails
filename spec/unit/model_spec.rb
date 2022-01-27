@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Transit::Model do
   
@@ -13,19 +13,19 @@ describe Transit::Model do
     context 'when called on a model' do
 
       it 'adds a delivery_options attribute' do
-        Transit::Page.respond_to?(
+        expect(Transit::Page.respond_to?(
           :delivery_options
-        ).should be_true
+        )).to be_truthy
       end
     
       it 'includes options passed from deliver_as' do
-        Transit::Page.delivery_options
-          .sluggable.should eq ":name"
+        expect(Transit::Page.delivery_options
+          .sluggable).to eq ":name"
       end
       
       it 'loads additional extensions from the options hash' do
-        Transit::Page.included_modules
-          .should include(Transit::Extensions::Sluggable)
+        expect(Transit::Page.included_modules)
+          .to include(Transit::Extensions::Sluggable)
       end
     end
   end

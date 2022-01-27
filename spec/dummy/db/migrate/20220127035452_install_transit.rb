@@ -1,4 +1,4 @@
-class InstallTransit < ActiveRecord::Migration
+class InstallTransit < ActiveRecord::Migration[6.0]
   def change
     create_table(:transit_settings) do |t|
       t.string :key
@@ -16,7 +16,7 @@ class InstallTransit < ActiveRecord::Migration
       t.string   :slug
       t.string   :full_path
       t.string   :identifier
-      t.json     :regions,      default: {}
+      t.json     :region_data,  default: {}
       t.json     :region_draft, default: {}
       t.string   :ancestry
       t.integer  :ancestry_depth, default: nil
@@ -27,7 +27,7 @@ class InstallTransit < ActiveRecord::Migration
       ##
       # Orderable
       # 
-      # t.integer :position, :default => nil
+      t.integer :position, :default => nil
       
       t.timestamps
     end

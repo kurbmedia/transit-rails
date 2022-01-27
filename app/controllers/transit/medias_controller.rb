@@ -88,7 +88,6 @@ module Transit
     # Optional strong params support
     # 
     def permitted_params
-      return params[:media] unless Rails.version.to_i >= 4
       params.require(:media).permit([ :name, :folder_id ])
     end
     

@@ -10,8 +10,8 @@ Gem::Specification.new do |s|
   s.authors     = ["Brent Kirby"]
   s.email       = ["dev@kurbmedia.com"]
   s.homepage    = "https://github.com/kurbmedia/transit-rails"
-  s.summary     = %q{Transit is a content management engine for Rails 3.1+ based on Mercury editor.}
-  s.description = %q{Transit is a content management engine for Rails 3.1+ based on Mercury editor. It supports ActiveRecord, as well as Mongoid}
+  s.summary     = %q{Transit is a content management engine for Rails 3.1+}
+  s.description = %q{Transit is a content management engine for Rails 3.1+}
 
   s.rubyforge_project = "transit"
   s.license           = 'MIT'
@@ -20,15 +20,13 @@ Gem::Specification.new do |s|
   s.executables       = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths     = ["lib"]
 
-  s.add_dependency("rails", ">= 3.2.6", "< 5")
+  s.add_dependency("rails", ">= 5", "< 8")
+  s.add_dependency("ancestry", "~> 4.0.0")
   
-  s.add_development_dependency("rspec", ">= 2.14.0")
-  s.add_development_dependency("rspec-rails", ">= 2.14.0")
-  s.add_development_dependency("machinist", "~> 2.0")
-  
-  s.add_development_dependency("mysql2", "~> 0.3.11")
-  s.add_development_dependency("ancestry", "~> 2.0.0")
-  s.add_development_dependency("mongoid", ">= 3.1")
-  s.add_development_dependency("mongoid-ancestry", "~> 0.3.1", "< 4.1")
-  s.add_development_dependency("mongoid-rspec", "~> 1.8")
+  s.add_development_dependency("rspec", "~> 3.0")
+  s.add_development_dependency("rspec-rails", "~> 5.0")
+  s.add_development_dependency("factory_bot_rails", "~> 6.0")
+  s.add_development_dependency("shoulda-matchers", "~> 5.0")
+
+  s.add_development_dependency("pg", "~> 1.0")
 end

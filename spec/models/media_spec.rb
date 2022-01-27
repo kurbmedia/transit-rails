@@ -1,15 +1,6 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Transit::Media do
-  
-  describe 'associations' do
-    
-    it 'belongs to an attachable resource' do
-      should belong_to(
-        :attachable)
-    end
-  end
-  
   
   describe 'validations' do
     
@@ -24,7 +15,7 @@ describe Transit::Media do
     
     before do
       ['application', 'image', 'file'].each do |type|
-        Transit::Media.make!(media_type: type)
+        create(:media, media_type: type)
       end
     end
     
@@ -52,7 +43,7 @@ describe Transit::Media do
         
         it 'returns true' do
           asset.image?
-            .should be_true
+            .should be_truthy
         end
       end
       
@@ -64,7 +55,7 @@ describe Transit::Media do
         
         it 'returns false' do
           asset.image?
-            .should be_false
+            .should be_falsey
         end
       end
     end
@@ -80,7 +71,7 @@ describe Transit::Media do
         
         it 'returns true' do
           asset.video?
-            .should be_true
+            .should be_truthy
         end
       end
       
@@ -92,7 +83,7 @@ describe Transit::Media do
         
         it 'returns false' do
           asset.video?
-            .should be_false
+            .should be_falsey
         end
       end
     end
@@ -108,7 +99,7 @@ describe Transit::Media do
         
         it 'returns true' do
           asset.audio?
-            .should be_true
+            .should be_truthy
         end
       end
       
@@ -120,7 +111,7 @@ describe Transit::Media do
         
         it 'returns false' do
           asset.audio?
-            .should be_false
+            .should be_falsey
         end
       end
     end

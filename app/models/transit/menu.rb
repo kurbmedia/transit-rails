@@ -1,11 +1,13 @@
-require_dependency "transit/schemas/#{Transit.orm.to_s}/menu"
-
 module Transit
-  class Menu
+  class Menu < ApplicationRecord
+    
     validates :name, :identifier, presence: true
     validates :name, :identifier, uniqueness: true
+
     before_validation :generate_identifier
     after_save :rebuild_item_heirarchy
+
+    has_many :items, class_name: "Transit::MenuItem", dependent: :destroy
     
     accepts_nested_attributes_for :items, allow_destroy: true, reject_if: :all_blank
     alias :menu_items_attributes= :items_attributes=
@@ -48,7 +50,7 @@ module Transit
         item  = self.items.where(uid: cid).first
         next unless item
         found = self.items.where(uid: pid).first
-        item.update_attributes(parent: found)
+        item.update(parent: found)
       end
       @nodes_to_fix = nil
       true

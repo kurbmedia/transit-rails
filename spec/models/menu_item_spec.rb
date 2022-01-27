@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Transit::MenuItem do
   
@@ -18,19 +18,10 @@ describe Transit::MenuItem do
   
   
   describe 'associations' do
-    
-    when_mongoid do
-      it 'should be embedded_in a menu' do
-        should be_embedded_in(
-          :menu)
-      end
-    end
-    
-    when_active_record do
-      it 'should belong to a menu' do
-        should belong_to(
-          :menu)
-      end
+   
+    it 'should belong to a menu' do
+      should belong_to(
+        :menu)
     end
   end
   
@@ -38,7 +29,7 @@ describe Transit::MenuItem do
   describe '.page?' do
     
     let!(:page) do
-      Transit::Page.make!
+      create(:page)
     end
     
     context 'when the menu item is tied to a page' do
@@ -49,7 +40,7 @@ describe Transit::MenuItem do
       
       it 'returns true' do
         item.page?
-          .should be_true
+          .should be_truthy
       end
     end
     
@@ -62,7 +53,7 @@ describe Transit::MenuItem do
       
       it 'returns false' do
         item.page?
-          .should be_false
+          .should be_falsey
       end
     end
   end

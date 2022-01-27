@@ -1,23 +1,24 @@
 source "https://rubygems.org"
+git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-gem 'rails', '3.2.16'
+gem 'rails', '~> 6'
 
 # Declare your gem's dependencies in transit.gemspec.
 # Bundler will treat runtime dependencies like base dependencies, and
 # development dependencies will be added by default to the :development group.
 gemspec
+gem "pg"
 
 group :test do
-  gem 'mercury-rails', github: 'jejacks0n/mercury'
-  gem 'mongoid-rspec', '~> 1.8', :require => 'mongoid-rspec'
   gem 'simplecov', :require => false
   gem 'rake'
   gem 'guard'
   gem "guard-rspec"
   gem 'rb-fsevent'
   gem 'listen'
-  gem 'machinist_mongo', github: 'brentkirby/machinist_mongo', require: 'machinist/mongoid'
-  gem 'shoulda-matchers', '~> 2.2.0'
+  gem 'rspec', '~> 3.10'
+  gem 'rspec-rails', '~> 5.0'
+  gem 'factory_bot_rails'
 end
 
 group :doc do

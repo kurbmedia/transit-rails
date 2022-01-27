@@ -1,9 +1,9 @@
-require_dependency "transit/schemas/#{Transit.orm.to_s}/media"
-require 'mime/types'
+#require 'mime/type'
 
 module Transit
-  class Media
-    belongs_to :attachable, polymorphic: true
+  class Media < ApplicationRecord
+    
+    belongs_to :attachable, polymorphic: true, optional: true
     validates :name, presence: true
     
     scope :images, lambda{ where(media_type: 'image') }
@@ -11,6 +11,13 @@ module Transit
     scope :audio,  lambda{ where(media_type: 'audio') }
     
     before_validation :set_default_name
+    self.table_name = 'transit_medias'
+
+    class << self
+      def files
+        where('transit_medias.media_type NOT IN (?)', ['image', 'audio', 'video'])
+      end
+    end
     
     attr_accessor :file
     

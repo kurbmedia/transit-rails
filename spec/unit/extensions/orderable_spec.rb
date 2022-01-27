@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe "the Ordering extension" do
   
@@ -11,8 +11,8 @@ describe "the Ordering extension" do
   context 'when included' do
     
     it 'adds a position field' do
-      Transit::Page.new.respond_to?(
-        :position).should be_true
+      expect(Transit::Page.new.respond_to?(
+        :position)).to be_truthy
     end
   end
   
@@ -21,27 +21,27 @@ describe "the Ordering extension" do
   end
   
   let!(:page) do
-    Transit::Page.make!
+    create(:page)
   end
   
   let!(:page2) do
-    Transit::Page.make!
+    create(:page)
   end
   
   let!(:page3) do
-    Transit::Page.make!
+    create(:page)
   end
   
   let!(:sub) do
-    Transit::Page.make!(parent: page)
+    create(:page, parent: page)
   end
   
   let!(:sub2) do
-    Transit::Page.make!(parent: page)
+    create(:page, parent: page)
   end
   
   let!(:sub3) do
-    Transit::Page.make!(parent: page)
+    create(:page, parent: page)
   end
   
   context 'when top level nodes' do

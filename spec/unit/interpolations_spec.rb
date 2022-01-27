@@ -1,9 +1,9 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Transit::Interpolations do
   
   let!(:page) do
-    Transit::Page.make
+    create(:page)
   end
   
   describe 'adding methods with Transit.interpolates' do
@@ -19,25 +19,23 @@ describe Transit::Interpolations do
     end
     
     it 'should add an interpolation method' do
-      Transit::Interpolations[:test]
-        .should_not be_nil
+      expect(Transit::Interpolations[:test]).to_not be_nil
     end
     
     it 'should add the callback as an interpolation' do
-      Transit::Interpolations[:test]
-        .should be_a(Method)
+      expect(Transit::Interpolations[:test]).to be_a(Method)
     end
     
     context 'when running the interpolation' do
       
       it 'replaces each key with the callback result' do
-        Transit::Interpolations.interpolate(":test", page)
-          .should eq "success"
+        expect(Transit::Interpolations.interpolate(":test", page))
+          .to eq "success"
       end
       
       it 'passes any arguments to the interpolation block' do
-        Transit::Interpolations.interpolate(":page", page)
-          .should eq page.title
+        expect(Transit::Interpolations.interpolate(":page", page))
+          .to eq page.title
       end
     end
   end
@@ -62,7 +60,7 @@ describe Transit::Interpolations do
     end
       
     it "interpolates month, year, and title" do
-      result.should eq expected
+      expect(result).to eq expected
     end
   end
 end

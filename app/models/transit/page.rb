@@ -1,13 +1,13 @@
-require_dependency "transit/schemas/#{Transit.orm.to_s}/page"
+require 'ancestry'
 
 module Transit
-  class Page
-    extend Transit::Templating
+  class Page < ApplicationRecord
+
+    include Transit::Model
     
     # All pages should use publishing, slugs, and tracking
     transit :publishable, 
-            sluggable: ':name',
-            draftable: :region_data
+            sluggable: ':name'
     
     validates :title, :name, :slug, presence: true
     validate :slug_is_unique
@@ -15,7 +15,12 @@ module Transit
     
     before_validation :sanitize_slug
     before_validation :generate_identifier
-    
+
+    serialize :keywords
+    serialize :region_data
+  
+    has_ancestry orphan_strategy: :rootify, cache_depth: true
+  
     has_many :attachments, class_name: "Transit::Media", as: :attachable
 
     scope :top_level, -> { roots }
@@ -57,7 +62,7 @@ module Transit
     # deploy all region changes.
     # 
     def publish!
-      deploy
+      update(region_data: region_draft)
       super
     end
     
@@ -78,7 +83,7 @@ module Transit
     # 
     def absolute_path_with_ancestry
       [self.ancestors(:to_depth => self.depth).pluck(:slug), self.slug].flatten.compact.map do |part|
-        _sanitize_uri_fragment(part)
+        sanitize_uri_fragment(part)
       end.reject(&:blank?)
     end
 
@@ -107,7 +112,7 @@ module Transit
         parent_parts = self.ancestors(:to_depth => self.depth).pluck(:slug).reverse
         self.slug    = slug_parts.drop_while{ |part| part == parent_parts.shift }.join("/")
       end
-      self.slug      = _sanitize_uri_fragment(self.slug)
+      self.slug      = sanitize_uri_fragment(self.slug)
       self.full_path = self.absolute_path.sub(/^\//, '')
     end
     
@@ -126,7 +131,7 @@ module Transit
     # Removes protocols, and invalid characters from a url fragment
     # @param [String] frag The fragment to sanitize
     # 
-    def _sanitize_uri_fragment(frag)
+    def sanitize_uri_fragment(frag)
       return nil if frag.nil?
       frag   = frag.gsub(/^(http|ftp|sftp|file)?:?(\/{1,2})?/i, "")
       parts  = frag.split("/")

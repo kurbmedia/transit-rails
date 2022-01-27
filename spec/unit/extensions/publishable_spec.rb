@@ -1,16 +1,16 @@
-require 'spec_helper' 
+require 'rails_helper' 
 
 describe "Publishable Extension" do
   
   let!(:page) do
-    Transit::Page.make!(
+    create(:page, 
       title: "Un-Available Page",
       slug: "parent"
     )
   end
   
   let!(:page2) do
-    Transit::Page.make!(
+    create(:page, 
       title: 'Available Page', 
       slug: 'child',
       parent: page)
@@ -19,7 +19,7 @@ describe "Publishable Extension" do
   it 'adds a published attribute' do
     page.respond_to?(
       :published)
-      .should be_true
+      .should be_truthy
   end
   
   it 'includes the Publishable extension' do
@@ -30,7 +30,7 @@ describe "Publishable Extension" do
   it 'adds a .published? method' do
     page.respond_to?(
       :published?)
-      .should be_true
+      .should be_truthy
   end
   
   describe '.published scope' do
@@ -64,7 +64,7 @@ describe "Publishable Extension" do
       end
       
       let!(:page) do
-        Transit::Page.make!(
+        create(:page, 
           publish_on: Date.today.to_time.midnight,
           title: "Post Slug Test",
           published: 'true'
@@ -72,7 +72,7 @@ describe "Publishable Extension" do
       end
   
       let!(:page2) do
-        Transit::Page.make!(
+        create(:page, 
           publish_on: 5.days.from_now,
           title: "Unavailable Post",
           published: 'true'

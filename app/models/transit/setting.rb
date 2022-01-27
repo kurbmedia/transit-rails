@@ -1,7 +1,8 @@
-require_dependency "transit/schemas/#{Transit.orm.to_s}/setting"
-
 module Transit
-  class Setting
+  class Setting < ApplicationRecord
+
+    serialize :options
+    
     class_attribute :value_mappings, instance_writer: false
     self.value_mappings ||= {
         "boolean" => :to_bool,
@@ -36,8 +37,9 @@ module Transit
     end
     
     
-    validates :key, :value, :value_type, presence: true
+    validates :key, :value_type, presence: true
     validates :key, uniqueness: true
+
     before_save :convert_value
     after_save :update_global_settings
     

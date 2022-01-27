@@ -1,30 +1,16 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe Transit::Page do
-  
-  describe 'associations' do
-    
-    
-    it 'has many attachments' do
-      should have_many(
-        :attachments)
-    end
-  end
+describe Transit::Page, type: :model do
   
   describe 'applied attributes' do
     
     let!(:page) do
       Transit::Page.new
     end
-    
-    it 'has a title attribute' do
-      page.respond_to?(:title)
-        .should be_true
-    end
-    
-    it 'has a description attribute' do
-      page.respond_to?(:description)
-        .should be_true
+
+    it 'has a title and description' do
+      expect(page.respond_to?(:title)).to be_truthy
+      expect(page.respond_to?(:description)).to be_truthy
     end
   end
   
@@ -49,10 +35,7 @@ describe Transit::Page do
   describe 'sanitizing_slugs' do
     
     let(:page) do
-      Transit::Page.make!(
-        title: "Test Page",
-        slug: slug
-      )
+      create(:page, title: "Test Page", slug: slug)
     end
     
     context 'when the slug is a full url' do
@@ -62,8 +45,7 @@ describe Transit::Page do
       end
       
       it 'removes the protocol and domain' do
-        page.slug
-          .should eq "the-path"
+        expect(page.slug).to eq 'the-path'
       end
     end
     
@@ -84,14 +66,14 @@ describe Transit::Page do
   describe 'page scopes' do
     
     let!(:parent_page) do
-      Transit::Page.make!(
+      create(:page,
         title: "Un-Published Page",
         slug: "parent"
       )
     end
     
     let!(:sub_page) do
-      Transit::Page.make!(
+      create(:page,
         title: 'Published Page', 
         slug: 'child',
         parent: parent_page)
@@ -109,13 +91,13 @@ describe Transit::Page do
   describe 'page hierarchy' do
     
     let!(:page) do 
-      Transit::Page.make!(
+      create(:page,
         title: "Parent Page",
         slug: "parent")
     end
     
     let!(:sub_page) do
-      Transit::Page.make!(
+      create(:page,
         title: "Sub Page", 
         slug: "sub-page", 
         published: true,
@@ -127,26 +109,22 @@ describe Transit::Page do
       context 'and it contains sub-pages' do
         
         it ".pages? returns true" do
-          page.pages?
-            .should be_true
+          expect(page.pages?).to be_truthy
         end
         
         it "stores sub pages as instances of the same class" do
-          page.children.first
-            .should be_a(Transit::Page)
+          expect(page.children.first).to be_a(Transit::Page)
         end
         
         it "stores unique page instances" do
-          page.children.count
-            .should eq 1
+          expect(page.children.count).to eq 1
         end
       end
       
       context 'and it does not have sub-pages' do
         
         it ".pages? returns false" do
-          sub_page.pages?
-            .should be_false
+          expect(sub_page.pages?).to be_falsey
         end
       end
     end
@@ -154,33 +132,29 @@ describe Transit::Page do
     context 'when a page is secondary' do
       
       it 'does not store parent page ids' do
-        sub_page.children
-          .should be_empty
+        expect(sub_page.children).to be_empty
       end
     end
     
     context "when a page is tertiary" do
       
       let!(:tertiary) do
-        Transit::Page.make!(
+        create(:page,
           title: "Tertiary Page", 
           slug: 'tertiary',
           parent: sub_page)
       end
       
       it "is nested under the secondary page" do
-        sub_page.children
-          .should include(tertiary)
+        expect(sub_page.children).to include(tertiary)
       end
       
       it "is not referenced in the top level page" do
-        page.children
-          .should_not include(tertiary)
+        expect(page.children).to_not include(tertiary)
       end
       
       it "stores unique page instances" do
-        sub_page.children.count
-          .should eq 1
+        expect(sub_page.children.count).to eq 1
       end
     end
     
@@ -188,29 +162,25 @@ describe Transit::Page do
     describe 'assigning a hash to region_data' do
       
       let!(:page) do
-        Transit::Page.make!
+        create(:page)
       end
       
       before do
-        page.update_attributes({
+        page.update({
           region_data: { "test_node" => { "content" => "original" }}
         })
-        puts page.region_data.inspect
       end
       
       it 'generates a collection of regions' do
-        page.regions
-          .should_not be_nil
+        expect(page.regions).to_not be_nil
       end
       
       specify do
-        page.regions.first
-          .should be_a(Transit::Region)
+        expect(page.regions.first).to be_a(Transit::Region)
       end
       
       it 'generates a region for each item in the hash' do
-        page.regions.count
-          .should eq 1
+        expect(page.regions.count).to eq 1
       end
     end
   end
@@ -224,14 +194,14 @@ describe Transit::Page do
       end
       
       let!(:parent_page) do
-        Transit::Page.make!(
+        create(:page,
           title: "Un-Published Page",
           slug: "parent"
         )
       end
     
       let!(:sub_page) do
-        Transit::Page.make!(
+        create(:page,
           title: 'Published Page', 
           slug: 'child',
           parent: parent_page)
@@ -239,7 +209,7 @@ describe Transit::Page do
       
       
       let!(:tertiary) do
-        Transit::Page.make!(
+        create(:page,
           title: "Tertiary Page", 
           slug: 'tertiary',
           parent: sub_page)
@@ -248,59 +218,51 @@ describe Transit::Page do
       context 'and the page is top level' do
       
         it 'creates an absolute_path using only its slug' do
-          parent_page.absolute_path
-            .should eq '/parent'
+          expect(parent_page.absolute_path).to eq '/parent'
         end
         
         it 'generates the full_path' do
-          parent_page.full_path
-            .should eq 'parent'
+          expect(parent_page.full_path).to eq 'parent'
         end
       end
     
       context 'and the page is secondary' do
       
         it 'creates an absolute_path using the slug from its parent' do
-          sub_page.absolute_path
-            .should eq '/parent/child'
+          expect(sub_page.absolute_path).to eq '/parent/child'
         end
         
         it 'generates the full path' do
-          sub_page.full_path
-            .should eq 'parent/child'
+          expect(sub_page.full_path).to eq 'parent/child'
         end
       end
       
       context 'and the page is tertiary' do
         
         it 'creates an absolute_path using its heirarchy' do
-          tertiary.absolute_path
-            .should eq '/parent/child/tertiary'
+          expect(tertiary.absolute_path).to eq '/parent/child/tertiary'
         end
         
         it 'generates the full path' do
-          tertiary.full_path
-            .should eq 'parent/child/tertiary'
+          expect(tertiary.full_path).to eq 'parent/child/tertiary'
         end
       end
             
       context 'and the slug includes a parent slug' do
         
         let!(:tertiary2) do
-          Transit::Page.make!(
+          create(:page,
             title: "Tertiary Page", 
             slug: 'child/tertiary2',
             parent: sub_page)
         end
         
         it 'removes the duplicate slug portions' do
-          tertiary2.absolute_path
-            .should eq '/parent/child/tertiary2'
+          expect(tertiary2.absolute_path).to eq '/parent/child/tertiary2'
         end
         
         it 'generates the full path' do
-          tertiary2.full_path
-            .should eq 'parent/child/tertiary2'
+          expect(tertiary2.full_path).to eq 'parent/child/tertiary2'
         end
       end
     end
@@ -313,14 +275,14 @@ describe Transit::Page do
       end
       
       let!(:parent_page) do
-        Transit::Page.make!(
+        create(:page,
           title: "Un-Published Page",
           slug: "parent"
         )
       end
     
       let!(:sub_page) do
-        Transit::Page.make!(
+        create(:page,
           title: 'Published Page', 
           slug: 'child',
           parent: parent_page)
@@ -328,7 +290,7 @@ describe Transit::Page do
       
       
       let!(:tertiary) do
-        Transit::Page.make!(
+        create(:page,
           title: "Tertiary Page", 
           slug: 'tertiary',
           parent: sub_page)
@@ -337,24 +299,21 @@ describe Transit::Page do
       context 'and the page is top level' do
       
         it 'creates an absolute_path using only its slug' do
-          parent_page.absolute_path
-            .should eq '/parent'
+          expect(parent_page.absolute_path).to eq '/parent'
         end
       end
     
       context 'and the page is secondary' do
       
         it 'creates an absolute_path using only its slug' do
-          sub_page.absolute_path
-            .should eq '/child'
+          expect(sub_page.absolute_path).to eq '/child'
         end
       end
       
       context 'and the page is tertiary' do
         
         it 'creates an absolute_path using only its slug' do
-          tertiary.absolute_path
-            .should eq '/tertiary'
+          expect(tertiary.absolute_path).to eq '/tertiary'
         end
       end
       

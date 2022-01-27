@@ -1,14 +1,30 @@
-require File.expand_path('../boot', __FILE__)
+require_relative "boot"
 
-require 'rails/all'
+require "rails/all"
 
+# Require the gems listed in Gemfile, including any gems
+# you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 require "transit"
 
 module Dummy
   class Application < Rails::Application
-    config.autoload_paths.reject!{ |p| p =~ /\/app\/(\w+)$/ && !%w(controllers helpers mailers views).include?($1) }
-    config.autoload_paths += [ "#{config.root}/app/#{TRANSIT_ORM}" ]
+    config.load_defaults Rails::VERSION::STRING.to_f
+
+    # For compatibility with applications that use this config
+    config.action_controller.include_all_helpers = false
+    config.generators do |g|
+      g.helper false
+      g.test_framework :rspec
+      g.fixture_replacement :factory_bot, dir: 'spec/factories'
+    end
+    
+    # Configuration for the application, engines, and railties goes here.
+    #
+    # These settings can be overridden in specific environments using the files
+    # in config/environments, which are processed later.
+    #
+    # config.time_zone = "Central Time (US & Canada)"
+    # config.eager_load_paths << Rails.root.join("extras")
   end
 end
-
