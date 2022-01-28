@@ -17,8 +17,6 @@ module Transit
     before_validation :generate_identifier
 
     serialize :keywords
-    serialize :region_data
-  
     has_ancestry orphan_strategy: :rootify, cache_depth: true
   
     has_many :attachments, class_name: "Transit::Media", as: :attachable
@@ -71,7 +69,7 @@ module Transit
     # Build regions from the stored data hash. 
     # 
     def regions
-      @regions ||= RegionBuilder.new(self.region_data || self.draft_region_data)
+      @regions ||= RegionBuilder.new(self.region_data || self.region_draft_data)
     end
     
     

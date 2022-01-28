@@ -9,8 +9,18 @@ module Transit
     # Build a collection of regions from a regions hash.
     # 
     def initialize(data = nil)
-      return self unless data.is_a?(Hash)
-      @region_data = data
+      
+      if data.is_a?(String)
+        data = ::YAML.load(data)
+      end
+
+      sanitized_data = case data.class.name
+      when 'Hash' || 'ActiveSupport::HashWithIndifferentAccess' then data
+      when 'ActionController::Parameters' then data.to_unsafe_h
+      when 'NilClass' then {}
+      end
+
+      @region_data = sanitized_data || {}
       @region_data.each do |id, props|
         self.push( Transit::Region.new(props.merge(id: id)) )
       end
