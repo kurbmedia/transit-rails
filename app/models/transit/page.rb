@@ -69,7 +69,7 @@ module Transit
     # Build regions from the stored data hash. 
     # 
     def regions
-      @regions ||= RegionBuilder.new(self.region_data || self.region_draft_data)
+      RegionBuilder.new(self.region_data || self.region_draft_data)
     end
     
     

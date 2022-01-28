@@ -1,6 +1,7 @@
 Transit::Engine.routes.draw do
   resources :pages do
     post 'deploy', on: :member
+    resources :regions, only: [:show, :create, :update]
   end
   
   resources :settings, except: [:destroy]

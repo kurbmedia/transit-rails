@@ -3,7 +3,7 @@ module Transit
     include ActiveModel::Naming
     include ActiveModel::Serialization
     
-    attr_reader :id, :content, :type, :data, :snippet_data
+    attr_reader :id, :content, :type, :data
     attr_accessor :attributes
     
     def initialize(data = nil)

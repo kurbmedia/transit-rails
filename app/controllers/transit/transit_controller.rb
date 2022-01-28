@@ -1,11 +1,9 @@
 module Transit
   class TransitController < ::ApplicationController
-    before_filter :perform_authentication_method
-    after_filter :set_xhr_flash
-    helper Transit::ApplicationHelper
-    
-    protected
-    
+    before_action :perform_authentication_method
+    after_action  :set_xhr_flash
+
+    protected    
     
     ##
     # If an authentication method has been set in the config,

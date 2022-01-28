@@ -1,6 +1,5 @@
 module Transit
   class PagesController < TransitController
-    before_filter :perform_authentication_method
     helper_method :resource, :collection, :current_page, :parent_page 
     helper_method :collection_url, :resource_url, :edit_resource_url, :resource_instance_name
     respond_to :html, :js, :json
