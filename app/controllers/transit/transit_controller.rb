@@ -1,7 +1,7 @@
 module Transit
   class TransitController < ::ApplicationController
     before_action :perform_authentication_method
-    after_action  :set_xhr_flash
+    helper ::Rails.application.routes.url_helpers
 
     protected    
     
@@ -26,21 +26,6 @@ module Transit
         flash[type] = message
       end
     end
-    
-    
-    ##
-    # When using AJAX add a X-Flash-Messages header to the 
-    # response so messages can be displayed.
-    # 
-    def set_xhr_flash
-      return true unless request.xhr? && flash.any?
-      result = []
-      flash.each do |key, value|
-        result.push << { key => value }
-      end  
-      response.headers['X-Flash-Messages'] = result.to_json unless result.empty?
-      flash.discard
-    end
-    
+  
   end
 end
