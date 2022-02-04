@@ -1,7 +1,7 @@
 module Transit
   class MenuItemsController < TransitController
     helper_method :collection
-    respond_to :html, :js, :json
+    respond_to :json
     
     def create
       respond_with(collection)

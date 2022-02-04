@@ -1,7 +1,7 @@
 module Transit
   class SettingsController < TransitController
     helper_method :collection
-    respond_to :html, :js, :json
+    respond_to :json
     
   end
 end

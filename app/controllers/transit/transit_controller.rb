@@ -3,6 +3,8 @@ module Transit
     before_action :perform_authentication_method
     helper ::Rails.application.routes.url_helpers
 
+    respond_to :json
+
     protected    
     
     ##
@@ -13,18 +15,6 @@ module Transit
       runs = Transit.config.authentication_method
       return true unless runs.present? && self.respond_to?(runs)
       send(runs)
-    end
-   
-    
-    ##
-    # Set a flash message for the response
-    # 
-    def set_flash_message(type, message)
-      if request.xhr?
-        flash.now[type] = message
-      else
-        flash[type] = message
-      end
     end
   
   end
