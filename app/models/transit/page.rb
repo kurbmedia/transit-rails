@@ -20,6 +20,11 @@ module Transit
     has_ancestry orphan_strategy: :rootify, cache_depth: true
   
     has_many :attachments, class_name: "Transit::Media", as: :attachable
+    has_many :menu_items, dependent: :nullify
+
+    after_save do
+      menu_items.each(&:touch)
+    end
 
     scope :top_level, -> { roots }
     

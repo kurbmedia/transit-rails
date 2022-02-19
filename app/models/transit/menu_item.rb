@@ -13,8 +13,12 @@ module Transit
     alias :items :children
     attr_accessor :temp_parent
     
+    before_validation :copy_url_from_page, if: :page?
+    
     before_create :set_uid
     before_save :cleanup_urls
+
+    after_touch :copy_url_from_page, if: :page?
     
     ##
     # Is this menu item tied to a page.
@@ -40,6 +44,14 @@ module Transit
     # 
     def cleanup_urls
       self.url = self.url.to_s.downcase
+    end
+
+    ##
+    # When using a page, match the URL of this menu item to that page.
+    #
+    def copy_url_from_page
+      return true unless page? && page.present?
+      self.url = self.page.absolute_path
     end
     
     

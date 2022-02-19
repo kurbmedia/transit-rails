@@ -42,7 +42,7 @@ module Transit
     # Should be overridden depending on your attachment/upload engine of choice
     # 
     def url
-      
+      raise ::NotImplementedError
     end
     
     
